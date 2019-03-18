@@ -14,8 +14,12 @@ header a {
   line-height: 25px;
   margin-left: 40px;
   font-family: 'Parisienne', cursive;
+  transition: width 1s, height 1s, transform 1s;
 }
-
+header a:hover {
+  transform:rotateX(360deg);
+  color: white;
+}
 
 
 .imgcontainer {
@@ -28,6 +32,14 @@ img.avatar {
   width: 10%;
   border-radius: 50%;
 }
+img.stanga-jos{
+	display: flex;
+	height: 300px;
+	width: 300px;
+    position: absolute;
+    left: 60%;
+    bottom: 20%;
+}
 img.avatarforgot {
   width: 17%;
   border-radius: 50%;
@@ -39,11 +51,14 @@ img.avatarforgot {
 }
 
 a.info {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 20px;
     text-decoration: none;
-    margin-left: 50%;
-    font-family: 'Monospace';
+    position: absolute;
+    left: 50%;
+    font-family: 'Impact';
+}
+a.info:hover {
+	color: red;
 }
 input[type=email], input[type=password] {
   width: 100%;
