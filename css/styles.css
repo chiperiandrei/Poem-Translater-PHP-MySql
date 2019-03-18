@@ -5,47 +5,18 @@ header {
 }
 
 header a {
-  float: left;
+  display: flex;
   color: black;
-  padding: 12px;
+  padding: 34px;
   text-decoration: none;
-  font-size: 40px; 
+  font-size: 40px;
   font-weight: bold;
   line-height: 25px;
   margin-left: 40px;
-  margin-top: 32px;
   font-family: 'Parisienne', cursive;
-  transition: width 1s, height 2s, transform 2s;
 }
 
-header a:hover {
-  float: left;
-  color: black;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 40px; 
-  font-weight: bold;
-  line-height: 25px;
-  margin-left: 40px;
-  margin-top: 32px;
-  font-family: 'Parisienne', cursive;
-  transform: rotate(360deg);
-}
-    
 
-h1.logo{
-	  float: left;
-  color: black;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 40px; 
-  font-weight: bold;
-  line-height: 25px;
-  margin-left: 40px;
-  margin-top: 32px;
-  font-family: 'Times New Roman';
-  position: fixed;
-}
 
 .imgcontainer {
   text-align: center;
