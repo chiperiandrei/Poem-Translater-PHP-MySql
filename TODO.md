@@ -5,7 +5,9 @@
 - [x] **main page**
 - [ ] **filter/seach mechanism for main page**
 - [x] **contact page**
-- [x] **page per poem** ([x] tabs with languages, [ ] select part of text)
+- [x] **page per poem**
+- - [x] tabs with languages
+- - [ ] select part of text)
 - [ ] **responsivnes**
 - [ ] **merge parts**
 
