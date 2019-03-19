@@ -32,10 +32,13 @@ img.avatar {
   width: 10%;
   border-radius: 50%;
 }
+img.avatarReg {
+  width: 10%;
+}
 img.stanga-jos{
-	display: flex;
-	height: 300px;
-	width: 300px;
+  display: flex;
+  height: 300px;
+  width: 300px;
     position: absolute;
     left: 60%;
     bottom: 20%;
@@ -57,12 +60,36 @@ a.info {
     left: 50%;
     font-family: 'Impact';
 }
-a.info:hover {
-	color: red;
+.forma a.info:hover {
+  color: red;
 }
-input[type=email], input[type=password] {
+
+.forma a.register-info {
+    font-size: 20px;
+    text-decoration: none;
+    position: absolute;
+    left: 50%;
+    margin-right: 40px;
+    margin-top: 38px;
+    margin-left: -104px;
+    font-family: 'Impact';
+}
+.forma a.infoAi {
+    font-size: 20px;
+    text-decoration: none;
+    position: absolute;
+    left: 50%;
+    margin-right: 40px;
+    margin-top: 38px;
+    margin-left: -120px;
+    font-family: 'Impact';
+}
+.forma a.infoAi:hover{
+  color: cyan;
+}
+input[type=email], input[type=password],input[type=text] {
   width: 100%;
-  padding: 12px 20px;
+  padding: 10px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid #ccc;
@@ -86,12 +113,21 @@ button:hover {
   opacity: 0.8;
 }
 
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
+
+button#reg {
+  background-color: black;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
 }
 footer {
-	background-color: red;
-	height: 100px;
+  background-color: red;
+  height: 100px;
 }
