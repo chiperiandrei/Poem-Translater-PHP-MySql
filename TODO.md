@@ -21,3 +21,5 @@ If is't time:
 - [x] **register page**
 - [x] **forgot password page**
 - [ ] **page per user** (rating for translators)
+- [x] **page per user / userinfo** 
+- [x] **page per user / edit info** 
