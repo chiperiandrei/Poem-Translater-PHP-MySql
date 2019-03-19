@@ -11,7 +11,7 @@
 - [ ] **merge parts**
 
 If is't time:
-- [ ] setting page
+- [ ] settings page
 
 ### Andrei:
 [To be added]
