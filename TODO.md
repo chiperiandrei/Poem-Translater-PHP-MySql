@@ -6,8 +6,9 @@
 - [ ] **filter/seach mechanism for main page**
 - [x] **contact page**
 - [x] **page per poem**
+- [x] **favorites page**
 - - [x] tabs with languages
-- - [ ] select part of text)
+- - [ ] select part of text
 - [ ] **responsivnes**
 - [ ] **merge parts**
 
