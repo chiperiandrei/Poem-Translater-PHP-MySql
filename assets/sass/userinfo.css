@@ -1,0 +1,145 @@
+
+img.avatar-mijloc {
+    height: 400px;
+    border-radius: 50%;
+    margin-left: 10%;
+    display: flex;
+    flex: 1;
+}
+span.userinfopane {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    font-size: 35px;
+    font-weight: bold;
+    /* top: -37%; */
+    position: relative;
+    margin-bottom: 4%;
+}
+.first-name {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 22px;
+    margin-right: 33%;
+    top: 5%;
+    padding: 7px;
+    position: relative;
+}
+.last-name {
+      display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 22px;
+    margin-right: 33%;
+    top: -4%;
+    padding: 7px;
+    position: relative;
+}
+.user-infor {
+    position: relative;
+    top: -45%;
+    left: 9%;
+}
+.email {
+     display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 22px;
+    margin-right: 33%;
+    top: -4%;
+    padding: 7px;
+    position: relative;
+}
+label {
+    margin-right: 4%;
+}
+
+input[type="text"] {
+    border-radius: 22%;
+    margin-left: 4px;
+}
+
+
+
+
+   @media screen and (max-width: 1200px) {
+   	.user-infor {
+    position: relative;
+    top: 5%;
+    margin-bottom: 11%;
+    left: -2%;
+}
+}
+
+
+
+
+
+
+@media screen and (max-width: 270px){
+
+img.avatar-mijloc {
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10%;
+    display: flex;
+    flex: 1;
+}
+
+.first-name {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 17px;
+    margin-right: 33%;
+    /* top: 0%; */
+    padding: 3px;
+    position: relative;
+}
+.last-name {
+     display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 17px;
+    margin-right: 33%;
+    /* top: 0%; */
+    padding: 3px;
+    position: relative;
+}
+
+.email {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 17px;
+    margin-right: 33%;
+    /* top: 0%; */
+    padding: 3px;
+    position: relative;
+}
+label {
+    margin-right: 4%;
+}
+
+input[type="text"] {
+    border-radius: 18%;
+    margin-left: 5px;
+}
+.user-infor {
+    position: relative;
+    top: 5%;
+    margin-bottom: 11%;
+    left: 35%;
+}
+
+header .container .title a{
+	    font-family: 'Parisienne', cursive;
+    font-size: 2em;
+    margin-top: 5px;
+    color: #212121;
+}
+header .container .navigation{
+	display: none;
+}
+}
