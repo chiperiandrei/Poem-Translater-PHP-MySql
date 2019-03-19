@@ -18,4 +18,3 @@ If is't time:
 - [x] **login page**
 - [x] **register page**
 - [x] **forgot password page**
-- [ ] **responsivnes**
