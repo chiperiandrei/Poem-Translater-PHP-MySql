@@ -85,4 +85,14 @@ main .menu-languages a.active {
   color: #FAFAFA;
   background-color: #212121;
 }
+
+main .menu-languages a.arrow {
+  position: absolute;
+  right: 0;
+  font-size: 1em;
+}
+
+main .menu-languages a.arrow::after {
+  right: 100%;
+}
 /*# sourceMappingURL=poem.css.map */

@@ -5,8 +5,7 @@
 - [x] **main page**
 - [ ] **filter/seach mechanism for main page**
 - [x] **contact page**
-- [ ] **page per poem** (tabs with languages)
-- [ ] **page per user** (rating for translators)
+- [x] **page per poem** ([x] tabs with languages, [ ] select part of text)
 - [ ] **responsivnes**
 - [ ] **merge parts**
 
@@ -18,3 +17,4 @@ If is't time:
 - [x] **login page**
 - [x] **register page**
 - [x] **forgot password page**
+- [ ] **page per user** (rating for translators)

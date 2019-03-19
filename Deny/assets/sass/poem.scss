@@ -77,6 +77,16 @@ main {
                 color: #FAFAFA;
                 background-color: #212121;
             }
+
+            &.arrow {
+                position: absolute;
+                right: 0;
+                font-size: 1em;
+
+                &::after {
+                    right: 100%;
+                }
+            }
         }
     }
 }
