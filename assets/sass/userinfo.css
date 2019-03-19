@@ -6,6 +6,9 @@ img.avatar-mijloc {
     display: flex;
     flex: 1;
 }
+span.infoT {background-color: cyan;/* background-size: 69px; */border-radius: 14px;}
+
+span.infoU {background-color: greenyellow;border-radius: 12px;}
 button {
     display: flex;
     flex: 1;
@@ -21,6 +24,41 @@ button {
     background-color: #BDBDBD;
     border: 1px solid #E0E0E0;
     text-align: center;
+}
+span.infos {
+    font-weight: bold;
+}
+.first-nameP {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 17px;
+    margin-right: 40%;
+    /* top: 0%; */
+    padding: 3px;
+    position: relative;
+}
+
+.last-nameP {
+     display: flex;
+     justify-content: flex-end;
+     flex: 1;
+     font-size: 17px;
+     margin-right: 40%;
+     /* top: 0%; */
+     padding: 3px;
+     position: relative;
+}
+
+.emailP {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 17px;
+    margin-right: 33%;
+    /* top: 0%; */
+    padding: 3px;
+    position: relative;
 }
 span.userinfopane {
     display: flex;
@@ -170,6 +208,38 @@ header .container .title a{
     font-size: 2em;
     margin-top: 5px;
     color: #212121;
+}
+.first-nameP {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 17px;
+    margin-right: 33%;
+    /* top: 0%; */
+    padding: 3px;
+    position: relative;
+}
+
+.last-nameP {
+     display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 17px;
+    margin-right: 33%;
+    /* top: 0%; */
+    padding: 3px;
+    position: relative;
+}
+
+.emailP {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    font-size: 17px;
+    margin-right: 33%;
+    /* top: 0%; */
+    padding: 3px;
+    position: relative;
 }
 header .container .navigation{
     display: none;
