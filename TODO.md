@@ -14,4 +14,8 @@ If is't time:
 - [ ] settings page
 
 ### Andrei:
-[To be added]
+- [ ] **responsivnes**
+- [x] **login page**
+- [x] **register page**
+- [x] **forgot password page**
+- [ ] **responsivnes**
