@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Parisienne&amp;subset=latin-ext">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=latin-ext">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="assets/sass/reset.css">
+    <link rel="stylesheet" href="assets/sass/style.css">
+    <link rel="stylesheet" href="assets/sass/header.css">
+    <link rel="stylesheet" href="assets/sass/main.css">
+    <link rel="stylesheet" href="assets/sass/contact.css">
+
+    <title>Poem Translater</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="title">
+                <a href="index.html">Poem Translater</a>
+            </div>
+            <nav class="navigation">
+                <a class="navigation-link active" href="">Contact<i class="fas fa-comments"></i></a>
+                <a class="navigation-link" href="favorites.html">Favorites<i class="fas fa-star"></i></a>
+                <div id="navigation-user">
+                    <div class="user-label">
+                        <span class="user-name">@denypatrascu</span>
+                        <span class="user-avatar"><img src="assets/img/avatars/denypatrascu.jpg" alt="denypatrascu"></span>
+                    </div>
+                    <div id="user-menu" class="hidden">
+                        <a href="profile.html">Profile</a>
+                        <a href="settings.html">Settings</a>
+                        <a href="login.html">Log out</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1 class="contact-name">Contact</h1>
+            <div class="first-name">
+                <label>First name:</label>
+                <input type="text" placeholder="John" required>
+                <span><i class="fas fa-user"></i></span>
+            </div>
+            <div class="last-name">
+                <label>Last name:</label>
+                <input type="text" placeholder="Doe" required>
+                <span><i class="fas fa-feather-alt"></i></span>
+            </div>
+            <div class="email">
+                <label>Email:</label>
+                <input type="text" placeholder="john.doe@example.com" required>
+                <span><i class="fas fa-at"></i></span>
+            </div>
+            <div class="textarea">
+                <label>The content of the message:</label>
+                <textarea></textarea>
+            </div>
+            <div class="submit">
+                <button>Send<i class="fas fa-reply"></i></button>
+                
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

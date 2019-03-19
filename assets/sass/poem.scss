@@ -1,0 +1,137 @@
+main { 
+    #add-comment-menu {
+        display: flex;
+        flex-direction: column;
+
+        background-color: #FAFAFA;
+        border: 1px solid #BDBDBD;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(0, 0, 0, .25);
+
+        textarea, input {
+            background-color: #FAFAFA;
+            font-family: 'Roboto', sans-serif;
+            border: 0;
+        }
+
+        textarea {
+            padding: 10px;
+            border-bottom: 1px solid #212121;
+            font-size: 0.8em;
+            min-width: 15vw;
+            min-height: 15vh;
+        }
+
+        input {
+            font-size: 0.7em;
+            font-weight: 300;
+            text-transform: uppercase;
+            padding: 15px 0;
+            cursor: pointer;
+        }
+    }
+
+    .container {
+        background-color: transparent;
+
+        .poem {
+            display: block;
+            margin-left: 15%;
+            margin-right: 15%;
+            padding: 40px 0;
+            border: 1px solid #BDBDBD;
+            background-color: #FAFAFA;
+            box-shadow: 0 0 15px rgba(0, 0, 0, .25);
+
+            .poem-title, .poem-author {
+                text-align: center;
+                font-family: 'Parisienne', cursive;
+            }
+
+            .poem-title {
+                font-weight: bold;
+                font-size: 3em;
+            }
+
+            .poem-author {
+                font-size: 1.7em;
+                padding-bottom: 30px;
+            }
+
+            pre {
+                column-count: 2;
+                font-family: 'Roboto', sans-serif;
+                text-align: center;
+            }
+        }
+    }
+
+    .menu-languages {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        position: fixed;
+        width: 100%; max-width: 1300px;
+        min-height: 50px;
+        bottom: 0;
+        padding-right: 50px;
+
+        margin: 0 auto;
+
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        background-color: rgba(255, 255, 255, .95);
+
+        a {
+            line-height: 50px;
+            padding: 0 20px;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            font-weight: 300;
+            color: #212121;
+            position: relative;
+            vertical-align: middle;
+
+            img {
+                margin-right: 7px;
+            }
+        
+            &::after {
+                position: absolute;
+                content: '';
+                width: 1px;
+                height: 20px;
+                top: 15px;
+                right: 0;
+                background-color: #212121;
+            }
+
+            &.active {
+                color: #FAFAFA;
+                background-color: #212121;
+            }
+
+            &.arrow {
+                position: absolute;
+                right: 0;
+                font-size: 1em;
+
+                &::after {
+                    right: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    main .container .poem {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    main .container .poem pre {
+        column-count: 1;
+    }
+}

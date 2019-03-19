@@ -1,0 +1,155 @@
+$main-background-color: #FAFAFA;
+$main-color: #212121;
+$main-max-width: 1600px;
+
+
+main {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .container {
+        background-color: $main-background-color;
+        width: 100%; max-width: $main-max-width;
+        padding: 20px;
+
+        .main-poems {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            article {
+                color: $main-color;
+                position: relative;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+                border: 1px solid transparent;
+                border-bottom-color: #cdcdcd;
+                cursor: crosshair;
+
+                margin: 20px 10px;
+                padding: 15px 0 30px 0;
+
+                background-color: rgba(0, 0, 0, 0.1);
+
+                a {
+                    color: $main-color;
+                }
+
+                .poem {
+                    display: flex;
+                    flex-direction: row;
+                    padding-left: 10px;
+
+                    .poem-bookmark, .poem-title, .poem-author {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center; 
+                        padding: 5px;
+                    }
+
+                    .poem-bookmark {
+                        padding-right: 10px;
+
+                        i {
+                            cursor: pointer;
+                            margin-top: -3px;
+                            font-size: 1.3em;
+                        }
+                    }
+
+                    .poem-title {
+                        font-family: 'Parisienne', cursive;
+                        font-weight: bold;
+                        font-size: 2.5em;    
+                        margin-right: 20px;
+                        position: relative;
+
+                        &::after {
+                            position: absolute;
+                            content: '';
+                            width: 6px; height: 6px;
+                            background-color: #757575;
+                            border-radius: 50%;
+                            right: -15px;
+                        }
+                    }
+        
+                    .poem-author {
+                        font-family: 'Parisienne', cursive;
+                        font-weight: normal;
+                        font-size: 1.8em;
+                    }
+                }
+
+                .poem-date {
+                    top: 20px;
+                    right: 20px; 
+                    position: absolute;
+                    display: inline-block;
+                    text-transform: uppercase;
+                    color: #FAFAFA;
+                    background-color: #212121;
+                    border-radius: 2px;
+                    padding: 5px 10px;
+                    opacity: 0.5;
+                }
+
+                .poem-strophe {
+                    padding-left: 45px;
+                    line-height: 1.5em;
+
+                    p {
+                        font-weight: 300;
+                    }
+
+                    .poem-read-more {
+                        display: inline-block;
+                        padding-top: 10px;
+                    }
+                }
+
+                &:hover {
+                    border: 1px solid #757575;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    main .container .main-poems article .poem {
+        .poem-title {
+            font-size: 2em;
+        }
+        .poem-author {
+            font-size: 1.4em;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    main {
+        margin-top: 160px;
+
+        .container .main-poems {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    main .container .main-poems article {
+        .poem {
+            .poem-title {
+                font-size: 1.6em;
+            }
+            .poem-author {
+                font-size: 1.2em;
+            }
+        }
+
+        .poem-strophe {
+            font-size: 0.9em;
+        }
+    }   
+}

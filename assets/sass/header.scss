@@ -1,0 +1,183 @@
+$header-background-color: #FAFAFA;
+$header-title-color: #212121;
+$header-nav-color: #212121;
+
+$header-max-width: 1600px;
+$header-height: 80px;
+
+header {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+
+    top: 0; left: 0; right: 0;
+    width: 100%;
+
+    background-color: $header-background-color;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+
+        width: 100%; max-width: $header-max-width;
+        height: $header-height;
+        padding: 0 20px;
+
+        .title {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            a {
+                font-family: 'Parisienne', cursive;
+                font-size: 3em;
+                margin-top: 5px;
+                color: $header-title-color;
+                
+            }
+        }
+        .navigation {
+            flex: auto;
+            display: flex;
+            justify-content: flex-end;
+            font-size: 1.2em;
+
+            .navigation-link {
+                line-height: $header-height;
+                text-align: center;
+                margin-left: 40pt;
+                color: $header-nav-color;
+                padding: 0 10pt;
+
+                .fas {
+                    margin-left: 7px;
+                    font-size: .8em;
+                }
+
+                &.active {
+                    text-decoration: underline;
+                }
+            }
+
+            #navigation-user {
+                cursor: pointer;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: 40pt;
+
+                .user-label {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    text-align: center;
+                    
+                    .user-name, .user-avatar {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        text-align: center;
+                    }
+                    
+                    .user-name {
+                        height: 40px;
+                    }
+
+                    .user-avatar {
+                        background: green;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                        margin-left: 15px;
+                       
+                        img {
+                            width: 100%; height: 100%;
+                        }
+                    }
+                }
+
+                #user-menu {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    position: absolute;
+                    text-align: center;
+                    top: $header-height;
+                    left: 0;
+                    width: 100%;
+                    background-color: $header-background-color;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    height: auto; 
+                    overflow: hidden;
+                    max-height: 500px;
+                    opacity: 1;
+                    transition: max-height .7s linear, opacity .2s ease-in-out;
+                    border: 1px solid #BDBDBD;
+
+                    &.hidden {
+                        max-height: 0;
+                        opacity: 0;
+                    }
+
+                    a {
+                        padding: 10px 0;
+                        border-top: 1px solid #E0E0E0;
+                        color: $header-nav-color;
+                        font-size: 0.9em;
+                        transition: all .2s ease-in-out;
+                        
+                        &:hover {
+                            background-color: #D1D1D1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    header {
+        position: absolute;
+
+        .container {
+            height: 2 * $header-height;
+            flex-direction: column;
+
+            .title {
+                text-align: center;
+                height: $header-height;
+            }
+
+            .navigation {
+                position: sticky;
+                height: $header-height;
+                justify-content: space-between;
+
+                .navigation-link, #navigation-user {
+                    margin-left: 0;
+                    padding: 0;
+                }
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 650px) {
+    header .container .navigation .navigation-link, #navigation-user {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    header .container .navigation .navigation-link, #navigation-user {
+        font-size: 0.8em;
+    }
+}
