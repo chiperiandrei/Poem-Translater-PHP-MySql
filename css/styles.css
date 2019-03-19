@@ -114,13 +114,13 @@ a.info {
 }
 input[type=email], input[type=password],input[type=text] {
   width: 100%;
-  padding: 10px 20px;
-  margin: 8px 0;
+  padding: 10px 28px;
+  margin: 17px 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
   font-family: 'Roboto';
-  font-size: 14px;
+  font-size: 23px;
   font-weight: bold;
 }
 
@@ -143,4 +143,159 @@ button:hover {
 footer {
   background-color: red;
   height: 100px;
+}
+
+
+@media screen and (max-width: 600px) {
+* {box-sizing: border-box;}
+header {
+
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+
+    top: 0;
+     left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #FAFAFA;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+body { 
+  margin: 0;
+ padding: 0; }
+
+
+header a {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  color: black;
+  margin-left: 8%;
+  padding: 34px;
+  text-decoration: none;
+  font-size: 38px;
+  font-weight: bold;
+  line-height: 0px;
+  font-family: 'Parisienne', cursive;
+  transition: width 1s, height 1s, transform 1s;
+}
+header a:hover {
+  transform:rotateX(360deg);
+  color: white;
+}
+
+
+.imgcontainer {
+  text-align: center;
+  margin: -19px 0 12px 0;
+  /* max-width: 116%; */
+  margin-top: 43%;
+}
+
+img.avatar {
+  width: 10%;
+  /* border-radius: 50%; */
+}
+img.avatarReg {
+  width: 10%;
+}
+img.stanga-jos{
+  /* display: flex; */
+  display: none;
+  /* height: 300px; */
+  /* width: 300px; */
+  /* position: absolute; */
+  /* left: 60%; */
+  /* bottom: 20%; */
+}
+img.avatarforgot {
+  width: 17%;
+  border-radius: 50%;
+}
+.container {
+  /* padding: 16px; */
+  margin-left: 30%;
+  margin-right: 36%;
+}
+
+a.info {
+    font-size: 12px;
+    text-decoration: none;
+    position: absolute;
+    left: 50%;
+    color: black;
+    font-family: 'Impact';
+}
+.forma a.info:hover {
+  opacity: 0.8;
+  color:#cdcdcd;
+}
+
+.forma a.register-info {
+    font-size: 13px;
+    text-decoration: none;
+    position: absolute;
+    /* left: 50%; */
+    color: black;
+    margin-right: 40px;
+    margin-top: 38px;
+    /* margin-left: -104px; */
+    font-family: 'Impact';
+}
+.forma a.register-info:hover{
+    opacity: 0.8;
+  color:#cdcdcd;
+}
+.forma a.infoAi {
+    font-size: 20px;
+    text-decoration: none;
+    position: absolute;
+    left: 50%;
+    margin-right: 40px;
+    margin-top: 38px;
+    margin-left: -120px;
+    font-family: 'Impact';
+}
+.forma a.infoAi:hover{
+  opacity: 0.8;
+  color:#cdcdcd;
+}
+input[type=email], input[type=password],input[type=text] {
+  width: 147%;
+  /* padding: 10px 28px; */
+  margin: 17px 0;
+  display: flex;
+  flex: 1;
+  border-radius: 16px;
+  /* margin-right: -65%; */
+  border: 1px solid #ccc;
+  /* box-sizing: border-box; */
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button {
+  background-color: #cdcdcd;
+  color: black;
+  padding: 9px 20px;
+  margin: 8px 0;
+  border: 4px;
+  /* border-color: red; */
+  font-weight: bold;
+  cursor: pointer;
+  width: 143%;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+}
+
+footer {
+  background-color: red;
+  height: 100px;
+}
 }
