@@ -56,9 +56,9 @@ img.stanga-jos{
   display: flex;
   height: 300px;
   width: 300px;
-    position: absolute;
-    left: 60%;
-    bottom: 20%;
+  position: absolute;
+  left: 66%;
+  bottom: 20%;
 }
 img.avatarforgot {
   width: 17%;
