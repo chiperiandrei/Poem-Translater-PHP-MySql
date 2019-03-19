@@ -6,6 +6,22 @@ img.avatar-mijloc {
     display: flex;
     flex: 1;
 }
+button {
+    display: flex;
+    flex: 1;
+    position: relative;
+    left: 56%;
+    margin-top: 2%;
+    cursor: pointer;
+    /* width: 200px; */
+    height: 31px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    /* font-weight: 400; */
+    background-color: #BDBDBD;
+    border: 1px solid #E0E0E0;
+    text-align: center;
+}
 span.userinfopane {
     display: flex;
     justify-content: center;
@@ -64,11 +80,27 @@ input[type="text"] {
 
 
    @media screen and (max-width: 1200px) {
-   	.user-infor {
+    .user-infor {
     position: relative;
     top: 5%;
     margin-bottom: 11%;
     left: -2%;
+}
+button {
+    display: flex;
+    flex: 1;
+    position: relative;
+    left: 44%;
+    margin-top: 2%;
+    cursor: pointer;
+    /* width: 200px; */
+    height: 31px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    /* font-weight: 400; */
+    background-color: #BDBDBD;
+    border: 1px solid #E0E0E0;
+    text-align: center;
 }
 }
 
@@ -134,12 +166,28 @@ input[type="text"] {
 }
 
 header .container .title a{
-	    font-family: 'Parisienne', cursive;
+        font-family: 'Parisienne', cursive;
     font-size: 2em;
     margin-top: 5px;
     color: #212121;
 }
 header .container .navigation{
-	display: none;
+    display: none;
+}
+button {
+    display: flex;
+    flex: 1;
+    position: relative;
+    left: 3%;
+    margin-top: 2%;
+    cursor: pointer;
+    /* width: 200px; */
+    height: 31px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    /* font-weight: 400; */
+    background-color: #BDBDBD;
+    border: 1px solid #E0E0E0;
+    text-align: center;
 }
 }
