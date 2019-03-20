@@ -12,8 +12,7 @@
 - [x] **merge parts**
 
 If is't time:
-- [ ] **filter/seach mechanism for main page**
-- [ ] **page per user** (rating for translators)
+- [x] **filter/seach mechanism for main page**
 
 ### Andrei:
 - [x] **responsivnes**
