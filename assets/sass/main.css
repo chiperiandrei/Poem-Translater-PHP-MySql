@@ -19,6 +19,85 @@ main .container {
   padding: 20px;
 }
 
+main .container .main-search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 10px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+main .container .main-search .search, main .container .main-search .filter, main .container .main-search .sort {
+  height: 60px;
+  border: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1.3em;
+  background-color: #FFFFFF;
+}
+
+main .container .main-search .search {
+  -webkit-box-flex: 4;
+      -ms-flex: 4;
+          flex: 4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main .container .main-search .search input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  padding-left: 20px;
+  min-width: 0;
+  width: 100%;
+}
+
+main .container .main-search .search button {
+  width: 60px;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+main .container .main-search .search button .fas {
+  font-size: 1.4em;
+}
+
+main .container .main-search .filter {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0 15px;
+  border-left: 1px solid #cdcdcd;
+  border-right: 1px solid #cdcdcd;
+  cursor: pointer;
+}
+
+main .container .main-search .filter select {
+  min-width: 0;
+  width: 100%;
+}
+
+main .container .main-search .sort {
+  width: 60px;
+  cursor: pointer;
+}
+
+main .container .main-search .sort .fas {
+  font-size: 1.3em;
+}
+
 main .container .main-poems {
   display: -ms-grid;
   display: grid;
@@ -132,6 +211,75 @@ main .container .main-poems article:hover {
   border: 1px solid #757575;
 }
 
+footer {
+  text-align: center;
+  padding: 30px 0;
+}
+
+footer a {
+  color: #757575;
+}
+
+footer .fas {
+  color: #E91E63;
+  -webkit-animation: heartbeat 1s infinite;
+          animation: heartbeat 1s infinite;
+}
+
+@-webkit-keyframes heartbeat {
+  0% {
+    -webkit-transform: scale(0.75);
+            transform: scale(0.75);
+  }
+  20% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  40% {
+    -webkit-transform: scale(0.75);
+            transform: scale(0.75);
+  }
+  60% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  80% {
+    -webkit-transform: scale(0.75);
+            transform: scale(0.75);
+  }
+  100% {
+    -webkit-transform: scale(0.75);
+            transform: scale(0.75);
+  }
+}
+
+@keyframes heartbeat {
+  0% {
+    -webkit-transform: scale(0.75);
+            transform: scale(0.75);
+  }
+  20% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  40% {
+    -webkit-transform: scale(0.75);
+            transform: scale(0.75);
+  }
+  60% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  80% {
+    -webkit-transform: scale(0.75);
+            transform: scale(0.75);
+  }
+  100% {
+    -webkit-transform: scale(0.75);
+            transform: scale(0.75);
+  }
+}
+
 @media screen and (max-width: 1200px) {
   main .container .main-poems article .poem .poem-title {
     font-size: 2em;
@@ -144,6 +292,12 @@ main .container .main-poems article:hover {
 @media screen and (max-width: 1000px) {
   main {
     margin-top: 160px;
+  }
+  main .container .main-search .search, main .container .main-search .filter, main .container .main-search .sort {
+    font-size: 1em;
+  }
+  main .container .main-search .search button {
+    width: 40px;
   }
   main .container .main-poems {
     -ms-grid-columns: 1fr;

@@ -191,6 +191,11 @@ header .container .navigation #navigation-user #user-menu a:hover {
   background-color: #D1D1D1;
 }
 
+header .container .navigation #navigation-user #user-menu a .fas {
+  margin-right: 7px;
+  font-size: 0.8em;
+}
+
 @media screen and (max-width: 1000px) {
   header {
     position: absolute;
