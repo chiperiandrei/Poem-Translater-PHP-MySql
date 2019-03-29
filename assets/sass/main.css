@@ -205,6 +205,7 @@ main .container .main-poems article .poem-strophe p {
 main .container .main-poems article .poem-strophe .poem-read-more {
   display: inline-block;
   padding-top: 10px;
+  color: #757575;
 }
 
 main .container .main-poems article:hover {

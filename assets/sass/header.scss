@@ -39,6 +39,7 @@ header {
                 
             }
         }
+
         .navigation {
             flex: auto;
             display: flex;
@@ -46,11 +47,12 @@ header {
             font-size: 1.2em;
 
             .navigation-link {
-                line-height: $header-height;
+                line-height: $header-height - 30px;
                 text-align: center;
-                margin-left: 40pt;
+                margin: 15px 0 15px 40px;
                 color: $header-nav-color;
                 padding: 0 10pt;
+                border: 1px solid transparent;
 
                 .fas {
                     margin-left: 7px;
@@ -58,7 +60,8 @@ header {
                 }
 
                 &.active {
-                    text-decoration: underline;
+                    color: #666666;
+                    border: 1px solid #BDBDBD;
                 }
             }
 
@@ -69,6 +72,8 @@ header {
                 flex-direction: column;
                 justify-content: center;
                 margin-left: 40pt;
+                font-size: 0.9em;
+                font-weight: 300;
 
                 .user-label {
                     display: flex;
@@ -111,14 +116,13 @@ header {
                     left: 0;
                     width: 100%;
                     background-color: $header-background-color;
-                    border-bottom-left-radius: 5px;
-                    border-bottom-right-radius: 5px;
                     height: auto; 
                     overflow: hidden;
                     max-height: 500px;
                     opacity: 1;
                     transition: max-height .7s linear, opacity .2s ease-in-out;
                     border: 1px solid #BDBDBD;
+                    border-top: 0;
 
                     &.hidden {
                         max-height: 0;
@@ -161,7 +165,6 @@ header {
             }
 
             .navigation {
-                position: sticky;
                 height: $header-height;
                 justify-content: space-between;
 

@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', function () {
       onselect: function (e) {
           // console.log(e);
           // e.style.display = 'none';
+          document.getElementById('add-comment-menu').classList.toggle('hidden');
       },
       handler: function (e) {
         let target = e.target,

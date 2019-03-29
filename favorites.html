@@ -39,29 +39,46 @@
     </header>
     <main>
         <div class="container">
+            <section class="main-search">
+                <div class="search">
+                    <input type="text" placeholder="Search in the wonderful world of poems and authors...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+                <select class="filter">
+                    <option disabled selected hidden>Filter your poems</option>
+                    <option value="filter-popular-poems">Popular poems</option>
+                    <option value="filter-popular-authors">Popular authors</option>
+                    <option value="filter-popular-language">Popular language</option>
+                    <option value="filter-popular-language">The newest poems</option>
+                    <option value="filter-popular-language">The oldest poems</option>
+                </select>
+                <button class="sort"><i class="fas fa-sort-alpha-down"></i></button>
+            </section>
             <section class="main-poems">
                 <section>
-                    <!-- Luceafărul -->
+                    <!-- Liceu -->
                     <article>
                         <div class="poem">
-                            <span class="poem-bookmark" id="poem-bookmark-2">
+                            <span class="poem-bookmark" id="poem-bookmark-3">
                                 <i class="fas fa-bookmark"></i>
                             </span>
                             <h1 class="poem-title">
-                                <a href="poems/Peneş-Curcanul.html">Luceafărul</a>
+                                <a href="poems/Peneş-Curcanul.html">Liceu</a>
                             </h1>
                             <h4 class="poem-author">
-                                <a href="">Mihai Eminescu</a>
+                                <a href="">George Bacovia</a>
                             </h4>
                         </div>
                         <div class="poem-strophe">
-                            <p>A fost odată ca-n povești,</p>
-                            <p>A fost ca niciodată,</p>
-                            <p>Din rude mari împărătești,</p>
-                            <p>O prea frumoasă fată.</p>
-                            <a href="poems/Peneş-Curcanul.html" class="poem-read-more">[Citește mai mult]</a>        
+                            <p>Liceu, - cimitir</p>
+                            <p>Al tinereţii mele -</p>
+                            <p>Pedanţi profesori</p>
+                            <p>Şi examene grele...</p>
+                            <p>Şi azi mă-nfiori</p>
+                            <p>Liceu, - cimitir</p>
+                            <p>Al tinereţii mele!</p>
+                            <a href="poems/Peneş-Curcanul.html" class="poem-read-more">[Read more]</a>
                         </div>
-                        <div class="poem-date">1883</div>  
                     </article>
                 </section>
                 <section>
@@ -84,14 +101,16 @@
                             <p>Norii s-au mai răzbunat</p>
                             <p>Spre apus, dar stau grămadă</p>
                             <p>Peste sat.</p>
-                            <a href="poems/Peneş-Curcanul.html" class="poem-read-more">[Citește mai mult]</a>
+                            <a href="poems/Peneş-Curcanul.html" class="poem-read-more">[Read more]</a>
                         </div>
                     </article>
                 </section>
             </section>
         </div>
     </main>
-    <footer></footer>
+    <footer>
+        <p>Made with <i class="fas fa-heart"></i> in Iași by <a href="https://github.com/denyky">@denypatrascu</a> & <a href="https://github.com/chiperiandrei">@andreichiperi</a>.</p>
+    </footer>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

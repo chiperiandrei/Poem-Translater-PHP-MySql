@@ -3,7 +3,7 @@ main .container {
   display: grid;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
-      grid-template-areas: "cn cn" "fn ln" "email email" "ta ta" "submit submit";
+      grid-template-areas: "fn ln" "email email" "ta ta" "submit submit";
 }
 
 main .container .contact-name, main .container .first-name, main .container .last-name, main .container .email, main .container .textarea {
@@ -54,39 +54,27 @@ main .container .contact-name span, main .container .first-name span, main .cont
   background-color: #BDBDBD;
 }
 
-main .container .contact-name {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
-  grid-area: cn;
-  padding: 0;
-  font-family: 'Parisienne', cursive;
-  font-weight: bold;
-  font-size: 3em;
-  text-align: center;
-}
-
 main .container .first-name {
-  -ms-grid-row: 2;
+  -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: fn;
 }
 
 main .container .last-name {
-  -ms-grid-row: 2;
+  -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: ln;
 }
 
 main .container .email {
-  -ms-grid-row: 3;
+  -ms-grid-row: 2;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: email;
 }
 
 main .container .textarea {
-  -ms-grid-row: 4;
+  -ms-grid-row: 3;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: ta;
@@ -106,7 +94,7 @@ main .container .textarea textarea {
 }
 
 main .container .submit {
-  -ms-grid-row: 5;
+  -ms-grid-row: 4;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: submit;
@@ -134,9 +122,10 @@ main .container .submit button .fas {
 
 @media screen and (max-width: 650px) {
   main .container {
+    padding: 0;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-        grid-template-areas: "cn" "fn" "ln" "email" "ta" "submit";
+        grid-template-areas: "fn" "ln" "email" "ta" "submit";
   }
 }
 /*# sourceMappingURL=contact.css.map */

@@ -1,7 +1,11 @@
 main { 
     #add-comment-menu {
-        display: flex;
         flex-direction: column;
+        display: none;
+
+        &.hidden {
+            display: flex;
+        }
 
         background-color: #FAFAFA;
         border: 1px solid #BDBDBD;

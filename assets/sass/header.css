@@ -67,11 +67,12 @@ header .container .navigation {
 }
 
 header .container .navigation .navigation-link {
-  line-height: 80px;
+  line-height: 50px;
   text-align: center;
-  margin-left: 40pt;
+  margin: 15px 0 15px 40px;
   color: #212121;
   padding: 0 10pt;
+  border: 1px solid transparent;
 }
 
 header .container .navigation .navigation-link .fas {
@@ -80,7 +81,8 @@ header .container .navigation .navigation-link .fas {
 }
 
 header .container .navigation .navigation-link.active {
-  text-decoration: underline;
+  color: #666666;
+  border: 1px solid #BDBDBD;
 }
 
 header .container .navigation #navigation-user {
@@ -97,6 +99,8 @@ header .container .navigation #navigation-user {
       -ms-flex-pack: center;
           justify-content: center;
   margin-left: 40pt;
+  font-size: 0.9em;
+  font-weight: 300;
 }
 
 header .container .navigation #navigation-user .user-label {
@@ -162,8 +166,6 @@ header .container .navigation #navigation-user #user-menu {
   left: 0;
   width: 100%;
   background-color: #FAFAFA;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
   height: auto;
   overflow: hidden;
   max-height: 500px;
@@ -171,6 +173,7 @@ header .container .navigation #navigation-user #user-menu {
   -webkit-transition: max-height .7s linear, opacity .2s ease-in-out;
   transition: max-height .7s linear, opacity .2s ease-in-out;
   border: 1px solid #BDBDBD;
+  border-top: 0;
 }
 
 header .container .navigation #navigation-user #user-menu.hidden {
@@ -212,8 +215,6 @@ header .container .navigation #navigation-user #user-menu a .fas {
     height: 80px;
   }
   header .container .navigation {
-    position: -webkit-sticky;
-    position: sticky;
     height: 80px;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
