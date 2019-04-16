@@ -1,0 +1,81 @@
+$main-background-color: #FAFAFA;
+$main-color: #212121;
+$main-max-width: 1600px;
+
+main {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .container {
+        background-color: $main-background-color;
+        width: 100%; max-width: $main-max-width;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 40% 60%;
+
+        .photo {
+            margin-top: 200px;
+            display: grid;
+            grid-template-rows: 50% 50%;
+
+            .image {
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+
+                img {
+                    border-radius: 50%;
+                    border: 1px solid #BDBDBD;
+                    width: 50%;
+                }
+            }
+        }
+
+        .about-me {
+            margin-top: 80px;     
+
+            & > div {
+                display: flex;
+                flex-direction: column;
+                margin-top: 10px;
+                position: relative;
+
+                label {
+                    text-transform: uppercase;
+                    margin-bottom: 10px;
+                    font-weight: 300;
+                    font-size: 1em;
+                }
+
+                .fn, .ln, .em {
+                    height: 40px;
+                    padding: 10px 38px;
+                    border: 1px solid #E0E0E0;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1em;
+                    font-weight: 400;
+                    align-content: center;
+                    transition: border-color 300ms ease-in-out;
+                } 
+            }
+            span {
+
+                .fas {
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    font-size: 0.9em;
+                    text-align: center;
+                    left: 1px; bottom: 1px;
+                    width: 29px; height: 38px;
+                    background-color: #BDBDBD;
+                }
+                
+            }
+
+        }
+    }
+}

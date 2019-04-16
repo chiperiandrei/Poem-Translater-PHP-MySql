@@ -1,41 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Parisienne&amp;subset=latin-ext">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=latin-ext">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link rel="stylesheet" href="assets/sass/reset.css">
-    <link rel="stylesheet" href="assets/sass/style.css">
-    <link rel="stylesheet" href="assets/sass/header.css">
+<head> 
+    <?php 
+    require_once('components/connect.component.php');
+    require_once('components/head.component.php');
+    require_once('components/header.component.php');
+    ?>
     <link rel="stylesheet" href="assets/sass/main.css">
-    <title>Poem Translater</title>
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="title">
-                <a href="index.html">Poem Translater</a>
-            </div>
-            <nav class="navigation">
-                <a class="navigation-link" href="contact.html">Contact<i class="fas fa-comments"></i></a>
-                <a class="navigation-link" href="favorites.html">Favorites<i class="fas fa-star"></i></a>
-                <div id="navigation-user">
-                    <div class="user-label">
-                        <span class="user-name">@denypatrascu</span>
-                        <span class="user-avatar"><img src="assets/img/avatars/denypatrascu.jpg" alt="denypatrascu"></span>
-                    </div>
-                    <div id="user-menu" class="hidden">
-                        <a href="profile.html"><i class="fas fa-user"></i>Profile</a>
-                        <a href="settings.html"><i class="fas fa-cog"></i>Settings</a>
-                        <a href="login.html"><i class="fas fa-sign-out-alt"></i>Log out</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <?php PT_GET_HEADER($_SESSION['login'], 'index.php'); ?>
     </header>
     <main>
         <div class="container">
@@ -49,8 +24,8 @@
                     <option value="filter-popular-poems">Popular poems</option>
                     <option value="filter-popular-authors">Popular authors</option>
                     <option value="filter-popular-language">Popular language</option>
-                    <option value="filter-popular-language">The newest poems</option>
-                    <option value="filter-popular-language">The oldest poems</option>
+                    <option value="filter-newest-poem">The newest poems</option>
+                    <option value="filter-oldest-poem">The oldest poems</option>
                 </select>
                 <button class="sort"><i class="fas fa-sort-alpha-down"></i></button>
             </section>

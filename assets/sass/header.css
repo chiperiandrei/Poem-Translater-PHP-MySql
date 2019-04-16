@@ -237,4 +237,14 @@ header .container .navigation #navigation-user #user-menu a .fas {
     font-size: 0.8em;
   }
 }
+
+@media screen and (max-width: 320px) {
+  header .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  header .container .title {
+    font-size: 0.8em;
+  }
+}
 /*# sourceMappingURL=header.css.map */

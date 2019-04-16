@@ -189,3 +189,14 @@ header {
         font-size: 0.8em;
     }
 }
+
+@media screen and (max-width: 320px) {
+    header .container {
+        padding-left: 15px;
+        padding-right: 15px;
+
+        .title {
+            font-size: 0.8em
+        }
+    }
+}

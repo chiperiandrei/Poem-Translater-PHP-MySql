@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/sass/style.css">
     <link rel="stylesheet" href="assets/sass/header.css">
     <link rel="stylesheet" href="assets/sass/main.css">
-    <link rel="stylesheet" href="assets/sass/userinfo.css">
+    <link rel="stylesheet" href="assets/sass/settings.css">
     <title>Poem Translater</title>
 </head>
 <body>
@@ -27,7 +27,7 @@
                 <div id="navigation-user">
                     <div class="user-label">
                         <span class="user-name">@denypatrascu</span>
-                        <span class="user-avatar"><img src="assets/img/avatars/denypatrascu.jpg" alt="ceva"></span>
+                        <span class="user-avatar"><img src="assets/img/avatars/denypatrascu.jpg" alt="imagine"></span>
                     </div>
                     <div id="user-menu" class="hidden">
                         <a href="profile.html"><i class="fas fa-user"></i>Profile</a>
@@ -40,39 +40,50 @@
     </header>
     <main>
         <div class="container">
-            
-                <img src="assets/img/avatars/denypatrascu.jpg" alt="avatar" class="avatar-mijloc">
-                Selecteaza avatar <input type="file" name="myFile">
-                <div class="user-infor">
-                <span class="userinfopane">Editare informatii</span>
-                <br/>
+            <div class="about-me">
+                <div class="photo">
+                <div class="image">
+                   <img src="assets/img/avatars/denypatrascu.jpg" alt="imagine">
+                </div>
+                <div class="upload"> 
+                    <button type="submit"><i class="fas fa-upload"></i>Upload a file</button>
+                    <input type="file" name="myfile">
+                </div>
+                </div>
+                <div class="date-about-me">
                 <div class="first-name">
-                    <label for="">First name:</label>
-                    <span><i class="fas fa-user"></i></span>
-                    <input type="text" placeholder="John" required>
-                    
+                        <label for="first-name">First name:</label>
+                        <input type="text" name="first-name" placeholder="Joe" required>
+                        <span><i class="fas fa-user"></i></span>
+                    </div>
+                    <div class="last-name">
+                        <label for="last-name">Last name:</label>
+                        <input type="text" name="last-name" placeholder="Doe" required>
+                        <span><i class="fas fa-user"></i></span>
+                    </div>
+                    <div class="email">
+                        <label for="email">Email:</label>
+                        <input type="text" name="rank" placeholder="joedoe@exemple.com" required>
+                        <span><i class="fas fa-at"></i></span>
+                    </div>
+                    <div class="password">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" placeholder="*******" required>
+                        <span><i class="fas fa-key"></i></span>
+                    </div>
+                    <div class="password">
+                        <label for="password">Repeat password:</label>
+                        <input type="password" name="password" placeholder="*******" required>
+                        <span><i class="fas fa-key"></i></span>
+                    </div>
+                    <div class="butt">
+                        <button type="submit"><i class="fas fa-share"></i>Save</button>
+                    </div>
                 </div>
-                <div class="last-name">
-                    <label for="">Last name:</label>
-                    <span><i class="fas fa-feather-alt"></i></span>
-                    <input type="text" placeholder="Doe" required>
-                    
-                </div>
-                <div class="email">
-                    <label for="">Email:</label>
-                    <span><i class="fas fa-at"></i></span>
-                    <input type="text" placeholder="john.doe@example.com" required>
-                    
-                </div>
-                <div class="submit">
-                <button>Aplicare<i class="fas fa-reply"></i></button>
-                
-            </div>
             </div>
         </div>
     </main>
     <footer></footer>
-    <!-- <script src="https://use.fontawesome.com/d059957f87.js"></script> -->
     <script src="assets/js/script.js"></script>
 </body>
 </html>

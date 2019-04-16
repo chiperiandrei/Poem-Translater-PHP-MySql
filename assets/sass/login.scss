@@ -3,17 +3,18 @@ $main-color: #212121;
 $main-max-width: 1600px;
 
 main {
-    margin-top: 80px;
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 80px;    
 
     .container {
         display: grid;
         grid-template-columns: 60% 40%;
         background-color: $main-background-color;
         width: 100%; max-width: $main-max-width;
-        padding: 35px;
+        padding: 30px;
         
         .introduction {
             justify-content: flex-start;
@@ -94,6 +95,7 @@ main {
         
         .login {
             display: grid;
+            user-select: none;
 
             h1 {
                 font-size: 1.6em;
@@ -106,14 +108,34 @@ main {
                 margin-top: 30px;
                 position: relative;
 
-                label {
-                    text-transform: uppercase;
-                    margin-bottom: 10px;
-                    font-weight: 300;
-                    font-size: 1em;
+                &.login-text {
+                    position: relative;
+    
+                    & >  label {
+                        padding-bottom: 10px;
+                        text-transform: uppercase;
+                        font-weight: 300;
+                        font-size: 1em;
+                    }
+
+                    & > i.fas {
+                        position: absolute;
+                        left: 10px;
+                        bottom: 13px;
+                        font-size: 0.9em;
+                        z-index: 1;
+                    }
+    
+                    &::after {
+                        position: absolute;
+                        content: '';
+                        left: 1px; bottom: 1px;
+                        width: 29px; height: 38px;
+                        background-color: #BDBDBD;
+                    }
                 }
 
-                input {
+                & > input {
                     height: 40px;
                     padding: 0 38px;
                     border: 1px solid #E0E0E0;
@@ -128,15 +150,13 @@ main {
                 }
 
                 span {
-                    position: absolute;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    font-size: 0.9em;
-                    text-align: center;
-                    left: 1px; bottom: 1px;
-                    width: 29px; height: 38px;
-                    background-color: #BDBDBD;
+                    cursor: pointer;
+                    color: #212121;
+                    transition: color 200ms ease-in-out;
+
+                    &:hover {
+                        color: #757575;
+                    }
                 }
 
                 &:nth-child(4) {
@@ -146,16 +166,21 @@ main {
                     align-items: center;
                     margin-top: 40px;
 
-                    a {
-                        color: #212121;
-                        transition: color 200ms ease-in-out;
+                    & > div {
+                        cursor: pointer;
 
-                        &:hover {
+                        & > label {
+                            cursor: pointer;
+                            padding-left: 2px;
+
+                            transition: all 200ms ease-in-out; 
+                        }
+                        &:hover > label { 
                             color: #757575;
                         }
                     }
 
-                    button {
+                    & > button {
                         cursor: pointer; 
                         width: 100px; height: 40px;
                         text-align: center;
@@ -176,23 +201,179 @@ main {
                 &:last-child {
                     display: block;
 
-                    a {
+                    span {
                         display: inline-block;
-                        color: #212121;
                         padding-left: 22px;
-                        transition: color 200ms ease-in-out;   
 
                         .fas {
-                            left: 0;
                             position: absolute;
+                            left: 0;
                             margin-top: 2px;
                             font-size: 0.9em;
                         }
-
-                        &:hover {
-                            color: #757575;
-                        }
                     }
+                }
+            }
+        }
+    }
+}
+
+.create-account {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 80px; left: 0; right: 0; bottom: 0;
+    padding-bottom: 30px;
+    background-color: rgba(0, 0, 0, .75);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    overflow-y: scroll;
+
+    .container {
+        display: grid;
+        width: 100%; max-width: 1200px;
+        margin: 30px auto 0 auto;
+        padding: 15px 30px;
+        background-color: #FAFAFA;
+        
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "title title"
+                             "fn ln"
+                             "email email"
+                             "pass rpass"
+                             "capcha capcha"
+                             "send send";
+
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+
+        .title {
+            grid-area: title;
+            display: flex;
+            flex-direction: row;
+
+            & > h1 {
+                flex: 1;
+                font-size: 1.6em;
+                font-weight: 400;
+                
+            }
+
+            & > button {
+                display: flex;
+                justify-content: center;
+                
+                & > i {
+                    margin-left: 5px;
+                    font-size: 1.2em;
+                }
+            }
+        }
+
+        .first-name {
+            grid-area: fn;
+            margin-right: 15px;
+        }
+
+        .last-name {
+            grid-area: ln;
+            margin-left: 15px;
+
+
+            input {
+                padding-left: 10px;
+            }
+        }
+
+        .email {
+            grid-area: email;
+        }
+
+        .password {
+            grid-area: pass;
+            margin-right: 15px;
+        }
+
+        .repeat-password {
+            grid-area: rpass;
+            margin-left: 15px;
+
+            input {
+                padding-left: 10px;
+            }
+        }
+
+        .capcha {
+            grid-area: capcha;
+        }
+
+        .submit {
+            grid-area: send;
+        }
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            margin: 15px 0;
+            position: relative;
+
+            label {
+                text-transform: uppercase;
+                margin-bottom: 10px;
+                font-weight: 300;
+                font-size: 1em;
+            }
+
+            input {
+                height: 40px;
+                padding: 0 38px;
+                border: 1px solid #E0E0E0;
+                font-family: 'Roboto', sans-serif;
+                font-size: 1em;
+                font-weight: 400;
+                transition: border-color 300ms ease-in-out;
+
+                &:hover, &:focus {
+                    border-color: #212121;
+                }
+            }  
+
+            button {
+                cursor: pointer; 
+                width: 100px; height: 40px;
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+                font-size: 1em;
+                font-weight: 400;
+                color: #212121;
+                background-color: #BDBDBD;
+                border: 1px solid #E0E0E0;
+                transition: border-color 300ms ease-in-out;                        
+
+                &:hover {
+                    border-color: #212121;
+                }
+            }
+
+            span {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 0.9em;
+                text-align: center;
+                left: 1px; bottom: 1px;
+                width: 29px; height: 38px;
+                background-color: #BDBDBD;
+            }
+
+            &.submit {
+                display: flex;
+                align-items: flex-end;
+                margin-top: 40px;
+
+                .fas {
+                    margin-right: 5px;
                 }
             }
         }
@@ -220,6 +401,9 @@ main {
     main {
         margin-top: 160px;
     }
+    .create-account {
+        top: 160px;
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -236,6 +420,55 @@ main {
                 margin: 15px 0 0 0;
                 grid-column: 1 / 2;
             }
+        }
+    }
+
+    .create-account .container {
+        grid-template-columns: 1fr;
+        grid-template-areas: "title"
+                             "fn"
+                             "ln"
+                             "email"
+                             "pass"
+                             "rpass"
+                             "capcha"
+                             "send";
+
+        .title {
+            grid-area: title;
+            margin-right: 0;
+        }
+
+        .first-name {
+            grid-area: fn;
+            margin-right: 0;
+        }
+
+        .last-name {
+            grid-area: ln;
+            margin-left: 0;
+        }
+
+        .email {
+            grid-area: email;
+        }
+
+        .password {
+            grid-area: pass;
+            margin-right: 0;
+        }
+
+        .repeat-password {
+            grid-area: rpass;
+            margin-left: 0;
+        }
+
+        .capcha {
+            grid-area: capcha;
+        }
+
+        .submit {
+            grid-area: send;
         }
     }
 }

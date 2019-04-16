@@ -1,4 +1,22 @@
+main {
+  margin-top: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 main .container {
+  background-color: #FAFAFA;
+  width: 100%;
+  max-width: 1600px;
+  padding: 20px;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr;
@@ -126,6 +144,31 @@ main .container .submit button .fas {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
         grid-template-areas: "fn" "ln" "email" "ta" "submit";
+  }
+  main .container .first-name {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: fn;
+  }
+  main .container .last-name {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: ln;
+  }
+  main .container .email {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    grid-area: email;
+  }
+  main .container .textarea {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    grid-area: ta;
+  }
+  main .container .submit {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    grid-area: submit;
   }
 }
 /*# sourceMappingURL=contact.css.map */

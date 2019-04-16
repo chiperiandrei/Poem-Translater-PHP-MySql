@@ -1,5 +1,17 @@
+$main-background-color: #FAFAFA;
+$main-color: #212121;
+$main-max-width: 1600px;
+
 main {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
     .container {
+        background-color: $main-background-color;
+        width: 100%; max-width: $main-max-width;
+        padding: 20px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "fn ln"
@@ -106,6 +118,26 @@ main {
                                  "email"
                                  "ta"
                                  "submit";
+
+            .first-name {
+                grid-area: fn;
+            }
+    
+            .last-name {
+                grid-area: ln;
+            }
+    
+            .email {
+                grid-area: email;
+            }
+
+            .textarea {
+                grid-area: ta;
+            }
+    
+            .submit {
+                grid-area: submit;
+            }
         }
     }
 }
