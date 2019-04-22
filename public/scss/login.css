@@ -1,0 +1,581 @@
+main {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 80px;
+}
+
+main .container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 60% 40%;
+      grid-template-columns: 60% 40%;
+  background-color: #FAFAFA;
+  width: 100%;
+  max-width: 1600px;
+  padding: 30px;
+}
+
+main .container .introduction {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-right: 35px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+main .container .introduction h1 {
+  font-size: 1.6em;
+  font-weight: 400;
+}
+
+main .container .introduction > h1:first-child {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / 3;
+  margin-bottom: 30px;
+}
+
+main .container .introduction article {
+  color: #212121;
+  position: relative;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid transparent;
+  border-bottom-color: #cdcdcd;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 15px 0 30px 0;
+  cursor: crosshair;
+  -webkit-transition: border-color 300ms ease-in-out;
+  transition: border-color 300ms ease-in-out;
+}
+
+main .container .introduction article .poem-infos, main .container .introduction article .poem-strophe {
+  text-align: center;
+  margin-top: 1em;
+}
+
+main .container .introduction article .poem-infos a, main .container .introduction article .poem-strophe a {
+  color: #212121;
+}
+
+main .container .introduction article .poem-infos {
+  font-family: 'Parisienne', cursive;
+  font-size: 1.4em;
+}
+
+main .container .introduction article .poem-infos .poem-title a {
+  font-weight: bold;
+}
+
+main .container .introduction article .poem-infos .poem-author a {
+  font-weight: normal;
+}
+
+main .container .introduction article .poem-strophe {
+  font-weight: 300;
+}
+
+main .container .introduction article .poem-strophe .poem-read-more {
+  display: inline-block;
+  font-weight: 400;
+  margin-top: 15px;
+  color: #757575;
+}
+
+main .container .introduction article:nth-child(2) {
+  margin-right: 15px;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+}
+
+main .container .introduction article:nth-child(3) {
+  margin-left: 15px;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2 / 3;
+}
+
+main .container .introduction article:hover {
+  border: 1px solid #757575;
+}
+
+main .container .login {
+  display: -ms-grid;
+  display: grid;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+main .container .login h1 {
+  font-size: 1.6em;
+  font-weight: 400;
+}
+
+main .container .login > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 30px;
+  position: relative;
+}
+
+main .container .login > div.login-text {
+  position: relative;
+}
+
+main .container .login > div.login-text > label {
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1em;
+}
+
+main .container .login > div.login-text > i.fas {
+  position: absolute;
+  left: 10px;
+  bottom: 13px;
+  font-size: 0.9em;
+  z-index: 1;
+}
+
+main .container .login > div.login-text::after {
+  position: absolute;
+  content: '';
+  left: 1px;
+  bottom: 1px;
+  width: 29px;
+  height: 38px;
+  background-color: #BDBDBD;
+}
+
+main .container .login > div > input {
+  height: 40px;
+  padding: 0 38px;
+  border: 1px solid #E0E0E0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  -webkit-transition: border-color 300ms ease-in-out;
+  transition: border-color 300ms ease-in-out;
+}
+
+main .container .login > div > input:hover, main .container .login > div > input:focus {
+  border-color: #212121;
+}
+
+main .container .login > div span {
+  cursor: pointer;
+  color: #212121;
+  -webkit-transition: color 200ms ease-in-out;
+  transition: color 200ms ease-in-out;
+}
+
+main .container .login > div span:hover {
+  color: #757575;
+}
+
+main .container .login > div:nth-child(4) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 40px;
+}
+
+main .container .login > div:nth-child(4) > div {
+  cursor: pointer;
+}
+
+main .container .login > div:nth-child(4) > div > label {
+  cursor: pointer;
+  padding-left: 2px;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+
+main .container .login > div:nth-child(4) > div:hover > label {
+  color: #757575;
+}
+
+main .container .login > div:nth-child(4) > button {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  -webkit-transition: border-color 300ms ease-in-out;
+  transition: border-color 300ms ease-in-out;
+}
+
+main .container .login > div:nth-child(4) > button:hover {
+  border-color: #212121;
+}
+
+main .container .login > div #login-error {
+  color: #C62828;
+  font-weight: 600;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+  border: 1px solid #C62828;
+  padding: 10px 5px;
+}
+
+main .container .login > div:last-child {
+  display: block;
+}
+
+main .container .login > div:last-child span {
+  display: inline-block;
+  padding-left: 22px;
+}
+
+main .container .login > div:last-child span .fas {
+  position: absolute;
+  left: 0;
+  margin-top: 2px;
+  font-size: 0.9em;
+}
+
+.create-account {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 30px;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 2;
+  opacity: 0;
+  -webkit-transition: opacity 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out;
+  overflow-y: scroll;
+}
+
+.create-account .container {
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto 0 auto;
+  padding: 15px 30px;
+  background-color: #FAFAFA;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "title title" "fn ln" "email email" "pass rpass" "capcha capcha" "send send";
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.create-account .container .title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: title;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.create-account .container .title > h1 {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-size: 1.6em;
+  font-weight: 400;
+}
+
+.create-account .container .title > button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.create-account .container .title > button > i {
+  margin-left: 5px;
+  font-size: 1.2em;
+}
+
+.create-account .container .first-name {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: fn;
+  margin-right: 15px;
+}
+
+.create-account .container .last-name {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: ln;
+  margin-left: 15px;
+}
+
+.create-account .container .last-name input {
+  padding-left: 10px;
+}
+
+.create-account .container .email {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: email;
+}
+
+.create-account .container .password {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: pass;
+  margin-right: 15px;
+}
+
+.create-account .container .repeat-password {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: rpass;
+  margin-left: 15px;
+}
+
+.create-account .container .repeat-password input {
+  padding-left: 10px;
+}
+
+.create-account .container .capcha {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: capcha;
+}
+
+.create-account .container .submit {
+  -ms-grid-row: 6;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: send;
+}
+
+.create-account .container > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 15px 0;
+  position: relative;
+}
+
+.create-account .container > div label {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 300;
+  font-size: 1em;
+}
+
+.create-account .container > div input {
+  height: 40px;
+  padding: 0 38px;
+  border: 1px solid #E0E0E0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  -webkit-transition: border-color 300ms ease-in-out;
+  transition: border-color 300ms ease-in-out;
+}
+
+.create-account .container > div input:hover, .create-account .container > div input:focus {
+  border-color: #212121;
+}
+
+.create-account .container > div button {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  -webkit-transition: border-color 300ms ease-in-out;
+  transition: border-color 300ms ease-in-out;
+}
+
+.create-account .container > div button:hover {
+  border-color: #212121;
+}
+
+.create-account .container > div span {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 0.9em;
+  text-align: center;
+  left: 1px;
+  bottom: 1px;
+  width: 29px;
+  height: 38px;
+  background-color: #BDBDBD;
+}
+
+.create-account .container > div.submit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin-top: 40px;
+}
+
+.create-account .container > div.submit .fas {
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 1100px) {
+  main .container {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "login"  "intro";
+  }
+  main .container .introduction {
+    margin: 30px 0 0 0;
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: intro;
+  }
+  main .container .login {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: login;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    margin-top: 160px;
+  }
+  .create-account {
+    top: 160px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  main .container .introduction {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  main .container .introduction article:nth-child(2) {
+    margin: 0 0 15px 0;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1 / 2;
+  }
+  main .container .introduction article:nth-child(3) {
+    margin: 15px 0 0 0;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1 / 2;
+  }
+  .create-account .container {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "title" "fn" "ln" "email" "pass" "rpass" "capcha" "send";
+  }
+  .create-account .container .title {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: title;
+    margin-right: 0;
+  }
+  .create-account .container .first-name {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: fn;
+    margin-right: 0;
+  }
+  .create-account .container .last-name {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    grid-area: ln;
+    margin-left: 0;
+  }
+  .create-account .container .email {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+    grid-area: email;
+  }
+  .create-account .container .password {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+    grid-area: pass;
+    margin-right: 0;
+  }
+  .create-account .container .repeat-password {
+    -ms-grid-row: 6;
+    -ms-grid-column: 1;
+    grid-area: rpass;
+    margin-left: 0;
+  }
+  .create-account .container .capcha {
+    -ms-grid-row: 7;
+    -ms-grid-column: 1;
+    grid-area: capcha;
+  }
+  .create-account .container .submit {
+    -ms-grid-row: 8;
+    -ms-grid-column: 1;
+    grid-area: send;
+  }
+}
+/*# sourceMappingURL=login.css.map */
