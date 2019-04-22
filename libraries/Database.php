@@ -6,7 +6,7 @@ class Database extends PDO
 {
     public function __construct(
         $username = PT_DB_USERNAME,
-        $password = lPT_DB_PASSWORD)
+        $password = PT_DB_PASSWORD)
     {
         // echo 'libraries/Database.php<br>';
 
