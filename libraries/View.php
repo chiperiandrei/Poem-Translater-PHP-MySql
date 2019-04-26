@@ -1,9 +1,7 @@
 <?php
 
-
 class View
 {
-
     function __construct()
     {
         // echo 'libraries/View.php<br>';
@@ -13,5 +11,4 @@ class View
     {
         require_once('views/' . $name . '.php');
     }
-
 }

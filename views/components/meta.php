@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=latin-ext">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
-    <link rel="stylesheet" href="public/scss/reset.css">
-    <link rel="stylesheet" href="public/scss/style.css">
-    <link rel="stylesheet" href="public/scss/header.css">
-    <link rel="stylesheet" href="public/scss/footer.css">
+    <link rel="stylesheet" href="public/css/reset.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="public/css/header.css">
+    <link rel="stylesheet" href="public/css/footer.css">
