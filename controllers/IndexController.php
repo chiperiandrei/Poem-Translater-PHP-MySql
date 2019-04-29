@@ -8,27 +8,63 @@ require_once('models/IndexModel.php');
 class IndexController extends Controller
 {
     private $model;
-    private $poems;
 
     public function __construct()
     {
         parent::__construct();
 
-        // echo 'controllers/IndexModel.php<br>';
+        $this->model = new IndexModel();
+
+        if (Session::exists('user_id'))
+        {
+            // setting avatar
+            Session::set('avatar', $this->constructAvatarPath());
+        }
+
+        $this->view->poems = $this->packPoem(
+            $this->model->loadPoemsHeader(),
+            $this->model->loadPoemsBody()
+        );
+
+        $this->view->count = count($this->view->poems);
     }
 
     public function index()
     {
         Session::set('current_page', 'index');
 
-        $this->model = new IndexModel();
-        $this->poems = $this->model->loadPoems();
+        $this->view->render('index/index');
+    }
 
-        if (Session::exists('user_id')) {
+    private function constructAvatarPath()
+    {
+        $avatar_path = $this->model->loadAvatar();
 
-            echo 'Welcome ' . Session::get('first_name') . ' ' . Session::get('last_name') . '<br>';
+        if ($avatar_path) {
+            return 'storage/' . Session::get('username') . '/' . $avatar_path;
         }
 
-        $this->view->render('index/index');
+        return 'storage/default/avatar.png';
+    }
+
+    private function packPoem($headers, $bodies)
+    {
+        $poems = [];
+
+        $i = 0;
+
+        foreach ($headers as $header) {
+            $poems[$i]['title'] = $header['POEM_TITLE'];
+            $poems[$i]['author_name'] = $header['AUTHOR_NAME'];
+            $poems[$i]['language'] = ($header['LANGUAGE'] === 'en' ? 'gb' : $header['LANGUAGE']);
+            $poems[$i]['link'] = 'poems/' . $header['LANGUAGE'] . '/' .
+                                str_replace(' ', '-', $poems[$i]['title']);
+            $poems[$i]['author_link'] = 'authors/' .
+                                       str_replace(' ', '-', $poems[$i]['author_name']);
+            $poems[$i]['content'] = $bodies[$i];
+            $i++;
+        }
+
+        return $poems;
     }
 }

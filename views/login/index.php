@@ -1,6 +1,7 @@
 <?php require_once('views/components/meta.php'); ?>
 
-<link rel="stylesheet" href="../../public/css/login.css">
+<link rel="stylesheet" href="public/css/login.css">
+<link rel="stylesheet" href="public/css/flags.min.css">
 
 <?php require_once('views/login/components/header.php'); ?>
 
@@ -8,34 +9,52 @@
     <div class="container">
         <div class="introduction">
             <h1>The poems of the week</h1>
-            <?php for ($i = 0; $i < 2; $i++) :
-            $poem_title   = $this->poemHeader[$i]['POEM_TITLE'];
-            $poem_content = $this->poemContent[$i]['POEM_CONTENT'];
-            $poem_link    = 'poems/' . $this->poemHeader[$i]['LANGUAGE'] . '/' .
-                            str_replace(' ', '-', $poem_title);
-            $author_name  = $this->poemHeader[$i]['AUTHOR_NAME'];
-            $author_link  = 'authors/' .
-                            str_replace(' ', '-', $author_name);
-            ?>
             <article>
                 <div class="poem-infos">
                     <h1 class="poem-title">
-                        <a href="<?php echo $poem_link ?>">
-                            <?php echo $poem_title ?>
+                        <a href="<?php echo $this->poemOne['link']; ?>">
+                            <?php echo $this->poemOne['title']; ?>
                         </a>
                     </h1>
                     <h4 class="poem-author">
-                        <a href="<?php echo $author_link ?>">
-                            <?php echo $author_name ?>
+                        <a href="<?php echo $this->poemOne['author_link']; ?>">
+                            <?php echo $this->poemOne['author_name']; ?>
                         </a>
                     </h4>
                 </div>
                 <div class="poem-strophe">
-                    <pre><?php echo $poem_content ?></pre>
-                    <a href="<?php echo $poem_link ?>" class="poem-read-more">[Read more]</a>
+                    <pre><?php echo $this->poemOne['content']; ?></pre>
+                    <a href="<?php echo $this->poemOne['link']; ?>" class="poem-read-more">[Read more]</a>
                 </div>
+                <span class="poem-language">
+                    <img src="public/img/flags/blank.gif"
+                         class="flag flag-<?php echo $this->poemOne['language']; ?>"
+                         alt="<?php echo $this->poemOne['language']; ?>">
+                </span>
             </article>
-            <?php endfor; ?>
+            <article>
+                <div class="poem-infos">
+                    <h1 class="poem-title">
+                        <a href="<?php echo $this->poemTwo['link']; ?>">
+                            <?php echo $this->poemTwo['title']; ?>
+                        </a>
+                    </h1>
+                    <h4 class="poem-author">
+                        <a href="<?php echo $this->poemTwo['author_link']; ?>">
+                            <?php echo $this->poemTwo['author_name']; ?>
+                        </a>
+                    </h4>
+                </div>
+                <div class="poem-strophe">
+                    <pre><?php echo $this->poemTwo['content']; ?></pre>
+                    <a href="<?php echo $this->poemTwo['link']; ?>" class="poem-read-more">[Read more]</a>
+                </div>
+                <span class="poem-language">
+                    <img src="public/img/flags/blank.gif"
+                         class="flag flag-<?php echo $this->poemTwo['language']; ?>"
+                         alt="<?php echo $this->poemTwo['language']; ?>">
+                </span>
+            </article>
         </div>
         <form action="/login/connect" method="POST">
             <div class="login">

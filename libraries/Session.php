@@ -36,6 +36,13 @@ class Session
 
     public static function print($key)
     {
-        echo $_SESSION[$key];
+        if ($key == 'current_page') {
+            if ($_SESSION[$key] == 'index') {
+                echo '/';
+
+            }
+        } else {
+            echo $_SESSION[$key];
+        }
     }
 }

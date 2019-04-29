@@ -27,8 +27,8 @@
             <label for="repeat-password">Repeat password:</label>
             <input type="password" name="repeat-password" placeholder="*******" required>
         </div>
-        <div class="capcha">
-            TODO: Capcha
+        <div class="captcha">
+            TODO: Captcha
         </div>
         <div class="submit">
             <button type="submit"><i class="fas fa-share"></i>Send</button>

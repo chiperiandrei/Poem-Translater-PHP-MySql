@@ -8,8 +8,6 @@ class Controller
 
     function __construct()
     {
-        // echo 'libraries/Controller.php<br>';
-
         $this->view = new View();
     }
 

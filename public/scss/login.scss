@@ -81,6 +81,14 @@ main {
                     }
                 }
 
+                .poem-language {
+                    position: absolute;
+                    right: 20px; bottom: 20px;
+                    background-color: rgba(0, 0, 0, .15);
+                    border-radius: 2px;
+                    padding: 5px 10px;
+                }
+
                 &:nth-child(2) {
                     margin-right: 15px;
                     grid-column: 1 / 2;
@@ -254,7 +262,7 @@ main {
                              "fn ln"
                              "email email"
                              "pass rpass"
-                             "capcha capcha"
+                             "captcha captcha"
                              "send send";
 
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
@@ -315,8 +323,8 @@ main {
             }
         }
 
-        .capcha {
-            grid-area: capcha;
+        .captcha {
+            grid-area: captcha;
         }
 
         .submit {
@@ -443,7 +451,7 @@ main {
                              "email"
                              "pass"
                              "rpass"
-                             "capcha"
+                             "captcha"
                              "send";
 
         .title {
@@ -475,8 +483,8 @@ main {
             margin-left: 0;
         }
 
-        .capcha {
-            grid-area: capcha;
+        .captcha {
+            grid-area: captcha;
         }
 
         .submit {

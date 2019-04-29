@@ -57,7 +57,7 @@ class Application
 
         // user tries to login
         if ($URL[1] == 'connect') {
-            if ($controller->model->connect()) {
+            if ($controller->connect()) {
                 Session::unset('error');
                 header('Location: /');
             } else {
@@ -65,36 +65,13 @@ class Application
                 Session::set('error', 'Your email or password was incorrect. Please try again.');
                 header('Location: /login');
             }
+        } else if ($URL[1] == 'disconnect') {
+            // user wants to disconnect
+            $controller->disconnect();
+            header('Location: /login');
         } else {
             // login link is corrupted
             header('Location: /login');
         }
     }
 }
-
-/*
-
-// TODO: try to remove this lines from here
-            $controller = new $URL[0]();
-            // load view
-            $controller->index();
-
-            $count = count($URL);
-
-            switch ($count)
-            {
-                case 1:
-                    // TODO: check for existing files which can not be accessed
-                    break;
-
-                case 2:
-                    if ($URL[0] === 'LoginController') {
-                        $this->useLoginController($URL);
-                    }
-                    break;
-
-                default:
-                    header('Location: /login');
-                    break;
-            }
- */
