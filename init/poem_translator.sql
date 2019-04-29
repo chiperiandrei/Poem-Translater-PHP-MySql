@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Gazdă: 127.0.0.1
--- Timp de generare: apr. 26, 2019 la 06:35 PM
--- Versiune server: 10.1.38-MariaDB
--- Versiune PHP: 7.3.2
+-- Host: 127.0.0.1
+-- Generation Time: 30 Apr 2019 la 01:03
+-- Versiune server: 10.1.30-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Bază de date: `poem_translator`
+-- Database: `poem_translator`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `authors`
+-- Structura de tabel pentru tabelul `authors`
 --
 
 CREATE TABLE `authors` (
@@ -36,7 +36,7 @@ CREATE TABLE `authors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Eliminarea datelor din tabel `authors`
+-- Salvarea datelor din tabel `authors`
 --
 
 INSERT INTO `authors` (`ID`, `NAME`, `BIRTH_DATE`, `DEATH_DATE`) VALUES
@@ -45,12 +45,14 @@ INSERT INTO `authors` (`ID`, `NAME`, `BIRTH_DATE`, `DEATH_DATE`) VALUES
 (3, 'George Bacovia', 1881, 1957),
 (4, 'Ion Luca Caragiale', 1852, 1912),
 (5, 'Tudor Arghezi', 1880, 1967),
-(6, 'Maya Angelou', 1928, 2014);
+(6, 'Maya Angelou', 1928, 2014),
+(7, 'Victor Hugo', 1802, 1885),
+(8, 'Torquato Tasso', 1544, 1595);
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `author_images`
+-- Structura de tabel pentru tabelul `author_images`
 --
 
 CREATE TABLE `author_images` (
@@ -59,7 +61,7 @@ CREATE TABLE `author_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Eliminarea datelor din tabel `author_images`
+-- Salvarea datelor din tabel `author_images`
 --
 
 INSERT INTO `author_images` (`ID_AUTHOR`, `PATH`) VALUES
@@ -68,7 +70,7 @@ INSERT INTO `author_images` (`ID_AUTHOR`, `PATH`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `poems`
+-- Structura de tabel pentru tabelul `poems`
 --
 
 CREATE TABLE `poems` (
@@ -77,21 +79,24 @@ CREATE TABLE `poems` (
   `ID_AUTHOR` int(11) NOT NULL,
   `LANGUAGE` enum('RO','EN','DE','IT','FR','ES') CHARACTER SET utf8 COLLATE utf8_romanian_ci NOT NULL,
   `ID_STAFF` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Eliminarea datelor din tabel `poems`
+-- Salvarea datelor din tabel `poems`
 --
 
 INSERT INTO `poems` (`ID`, `TITLE`, `ID_AUTHOR`, `LANGUAGE`, `ID_STAFF`) VALUES
 (1, 'Peneş Curcanul', 2, 'RO', 1),
 (2, 'Liceu', 3, 'RO', 1),
-(3, 'Phenomenal Woman', 6, 'EN', 1);
+(3, 'Phenomenal Woman', 6, 'EN', 1),
+(4, 'Demain, dès l\'aube', 7, 'FR', 1),
+(5, 'Io v\'amo sol perche', 8, 'IT', 1),
+(6, 'Ecco mormorar l\'onde', 8, 'IT', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `staff`
+-- Structura de tabel pentru tabelul `staff`
 --
 
 CREATE TABLE `staff` (
@@ -99,7 +104,7 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Eliminarea datelor din tabel `staff`
+-- Salvarea datelor din tabel `staff`
 --
 
 INSERT INTO `staff` (`ID`) VALUES
@@ -108,7 +113,7 @@ INSERT INTO `staff` (`ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `strophes`
+-- Structura de tabel pentru tabelul `strophes`
 --
 
 CREATE TABLE `strophes` (
@@ -118,7 +123,7 @@ CREATE TABLE `strophes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Eliminarea datelor din tabel `strophes`
+-- Salvarea datelor din tabel `strophes`
 --
 
 INSERT INTO `strophes` (`ID_POEM`, `NTH`, `TEXT`) VALUES
@@ -153,12 +158,20 @@ INSERT INTO `strophes` (`ID_POEM`, `NTH`, `TEXT`) VALUES
 (3, 2, 'I walk into a room\r\nJust as cool as you please,   \r\nAnd to a man,\r\nThe fellows stand or\r\nFall down on their knees.   \r\nThen they swarm around me,\r\nA hive of honey bees.   \r\nI say,\r\nIt’s the fire in my eyes,   \r\nAnd the flash of my teeth,   \r\nThe swing in my waist,   \r\nAnd the joy in my feet.   \r\nI’m a woman\r\nPhenomenally.'),
 (3, 3, 'Phenomenal woman,\r\nThat’s me.'),
 (3, 4, 'Men themselves have wondered   \r\nWhat they see in me.\r\nThey try so much\r\nBut they can’t touch\r\nMy inner mystery.\r\nWhen I try to show them,   \r\nThey say they still can’t see.   \r\nI say,\r\nIt’s in the arch of my back,   \r\nThe sun of my smile,\r\nThe ride of my breasts,\r\nThe grace of my style.\r\nI’m a woman\r\nPhenomenally.\r\nPhenomenal woman,\r\nThat’s me.'),
-(3, 5, 'Now you understand\r\nJust why my head’s not bowed.   \r\nI don’t shout or jump about\r\nOr have to talk real loud.   \r\nWhen you see me passing,\r\nIt ought to make you proud.\r\nI say,\r\nIt’s in the click of my heels,   \r\nThe bend of my hair,   \r\nthe palm of my hand,   \r\nThe need for my care.   \r\n’Cause I’m a woman\r\nPhenomenally.\r\nPhenomenal woman,\r\nThat’s me.\r\n');
+(3, 5, 'Now you understand\r\nJust why my head’s not bowed.   \r\nI don’t shout or jump about\r\nOr have to talk real loud.   \r\nWhen you see me passing,\r\nIt ought to make you proud.\r\nI say,\r\nIt’s in the click of my heels,   \r\nThe bend of my hair,   \r\nthe palm of my hand,   \r\nThe need for my care.   \r\n’Cause I’m a woman\r\nPhenomenally.\r\nPhenomenal woman,\r\nThat’s me.\r\n'),
+(4, 1, 'Demain, dès l’aube, à l’heure où blanchit la campagne,\r\nJe partirai. Vois-tu, je sais que tu m’attends.\r\nJ’irai par la forêt, j’irai par la montagne.\r\nJe ne puis demeurer loin de toi plus longtemps.'),
+(4, 2, 'Je marcherai les yeux fixés sur mes pensées,\r\nSans rien voir au dehors, sans entendre aucun bruit,\r\nSeul, inconnu, le dos courbé, les mains croisées,\r\nTriste, et le jour pour moi sera comme la nuit.'),
+(4, 3, 'Je ne regarderai ni l’or du soir qui tombe,\r\nNi les voiles au loin descendant vers Harfleur,\r\nEt quand j’arriverai, je mettrai sur ta tombe\r\nUn bouquet de houx vert et de bruyère en fleur.'),
+(5, 1, 'Io v\'amo sol perchè voi siete bella,\r\ne perchè vuol mia stella,\r\nnon ch\'io speri da voi, dolce mio bene,\r\naltro che pene.'),
+(5, 2, 'E se talor gli occhi miei mostrate\r\naver qualche pietate,\r\nio non spero da voi del pianger tanto\r\naltro che pianto.'),
+(5, 3, 'Nè, perchè udite i miei sospiri ardenti\r\nche per voi sprago a i venti,\r\naltro spera da voi questo mio core\r\nse non dolore.'),
+(5, 4, 'Lasciate pur ch\'io v\'ami e ch\'io vi miri\r\ne che per voi sospiri,\r\nchè pene pianto e doglia è sol mercede\r\nde la mia fede.'),
+(6, 1, 'Ecco mormorar l\'onde,\r\nE tremolar le fronde\r\nA l\'aura mattutina, e gli arboscelli,\r\nE sovra i verdi rami i vaghi augelli\r\nCantar soavemente,\r\nE rider l\'Oriente;\r\nEcco già l\'alba appare,\r\nE si specchia nel mare,\r\nE rasserena il cielo,\r\nE le campagne imperla il dolce gelo,\r\nE gli alti monti indora:\r\nO bella e vaga Aurora,\r\nL\'aura è tua messaggera, e tu de l\'aura\r\nCh\'ogni arso cor ristaura.');
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `users`
+-- Structura de tabel pentru tabelul `users`
 --
 
 CREATE TABLE `users` (
@@ -171,7 +184,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Eliminarea datelor din tabel `users`
+-- Salvarea datelor din tabel `users`
 --
 
 INSERT INTO `users` (`ID`, `FIRST_NAME`, `LAST_NAME`, `EMAIL`, `USERNAME`, `PASSWORD`) VALUES
@@ -182,7 +195,7 @@ INSERT INTO `users` (`ID`, `FIRST_NAME`, `LAST_NAME`, `EMAIL`, `USERNAME`, `PASS
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `user_images`
+-- Structura de tabel pentru tabelul `user_images`
 --
 
 CREATE TABLE `user_images` (
@@ -191,30 +204,30 @@ CREATE TABLE `user_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Eliminarea datelor din tabel `user_images`
+-- Salvarea datelor din tabel `user_images`
 --
 
 INSERT INTO `user_images` (`ID_USER`, `PATH`) VALUES
-(2, '/denypatrascu/profile_picture.png');
+(2, 'profile_picture.jpg');
 
 --
--- Indexuri pentru tabele eliminate
+-- Indexes for dumped tables
 --
 
 --
--- Indexuri pentru tabele `authors`
+-- Indexes for table `authors`
 --
 ALTER TABLE `authors`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexuri pentru tabele `author_images`
+-- Indexes for table `author_images`
 --
 ALTER TABLE `author_images`
   ADD PRIMARY KEY (`ID_AUTHOR`);
 
 --
--- Indexuri pentru tabele `poems`
+-- Indexes for table `poems`
 --
 ALTER TABLE `poems`
   ADD PRIMARY KEY (`ID`,`ID_AUTHOR`,`ID_STAFF`),
@@ -222,19 +235,19 @@ ALTER TABLE `poems`
   ADD KEY `fk_poems__staff` (`ID_STAFF`);
 
 --
--- Indexuri pentru tabele `staff`
+-- Indexes for table `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexuri pentru tabele `strophes`
+-- Indexes for table `strophes`
 --
 ALTER TABLE `strophes`
   ADD PRIMARY KEY (`ID_POEM`,`NTH`) USING BTREE;
 
 --
--- Indexuri pentru tabele `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`),
@@ -242,65 +255,65 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `USERNAME` (`USERNAME`);
 
 --
--- Indexuri pentru tabele `user_images`
+-- Indexes for table `user_images`
 --
 ALTER TABLE `user_images`
   ADD PRIMARY KEY (`ID_USER`),
   ADD UNIQUE KEY `PATH` (`PATH`);
 
 --
--- AUTO_INCREMENT pentru tabele eliminate
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pentru tabele `authors`
+-- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `poems`
+--
+ALTER TABLE `poems`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT pentru tabele `poems`
---
-ALTER TABLE `poems`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT pentru tabele `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constrângeri pentru tabele eliminate
+-- Restrictii pentru tabele sterse
 --
 
 --
--- Constrângeri pentru tabele `author_images`
+-- Restrictii pentru tabele `author_images`
 --
 ALTER TABLE `author_images`
   ADD CONSTRAINT `fk_author_images__authors` FOREIGN KEY (`ID_AUTHOR`) REFERENCES `authors` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constrângeri pentru tabele `poems`
+-- Restrictii pentru tabele `poems`
 --
 ALTER TABLE `poems`
   ADD CONSTRAINT `fk_poems__authors` FOREIGN KEY (`ID_AUTHOR`) REFERENCES `authors` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_poems__staff` FOREIGN KEY (`ID_STAFF`) REFERENCES `staff` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constrângeri pentru tabele `staff`
+-- Restrictii pentru tabele `staff`
 --
 ALTER TABLE `staff`
   ADD CONSTRAINT `fk_staff__users` FOREIGN KEY (`ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constrângeri pentru tabele `strophes`
+-- Restrictii pentru tabele `strophes`
 --
 ALTER TABLE `strophes`
   ADD CONSTRAINT `fk_strophes__poems` FOREIGN KEY (`ID_POEM`) REFERENCES `poems` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constrângeri pentru tabele `user_images`
+-- Restrictii pentru tabele `user_images`
 --
 ALTER TABLE `user_images`
   ADD CONSTRAINT `fk_user_images__users` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
