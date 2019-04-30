@@ -22,9 +22,8 @@ class Application
 
             require_once('controllers/' . $URL[0] . '.php');
 
-            // TODO: try to remove this lines from here
+            // TODO: try to remove these lines from here
             $controller = new $URL[0]();
-            // load view
             $controller->index();
 
             $count = count($URL);
@@ -32,7 +31,6 @@ class Application
             switch ($count)
             {
                 case 1:
-                    // TODO: check for existing files which can not be accessed
                     break;
 
                 case 2:
@@ -47,7 +45,9 @@ class Application
             }
 
         } else {
-            echo '404: Page not found';
+            http_response_code(404);
+            require_once('views/errors/404.php');
+            exit();
         }
     }
 

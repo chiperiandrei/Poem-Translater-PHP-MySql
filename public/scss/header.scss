@@ -166,7 +166,8 @@ header {
 
             .navigation {
                 height: $header-height;
-                justify-content: space-between;
+                // justify-content: space-between;
+                justify-content: space-around;
 
                 .navigation-link, #navigation-user {
                     margin-left: 0;

@@ -1,0 +1,35 @@
+main {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+main .container {
+  width: 100%;
+  max-width: 1600px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  background-color: #212121;
+  color: #FAFAFA;
+  padding-bottom: 30px;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.5);
+}
+main .container h1 {
+  font-weight: 900;
+  font-size: 30vmin;
+}
+main .container span {
+  font-size: 7vmin;
+  font-weight: 300;
+}
+main .container span > .fas {
+  margin-right: 2vmin;
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    margin-top: 160px;
+  }
+}
+
+/*# sourceMappingURL=error.css.map */

@@ -140,7 +140,7 @@ header .container .navigation #navigation-user #user-menu a .fas {
   }
   header .container .navigation {
     height: 80px;
-    justify-content: space-between;
+    justify-content: space-around;
   }
   header .container .navigation .navigation-link, header .container .navigation #navigation-user {
     margin-left: 0;

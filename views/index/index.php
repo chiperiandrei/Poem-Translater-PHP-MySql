@@ -1,6 +1,6 @@
 <?php require_once('views/components/meta.php'); ?>
 
-<link rel="stylesheet" href="/public/css/main.css">
+<link rel="stylesheet" href="public/css/main.css">
 <link rel="stylesheet" href="public/css/flags.min.css">
 
 <?php
@@ -101,3 +101,6 @@ if (Session::exists('user_id')) {
 </main>
 
 <script src="public/js/main.js" type="text/javascript"></script>
+
+</body>
+</html>

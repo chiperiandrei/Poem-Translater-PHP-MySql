@@ -1,0 +1,41 @@
+$main-background-color: #212121;
+$main-color: #FAFAFA;
+$main-max-width: 1600px;
+
+main {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .container {
+    width: 100%;
+    max-width: $main-max-width;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
+    background-color: $main-background-color;
+    color: $main-color;
+    padding-bottom: 30px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, .5);
+
+    h1 {
+      font-weight: 900;
+      font-size: 30vmin;
+    }
+
+    span {
+      font-size: 7vmin;
+      font-weight: 300;
+
+      & > .fas {
+        margin-right: 2vmin;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    margin-top: 160px;
+  }
+}

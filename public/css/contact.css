@@ -1,0 +1,117 @@
+main {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+main .container {
+  background-color: #FAFAFA;
+  width: 100%;
+  max-width: 1600px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "fn ln" "email email" "ta ta" "submit submit";
+}
+main .container .contact-name, main .container .first-name, main .container .last-name, main .container .email, main .container .textarea {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+main .container .contact-name label, main .container .first-name label, main .container .last-name label, main .container .email label, main .container .textarea label {
+  padding-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.1em;
+}
+main .container .contact-name input, main .container .first-name input, main .container .last-name input, main .container .email input, main .container .textarea input {
+  border: 1px solid #E0E0E0;
+  height: 50px;
+  padding: 0 40px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+}
+main .container .contact-name span, main .container .first-name span, main .container .last-name span, main .container .email span, main .container .textarea span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  width: 30px;
+  height: 50px;
+  background-color: #BDBDBD;
+}
+main .container .first-name {
+  grid-area: fn;
+}
+main .container .last-name {
+  grid-area: ln;
+}
+main .container .email {
+  grid-area: email;
+}
+main .container .textarea {
+  grid-area: ta;
+  position: relative;
+}
+main .container .textarea textarea {
+  border: 1px solid #E0E0E0;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  padding: 10px 10px 0 10px;
+  height: 300px;
+  min-height: 100px;
+  max-width: 100%;
+  min-width: 100%;
+}
+main .container .submit {
+  grid-area: submit;
+  margin: 10px 20px;
+  position: relative;
+  text-align: right;
+}
+main .container .submit button {
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  text-align: center;
+}
+main .container .submit button .fas {
+  margin-left: 6px;
+  font-size: 0.8em;
+}
+
+@media screen and (max-width: 650px) {
+  main .container {
+    padding: 0;
+    grid-template-columns: 1fr;
+    grid-template-areas: "fn" "ln" "email" "ta" "submit";
+  }
+  main .container .first-name {
+    grid-area: fn;
+  }
+  main .container .last-name {
+    grid-area: ln;
+  }
+  main .container .email {
+    grid-area: email;
+  }
+  main .container .textarea {
+    grid-area: ta;
+  }
+  main .container .submit {
+    grid-area: submit;
+  }
+}
+
+/*# sourceMappingURL=contact.css.map */
