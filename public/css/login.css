@@ -255,9 +255,6 @@ main .container .login > div:last-child span .fas {
 .create-account .container .last-name input {
   padding-left: 10px;
 }
-.create-account .container .email {
-  grid-area: email;
-}
 .create-account .container .password {
   grid-area: pass;
   margin-right: 15px;

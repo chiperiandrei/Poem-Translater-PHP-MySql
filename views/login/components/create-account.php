@@ -1,3 +1,4 @@
+<form action="/login/signup" method="POST">
 <section id="create-account" class="create-account">
     <div class="container">
         <div class="title">
@@ -15,7 +16,12 @@
         </div>
         <div class="email">
             <label for="email">Email:</label>
-            <input type="text" name="rank" placeholder="johndoe@exemple.com" required>
+            <input type="email" name="email" placeholder="johndoe@exemple.com" required>
+            <span><i class="fas fa-at"></i></span>
+        </div>
+        <div class="email">
+            <label for="username">username:</label>
+            <input type="text" name="username" placeholder="username " required>
             <span><i class="fas fa-at"></i></span>
         </div>
         <div class="password">
@@ -23,10 +29,7 @@
             <input type="password" name="password" placeholder="*******" required>
             <span><i class="fas fa-key"></i></span>
         </div>
-        <div class="repeat-password">
-            <label for="repeat-password">Repeat password:</label>
-            <input type="password" name="repeat-password" placeholder="*******" required>
-        </div>
+
         <div class="captcha">
             TODO: Captcha
         </div>
@@ -35,3 +38,4 @@
         </div>
     </div>
 </section>
+</form>

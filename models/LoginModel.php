@@ -36,6 +36,38 @@ class LoginModel extends Model
         return false;
     }
 
+    public function verifyUserReg($email, $username)
+    {
+        $SQL = 'SELECT * FROM users WHERE email = ' . $email . 'or username = ' . $username;
+
+        $result = $this->db->prepare($SQL);
+        if ($result->rowCount() === 0)
+            return true;
+        else
+            return false;
+    }
+
+    public function register()
+    {
+        $SQL = 'INSERT INTO users(first_name,last_name,email,username,password) VALUES (:fname,:lname,:email,:username,:password)';
+
+        $result = $this->db->prepare($SQL);
+        $ok = $result->execute([
+            ':fname' => $_POST['first-name'],
+            ':lname' => $_POST['last-name'],
+            ':email' => $_POST['email'],
+            ':username' => $_POST['username'],
+            ':password' => md5($_POST['password'])
+        ]);
+        if ($ok) {
+            if (!file_exists('storage/'.$_POST['username'])) {
+                mkdir('storage/'.$_POST['username'], 0777, true);
+            }
+        }
+        return $ok;
+
+    }
+
     public function loadPoemHeader($poem_id)
     {
         $SQL = 'SELECT p.ID AS POEM_ID, p.ID_AUTHOR AS AUTHOR_ID, p.TITLE AS POEM_TITLE, a.NAME AS AUTHOR_NAME, 

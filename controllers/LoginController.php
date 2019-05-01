@@ -43,6 +43,15 @@ class LoginController extends Controller
     {
         return $this->model->verifyUser();
     }
+    public function signup()
+    {
+        $email = $_POST["email"];
+        $username = $_POST["username"];
+        if ($this->model->verifyUserReg($email,$username)) {
+            return $this->model->register();
+        }
+        else return false;
+    }
 
     public function disconnect()
     {

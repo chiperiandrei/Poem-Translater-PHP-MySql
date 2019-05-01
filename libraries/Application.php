@@ -28,8 +28,7 @@ class Application
 
             $count = count($URL);
 
-            switch ($count)
-            {
+            switch ($count) {
                 case 1:
                     break;
 
@@ -69,9 +68,19 @@ class Application
             // user wants to disconnect
             $controller->disconnect();
             header('Location: /login');
-        } else {
-            // login link is corrupted
-            header('Location: /login');
-        }
+        } else
+            if ($URL[1] == 'signup') {
+                if ($controller->signup()) {
+                    Session::unset('error');
+                    header('Location: /login');
+                } else {
+                    // username or password is incorrect
+                    Session::set('error', 'Something went wrong :(');
+                    header('Location: /login');
+                }
+            } else {
+                // login link is corrupted
+                header('Location: /login');
+            }
     }
 }
