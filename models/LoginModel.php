@@ -17,7 +17,7 @@ class LoginModel extends Model
 
         $result->execute([
             ':email' => $_POST['email'],
-            ':password' => $_POST['password']
+            ':password' => md5($_POST['password'])
         ]);
 
         if ($result->rowCount() === 1) {

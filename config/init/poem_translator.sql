@@ -188,9 +188,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `FIRST_NAME`, `LAST_NAME`, `EMAIL`, `USERNAME`, `PASSWORD`) VALUES
-(1, 'John', ' Doe', 'admin@poem-translator.tw', 'admin', 'admin'),
-(2, 'Deny-Constantin', 'Pătrașcu', 'denypatrascu@gmail.com', 'denypatrascu', 'parola'),
-(3, 'Andrei', 'Chiperi', 'chiperi.andrei@yahoo.ro', 'chiperiandrei', 'parola');
+(1, 'John', ' Doe', 'admin@poem-translator.tw', 'admin', '21232F297A57A5A743894A0E4A801FC3'),
+(2, 'Deny-Constantin', 'Pătrașcu', 'denypatrascu@gmail.com', 'denypatrascu', '8287458823FACB8FF918DBFABCD22CCB'),
+(3, 'Andrei', 'Chiperi', 'chiperi.andrei@yahoo.ro', 'chiperiandrei', '8287458823FACB8FF918DBFABCD22CCB');
 
 -- --------------------------------------------------------
 
@@ -209,6 +209,8 @@ CREATE TABLE `user_images` (
 
 INSERT INTO `user_images` (`ID_USER`, `PATH`) VALUES
 (2, 'profile_picture.jpg');
+INSERT INTO `user_images` (`ID_USER`, `PATH`) VALUES
+(3, 'profile_picture.jpg');
 
 --
 -- Indexes for dumped tables
@@ -258,8 +260,7 @@ ALTER TABLE `users`
 -- Indexes for table `user_images`
 --
 ALTER TABLE `user_images`
-  ADD PRIMARY KEY (`ID_USER`),
-  ADD UNIQUE KEY `PATH` (`PATH`);
+  ADD PRIMARY KEY (`ID_USER`);
 
 --
 -- AUTO_INCREMENT for dumped tables
