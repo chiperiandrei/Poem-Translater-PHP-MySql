@@ -81,25 +81,25 @@ class LoginModel extends Model
 
     public function emailME($email)
     {
-        $ok=false;
+        $ok = false;
         $pass = $this->generateRandomString(10);
         $new_pass = md5($pass);
-            $sql = "UPDATE users SET PASSWORD='$new_pass' WHERE EMAIL='$email'";
-            $count=$this->db->exec($sql);
-            if($count==1)
-                $ok=true;
-            else{
-                Session::set('eroareEmail', 'Emailul este gresit, frt!');
-            }
-                                            $pentru = $email;
-                                            $subject = 'PoTr ADMIN PANEL';
-                                            $mesaj = "Hello ! You're new password is".$pass;
-                                            $header = 'From: PoTr example' . "\r\n" .
-                                                'No replay: webmaster@example.com' . "\r\n" .
-                                                'X-Mailer: PHP/' . phpversion();
+        $sql = "UPDATE users SET PASSWORD='$new_pass' WHERE EMAIL='$email'";
+        $count = $this->db->exec($sql);
+        if ($count == 1)
+            $ok = true;
+        else {
+            Session::set('eroareEmail', 'Emailul este gresit, frt!');
+        }
+        $pentru = $email;
+        $subject = 'PoTr ADMIN PANEL';
+        $mesaj = "Hello ! You're new password is " . $pass . " . Make sure that you change it as soon as posible.";
+        $header = 'From: PoTr TEAM' . "\r\n" .
+            'No replay: potrTEAM@poem-translator.tw' . "\r\n" .
+            'X-Mailer: PHP/';
 
-                                            mail($pentru, $subject, $mesaj, $header);
-                                            Session::set('cui',$pentru);
+        mail($pentru, $subject, $mesaj, $header);
+        Session::set('cui', $pentru);
         return $ok;
 
     }
