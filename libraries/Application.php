@@ -81,6 +81,18 @@ class Application
                 header('Location: /login');
 
             }
+        } else if ($URL[1] == 'forgot') {
+            // user wants to disconnect
+            if ($controller->forgot()) {
+                Session::unset('eroareEmail');
+                Session::set('reg-ok', 'Congrats! You j!');
+                header('Location: /login');
+
+            } else {
+                Session::unset('reg-ok');
+                Session::unset('cui');
+                header('Location: /login');
+            }
         } else {
             // login link is corrupted
             header('Location: /login');

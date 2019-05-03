@@ -60,10 +60,46 @@ class LoginModel extends Model
             ':password' => md5($_POST['password'])
         ]);
         if ($ok) {
-            if (!file_exists('storage/'.$_POST['username'])) {
-                mkdir('storage/'.$_POST['username'], 0777, true);
+            if (!file_exists('storage/' . $_POST['username'])) {
+                mkdir('storage/' . $_POST['username'], 0777, true);
             }
         }
+        return $ok;
+
+    }
+
+    function generateRandomString($length)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function emailME($email)
+    {
+        $ok=false;
+        $pass = $this->generateRandomString(10);
+        $new_pass = md5($pass);
+            $sql = "UPDATE users SET PASSWORD='$new_pass' WHERE EMAIL='$email'";
+            $count=$this->db->exec($sql);
+            if($count==1)
+                $ok=true;
+            else{
+                Session::set('eroareEmail', 'Emailul este gresit, frt!');
+            }
+                                            $pentru = $email;
+                                            $subject = 'PoTr ADMIN PANEL';
+                                            $mesaj = "Hello ! You're new password is".$pass;
+                                            $header = 'From: PoTr example' . "\r\n" .
+                                                'No replay: webmaster@example.com' . "\r\n" .
+                                                'X-Mailer: PHP/' . phpversion();
+
+                                            mail($pentru, $subject, $mesaj, $header);
+                                            Session::set('cui',$pentru);
         return $ok;
 
     }

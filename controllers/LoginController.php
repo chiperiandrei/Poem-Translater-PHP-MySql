@@ -53,6 +53,12 @@ class LoginController extends Controller
         } else return false;
     }
 
+    public function forgot()
+    {
+        $email=$_POST["email"];
+        return $this->model->emailME($email);
+    }
+
     public function disconnect()
     {
         Session::destroy();

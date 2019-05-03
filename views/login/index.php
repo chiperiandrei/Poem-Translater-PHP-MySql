@@ -109,7 +109,7 @@
     </main>
 
 <?php require_once('views/login/components/create-account.php'); ?>
-
+<?php require_once('views/login/components/forgot-password.php'); ?>
     <script src="public/js/login.js" type="text/javascript"></script>
 
 <?php require_once('views/components/footer.php'); ?>
