@@ -9,7 +9,6 @@ class Application
         ob_start();
 
         Session::start();
-
         if (isset($_GET['url'])) {
             $URL = explode('/', $_GET['url']);
         } else {
@@ -48,6 +47,7 @@ class Application
             require_once('views/errors/404.php');
             exit();
         }
+
     }
 
     private function useLoginController($URL)
@@ -68,19 +68,23 @@ class Application
             // user wants to disconnect
             $controller->disconnect();
             header('Location: /login');
-        } else
-            if ($URL[1] == 'signup') {
-                if ($controller->signup()) {
-                    Session::unset('error');
-                    header('Location: /login');
-                } else {
-                    // username or password is incorrect
-                    Session::set('error', 'Something went wrong :(');
-                    header('Location: /login');
-                }
-            } else {
-                // login link is corrupted
+        } else if ($URL[1] == 'signup') {
+            if ($controller->signup()) {
+                Session::unset('error-reg');
+                Session::set('reg-ok', 'Congrats! You joined us !');
                 header('Location: /login');
+
+            } else {
+                // username or password is incorrect
+                Session::unset('reg-ok');
+                Session::set('error-reg', 'Something went wrong :(. Please try again !!');
+                header('Location: /login');
+
             }
+        } else {
+            // login link is corrupted
+            header('Location: /login');
+        }
+
     }
 }

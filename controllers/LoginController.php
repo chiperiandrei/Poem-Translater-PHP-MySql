@@ -43,14 +43,14 @@ class LoginController extends Controller
     {
         return $this->model->verifyUser();
     }
+
     public function signup()
     {
         $email = $_POST["email"];
         $username = $_POST["username"];
-        if ($this->model->verifyUserReg($email,$username)) {
+        if ($this->model->verifyUserReg($email, $username)) {
             return $this->model->register();
-        }
-        else return false;
+        } else return false;
     }
 
     public function disconnect()
@@ -64,9 +64,9 @@ class LoginController extends Controller
         $poem['author_name'] = $header['AUTHOR_NAME'];
         $poem['language'] = ($header['LANGUAGE'] === 'en' ? 'gb' : $header['LANGUAGE']);
         $poem['link'] = 'poems/' . $header['LANGUAGE'] . '/' .
-                        str_replace(' ', '-', $poem['title']);
+            str_replace(' ', '-', $poem['title']);
         $poem['author_link'] = 'authors/' .
-                                str_replace(' ', '-', $poem['author_name']);
+            str_replace(' ', '-', $poem['author_name']);
         $poem['content'] = $body['POEM_CONTENT'];
 
         return $poem;
