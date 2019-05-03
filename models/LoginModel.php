@@ -63,6 +63,14 @@ class LoginModel extends Model
             if (!file_exists('storage/' . $_POST['username'])) {
                 mkdir('storage/' . $_POST['username'], 0777, true);
             }
+            $pentru = $_POST["email"];
+            $subject = 'PoTr ADMIN PANEL';
+            $mesaj = "Hello ".$_POST["first-name"]." ".$_POST["last-name"]."! You're just joined us. Your password is  " . $_POST["password"] . " .\n Tip! You're nickname is ".$_POST["username"]." Have fun!";
+            $header = 'From: PoTr TEAM' . "\r\n" .
+                'No replay: potrTEAM@poem-translator.tw' . "\r\n" .
+                'X-Mailer: PHP/';
+
+            mail($pentru, $subject, $mesaj, $header);
         }
         return $ok;
 
