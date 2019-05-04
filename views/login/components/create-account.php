@@ -1,4 +1,4 @@
-<form action="/login/signup" method="POST">
+<form action="/login/create-account" method="POST">
 <section id="create-account" class="create-account">
     <div class="container">
         <div class="title">
@@ -19,17 +19,19 @@
             <input type="email" name="email" placeholder="johndoe@exemple.com" required>
             <span><i class="fas fa-at"></i></span>
         </div>
-        <div class="email">
+        <div class="username">
             <label for="username">username:</label>
-            <input type="text" name="username" placeholder="username " required>
-            <span><i class="fas fa-at"></i></span>
+            <input type="text" name="username" placeholder="john_doe" required>
         </div>
         <div class="password">
             <label for="password">Password:</label>
             <input type="password" name="password" placeholder="*******" required>
             <span><i class="fas fa-key"></i></span>
         </div>
-
+        <div class="repeat-password">
+            <label for="repeat-password">Repeat password:</label>
+            <input type="password" name="repeat-password" placeholder="*******" required>
+        </div>
         <div class="captcha">
             TODO: Captcha
         </div>

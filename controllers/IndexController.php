@@ -5,6 +5,8 @@ require_once('libraries/Session.php');
 
 require_once('models/IndexModel.php');
 
+define('HOST', 'http://poem-translator.tw/');
+
 class IndexController extends Controller
 {
     private $model;
@@ -41,10 +43,10 @@ class IndexController extends Controller
         $avatar_path = $this->model->loadAvatar();
 
         if ($avatar_path) {
-            return 'storage/' . Session::get('username') . '/' . $avatar_path;
+            return HOST . 'storage/' . Session::get('username') . '/' . $avatar_path;
         }
 
-        return 'storage/default/avatar.png';
+        return HOST . 'storage/default/avatar.png';
     }
 
     private function packPoem($headers, $bodies)
@@ -57,9 +59,9 @@ class IndexController extends Controller
             $poems[$i]['title'] = $header['POEM_TITLE'];
             $poems[$i]['author_name'] = $header['AUTHOR_NAME'];
             $poems[$i]['language'] = ($header['LANGUAGE'] === 'en' ? 'gb' : $header['LANGUAGE']);
-            $poems[$i]['link'] = 'poems/' . $header['LANGUAGE'] . '/' .
+            $poems[$i]['link'] = 'poem/' . $header['LANGUAGE'] . '/' .
                                 str_replace(' ', '-', $poems[$i]['title']);
-            $poems[$i]['author_link'] = 'authors/' .
+            $poems[$i]['author_link'] = 'author/' .
                                        str_replace(' ', '-', $poems[$i]['author_name']);
             $poems[$i]['content'] = $bodies[$i];
             $i++;

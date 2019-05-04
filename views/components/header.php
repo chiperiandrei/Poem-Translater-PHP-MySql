@@ -6,8 +6,8 @@
             <a href="<?php Session::print('current_page'); ?>">Poem Translator</a>
         </div>
         <nav class="navigation">
-            <a class="navigation-link" href="contact">Contact<i class="fas fa-comments"></i></a>
-            <a class="navigation-link" href="favorites">Favorites<i class="fas fa-star"></i></a>
+            <a class="navigation-link" href="http://poem-translator.tw/contact">Contact<i class="fas fa-comments"></i></a>
+            <a class="navigation-link" href="http://poem-translator.tw/favorites">Favorites<i class="fas fa-star"></i></a>
             <div id="navigation-user">
                 <div class="user-label">
                     <span class="user-name">
