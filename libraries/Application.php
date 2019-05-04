@@ -17,6 +17,7 @@ class Application
             $URL[0] = 'index';
         }
 
+
         $URL[0] = ucwords(strtolower($URL[0])) . 'Controller';
 
         if (file_exists('controllers/' . $URL[0] . '.php')) {
@@ -45,7 +46,7 @@ class Application
                     }
                     break;
                 case 4:
-                    if ($URL[0]=='AuthorController'){
+                    if ($URL[0] === 'AuthorController') {
                         $this->useAuthorController($URL);
                     }
                     break;

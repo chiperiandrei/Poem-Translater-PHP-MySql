@@ -13,7 +13,7 @@ class AuthorModel extends Model
     public function showAllPoems($author)
     {
         $author = str_replace('-', ' ', $author);
-        $SQL = 'SELECT p.title as TITLU_POEM FROM poems p join authors a on p.ID_AUTHOR = a.ID where a.NAME' . $author;
+        $SQL = 'SELECT p.title as TITLU_POEM FROM poems p join authors a on p.ID_AUTHOR = a.ID where a.NAME=' . $author;
         $statement = $this->db->prepare($SQL);
 
         $statement->execute();
