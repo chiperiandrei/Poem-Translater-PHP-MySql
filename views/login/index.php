@@ -84,17 +84,31 @@
                     </span>
                     </div>
                 <?php endif; ?>
-                <?php if (Session::exists('error-reg')) : ?>
+                <?php if (Session::exists('error-register')) : ?>
                     <div>
                     <span id="login-error">
-                        <?php Session::print('error-reg'); ?>
+                        <?php Session::print('error-register'); ?>
                     </span>
                     </div>
                 <?php endif; ?>
-                <?php if (Session::exists('reg-ok')) : ?>
+                <?php if (Session::exists('password-not-same')) : ?>
+                    <div>
+                    <span id="login-error">
+                        <?php Session::print('password-not-same'); ?>
+                    </span>
+                    </div>
+                <?php endif; ?>
+                <?php if (Session::exists('email-is-used')) : ?>
+                    <div>
+                    <span id="login-error">
+                        <?php Session::print('email-is-used'); ?>
+                    </span>
+                    </div>
+                <?php endif; ?>
+                <?php if (Session::exists('log-register')) : ?>
                     <div>
                     <span id="login-ok">
-                        <?php Session::print('reg-ok'); ?>
+                        <?php Session::print('log-register'); ?>
                     </span>
                     </div>
                 <?php endif; ?>

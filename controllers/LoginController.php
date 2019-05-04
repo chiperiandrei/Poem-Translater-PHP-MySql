@@ -48,9 +48,21 @@ class LoginController extends Controller
     {
         $email = $_POST["email"];
         $username = $_POST["username"];
+        $password1 = $_POST["password"];
+        $password2 = $_POST["repeat-password"];
         if ($this->model->verifyUserReg($email, $username)) {
-            return $this->model->register();
-        } else return;
+            if ($password2==$password1) {
+                return $this->model->register();
+            }
+            else
+            {
+                Session::set('password-not-same', 'Sorry ! The password must be equals.');
+                return false;
+            }
+        } else {
+
+            return false;
+        }
     }
 
     public function forgot()
@@ -70,9 +82,9 @@ class LoginController extends Controller
         $poem['author_name'] = $header['AUTHOR_NAME'];
         $poem['language'] = ($header['LANGUAGE'] === 'en' ? 'gb' : $header['LANGUAGE']);
         $poem['link'] = 'poem/' . $header['LANGUAGE'] . '/' .
-                         str_replace(' ', '-', $poem['title']);
+            str_replace(' ', '-', $poem['title']);
         $poem['author_link'] = 'author/' .
-                                str_replace(' ', '-', $poem['author_name']);
+            str_replace(' ', '-', $poem['author_name']);
         $poem['content'] = $body['POEM_CONTENT'];
 
         return $poem;

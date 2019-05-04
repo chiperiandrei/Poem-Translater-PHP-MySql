@@ -44,7 +44,11 @@ class Application
                         $this->usePoemController($URL);
                     }
                     break;
-
+                case 4:
+                    if ($URL[0] == 'AuthorController') {
+                        $this->useAuthorController($URL);
+                    }
+                    break;
                 default:
                     header('Location: /login');
                     break;
@@ -86,10 +90,14 @@ class Application
             // user want to create an account
             if ($controller->sign_up()) {
                 Session::unset('error-register');
+                Session::unset('email-is-used');
+                Session::unset('password-not-same');
                 Session::set('log-register', 'Congratulations! You joined us.');
                 header('Location: /login');
             } else {
+                Session::unset('log-register');
                 Session::set('error-register', 'Something went wrong. Please try again.');
+                Session::set('email-is-used', 'Sorry ! The email or the username is unavailable');
                 header('Location: /login');
             }
 
@@ -114,5 +122,10 @@ class Application
     private function usePoemController($URL)
     {
         $this->current_controller->loadPoem($URL[2], $URL[1]);
+    }
+
+    private function useAuthorController($URL)
+    {
+        $this->current_controller->loadAuthor($URL[1]);
     }
 }
