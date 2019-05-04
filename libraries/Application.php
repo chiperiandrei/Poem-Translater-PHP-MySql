@@ -45,7 +45,7 @@ class Application
                     }
                     break;
                 case 4:
-                    if ($URL[0] == 'AuthorController') {
+                    if ($URL[0]=='AuthorController'){
                         $this->useAuthorController($URL);
                     }
                     break;
