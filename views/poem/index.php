@@ -43,4 +43,6 @@ if (Session::exists('user_id')) {
     </div>
 </main>
 
+<script src="../../public/js/poem.js"></script>
+
 <?php require_once('views/components/footer.php'); ?>
