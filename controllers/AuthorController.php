@@ -32,7 +32,7 @@ class AuthorController extends Controller
         $this->view->author_info = $this->packAuthor($this->model->loadAuthorInfo($authorIN));
 
         $this->view->poems_by_author = $this->model->showAllPoems($authorIN);
-        
+
     }
 
 

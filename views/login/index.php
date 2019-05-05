@@ -77,10 +77,10 @@
                     </div>
                     <button type="submit" id="login">Login</button>
                 </div>
-                <?php if (Session::exists('error')) : ?>
+                <?php if (Session::exists('error-login')) : ?>
                     <div>
                     <span id="login-error">
-                        <?php Session::print('error'); ?>
+                        <?php Session::print('error-login'); ?>
                     </span>
                     </div>
                 <?php endif; ?>
