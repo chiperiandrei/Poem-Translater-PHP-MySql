@@ -186,6 +186,13 @@ main .container .login > div #login-error {
   border: 1px solid #C62828;
   padding: 10px 5px;
 }
+main .container .login > div #login-ok {
+  color: #19c622;
+  font-weight: 600;
+  transition: all 300ms ease-in-out;
+  border: 1px solid #2ec646;
+  padding: 10px 5px;
+}
 main .container .login > div:last-child {
   display: block;
 }

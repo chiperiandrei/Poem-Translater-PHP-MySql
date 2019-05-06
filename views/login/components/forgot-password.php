@@ -17,14 +17,6 @@
     </section>
 </form>
 
-<?php if (Session::exists('log-register')) : ?>
-<div>
-    <span id="reg-ok">
-        <?php Session::print('log-register'); ?>
-    </span>
-</div>
-<?php endif; ?>
-
 <?php if (Session::exists('error-forgot')) : ?>
 <div>
     <span id="login-ok">
@@ -33,10 +25,3 @@
 </div>
 <?php endif; ?>
 
-<?php if (Session::exists('cui')) : ?>
-<div>
-    <span id="login-ok">
-        We sent you an e-mail.<?php Session::print('cui'); ?>
-    </span>
-</div>
-<?php endif; ?>
