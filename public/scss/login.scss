@@ -120,13 +120,7 @@ main {
                 margin-top: 30px;
                 position: relative;
 
-                #login-ok {
-                    color: #19c622;
-                    font-weight: 600;
-                    transition: all 300ms ease-in-out;
-                    border: 1px solid #2ec646;
-                    padding: 10px 5px;
-                }
+
 
                 &.login-text {
                     position: relative;
@@ -223,6 +217,14 @@ main {
                     font-weight: 600;
                     transition: all 300ms ease-in-out;
                     border: 1px solid #C62828;
+                    padding: 10px 5px;
+                }
+
+                #login-ok {
+                    color: #19c622;
+                    font-weight: 600;
+                    transition: all 300ms ease-in-out;
+                    border: 1px solid #2ec646;
                     padding: 10px 5px;
                 }
 
