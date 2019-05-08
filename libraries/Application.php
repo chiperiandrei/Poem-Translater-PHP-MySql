@@ -37,6 +37,8 @@ class Application
                 case 2:
                     if ($URL[0] === 'LoginController') {
                         $this->useLoginController($URL);
+                    } else if ($URL[0] === 'AuthorController') {
+                        $this->useAuthorController($URL);
                     }
                     break;
 
@@ -45,11 +47,7 @@ class Application
                         $this->usePoemController($URL);
                     }
                     break;
-                case 4:
-                    if ($URL[0] === 'AuthorController') {
-                        $this->useAuthorController($URL);
-                    }
-                    break;
+
                 default:
                     header('Location: /login');
                     break;

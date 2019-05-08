@@ -56,7 +56,7 @@ class LoginController extends Controller
             }
             else
             {
-                Session::set('password-not-same', 'Sorry ! The password must be equals.');
+                Session::set('password-not-same', 'Sorry! The passwords must be equals.');
                 return false;
             }
         } else {
