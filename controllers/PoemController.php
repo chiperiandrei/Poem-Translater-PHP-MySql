@@ -35,6 +35,10 @@ class PoemController extends Controller
         $this->view->poem_body = $this->packBody(
             $this->model->loadPoemBody()
         );
+
+        $this->view->poem_languages = $this->packAvailableTranslations(
+            $this->model->loadAvailableTranslations()
+        );
     }
 
     private function packHeader($header)
@@ -59,5 +63,19 @@ class PoemController extends Controller
         }
 
         return $poem;
+    }
+
+    private function packAvailableTranslations($languages)
+    {
+        $translations = [];
+
+        foreach ($languages as $language)
+        {
+            array_push($translations,
+                strtolower($language['LANGUAGE'] === 'EN' ? 'gb' : $language['LANGUAGE'])
+            );
+        }
+
+        return $translations;
     }
 }

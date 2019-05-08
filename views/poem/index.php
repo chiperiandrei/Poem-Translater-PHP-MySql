@@ -34,6 +34,16 @@ if (Session::exists('user_id')) {
                  alt="<?php echo $this->poem_header['language']; ?>"/>
             <?php echo $this->poem_header['language']; ?>
         </a>
+        <?php foreach($this->poem_languages as $language) : ?>
+            <a href="">
+                <img src="../../public/img/flags/blank.gif"
+                     class="flag flag-<?php echo $language; ?>"
+                     alt="<?php echo $language; ?>"/>
+                <?php echo $language; ?>
+            </a>
+
+        <?php endforeach; ?>
+
         <a href="" class="arrow"><i class="fas fa-angle-double-down"></i></a>
     </nav>
 

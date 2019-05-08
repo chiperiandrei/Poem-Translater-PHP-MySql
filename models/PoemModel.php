@@ -52,4 +52,20 @@ class PoemModel extends Model
 
         return;
     }
+
+    public function loadAvailableTranslations()
+    {
+        if ($this->poem_id) {
+            $SQL = 'SELECT DISTINCT LANGUAGE FROM translations WHERE ID_POEM = ' . $this->poem_id;
+
+            $statement = $this->db->prepare($SQL);
+
+            $statement->execute();
+
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
+        return;
+    }
 }

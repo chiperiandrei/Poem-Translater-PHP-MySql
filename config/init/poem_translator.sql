@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 30 Apr 2019 la 14:31
+-- Generation Time: 08 Mai 2019 la 10:43
 -- Versiune server: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -171,6 +171,49 @@ INSERT INTO `strophes` (`ID_POEM`, `NTH`, `TEXT`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structura de tabel pentru tabelul `translations`
+--
+
+CREATE TABLE `translations` (
+  `ID` int(11) NOT NULL,
+  `ID_POEM` int(11) NOT NULL,
+  `ID_USER` int(11) NOT NULL,
+  `RATING` enum('0','1','2','3','4','5') NOT NULL DEFAULT '0',
+  `LANGUAGE` enum('RO','EN','DE','IT','FR','ES') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `translations`
+--
+
+INSERT INTO `translations` (`ID`, `ID_POEM`, `ID_USER`, `RATING`, `LANGUAGE`) VALUES
+(1, 2, 2, '3', 'EN'),
+(2, 2, 2, '2', 'IT');
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `translation_strophes`
+--
+
+CREATE TABLE `translation_strophes` (
+  `ID_TRANSLATION` int(11) NOT NULL,
+  `NTH` int(3) NOT NULL,
+  `TEXT` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `translation_strophes`
+--
+
+INSERT INTO `translation_strophes` (`ID_TRANSLATION`, `NTH`, `TEXT`) VALUES
+(1, 1, 'High school, - cemetery\r\nMy youth -\r\nPedant teachers\r\nAnd heavy exams ...\r\nAnd today you are\r\nHigh school, - cemetery\r\nMy youth!'),
+(1, 2, 'High school, - cemetery\r\nWith long corridors -\r\nToday is no longer me\r\nAnd my mind hurts ...\r\nNothing I ever want -\r\nHigh school, - cemetery\r\nWith long corridors ...'),
+(1, 3, 'High school, - cemetery\r\nMy youth -\r\nThe world you gave me\r\nIn heavy rains,\r\nSo blasted ...\r\nHigh school, - cemetery\r\nMy youth!');
+
+-- --------------------------------------------------------
+
+--
 -- Structura de tabel pentru tabelul `users`
 --
 
@@ -208,8 +251,7 @@ CREATE TABLE `user_images` (
 --
 
 INSERT INTO `user_images` (`ID_USER`, `PATH`) VALUES
-(2, 'profile_picture.jpg');
-INSERT INTO `user_images` (`ID_USER`, `PATH`) VALUES
+(2, 'profile_picture.jpg'),
 (3, 'profile_picture.jpg');
 
 --
@@ -249,6 +291,20 @@ ALTER TABLE `strophes`
   ADD PRIMARY KEY (`ID_POEM`,`NTH`) USING BTREE;
 
 --
+-- Indexes for table `translations`
+--
+ALTER TABLE `translations`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `fk_translations__poems` (`ID_POEM`),
+  ADD KEY `fk_translations__usrs` (`ID_USER`);
+
+--
+-- Indexes for table `translation_strophes`
+--
+ALTER TABLE `translation_strophes`
+  ADD PRIMARY KEY (`ID_TRANSLATION`,`NTH`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -277,6 +333,12 @@ ALTER TABLE `authors`
 --
 ALTER TABLE `poems`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `translations`
+--
+ALTER TABLE `translations`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -312,6 +374,19 @@ ALTER TABLE `staff`
 --
 ALTER TABLE `strophes`
   ADD CONSTRAINT `fk_strophes__poems` FOREIGN KEY (`ID_POEM`) REFERENCES `poems` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrictii pentru tabele `translations`
+--
+ALTER TABLE `translations`
+  ADD CONSTRAINT `fk_translations__poems` FOREIGN KEY (`ID_POEM`) REFERENCES `poems` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_translations__usrs` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrictii pentru tabele `translation_strophes`
+--
+ALTER TABLE `translation_strophes`
+  ADD CONSTRAINT `fk_translation_strophes__translations` FOREIGN KEY (`ID_TRANSLATION`) REFERENCES `translations` (`ID`);
 
 --
 -- Restrictii pentru tabele `user_images`
