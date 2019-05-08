@@ -28,21 +28,12 @@ class AuthorController extends Controller
     {
         $authorIN = str_replace('-', ' ', $URL);
 
-
-        $this->view->author_info = $this->packAuthor($this->model->loadAuthorInfo($authorIN));
+        $this->view->author_info = $this->model->loadAuthorInfo($authorIN);
 
         $this->view->poems_by_author = $this->model->showAllPoems($authorIN);
 
-    }
+        $this->view->photo = $this->model->loadAuthorPhoto($authorIN);
 
-
-    private function packAuthor($header)
-    {
-        $autor['nume'] = $header['NUME'];
-        $autor['moarte'] = $header['DATA_NASTERE'];
-        $autor['dead'] = $header['DATA_DECEDARE'];
-
-        return $autor;
     }
 
 
