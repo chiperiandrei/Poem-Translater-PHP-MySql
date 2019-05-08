@@ -24,6 +24,14 @@ class AuthorController extends Controller
         $this->view->render('author/index');
     }
 
+    public function getLink($limba, $nume)
+    {
+        $line = '../poem/' . $limba . '/' .
+            str_replace(' ', '-', $nume);
+        return $line;
+    }
+
+
     public function loadAuthor($URL)
     {
         $authorIN = str_replace('-', ' ', $URL);
@@ -34,6 +42,9 @@ class AuthorController extends Controller
 
         $this->view->photo = $this->model->loadAuthorPhoto($authorIN);
 
+        foreach ($this->view->poems_by_author as $rK => $rV) {
+            $this->view->poems_by_author[$rK]["link"] = $this->getLink($rV['LIMBA'], $rV['title']);;
+        }
     }
 
 

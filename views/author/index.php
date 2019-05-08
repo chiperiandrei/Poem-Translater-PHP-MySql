@@ -12,7 +12,7 @@ if (Session::exists('user_id')) {
 ?>
 
     <main>
-        <img src="../storage/authors/vasilealecsandri<?php echo $this->photo['IMAGINE'] ?>" >
+
         <div class="container">
             <section class="poem" id="poem">
                 <div class="poem-title">
@@ -22,13 +22,16 @@ if (Session::exists('user_id')) {
                     <?php echo $this->author_info['DATA_NASTERE']; ?>
                     - <?php echo $this->author_info['DATA_DECEDARE']; ?>
                 </div>
+                <img src="../storage/authors/vasilealecsandri<?php echo $this->photo['IMAGINE'] ?>" height="70%"
+                     width="40%">
                 <div class="poem-strophes">
                     <ol>
-                    <?php
+
+                        <?php
                         foreach ($this->poems_by_author as $poem) {
-                            echo "<li>".$poem['title']."</li>";
+                            echo "<li><a href=" . $poem['link'] . ">" . $poem['title'] . "</a> </li>";
                         }
-                    ?>
+                        ?>
                     </ol>
                 </div>
             </section>
