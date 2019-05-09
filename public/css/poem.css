@@ -53,6 +53,9 @@ main .container .poem .poem-title, main .container .poem .poem-author {
   text-align: center;
   font-family: "Parisienne", cursive;
 }
+main .container .poem .poem-title > a, main .container .poem .poem-author > a {
+  color: #212121;
+}
 main .container .poem .poem-title {
   font-weight: bold;
   font-size: 3em;
@@ -100,11 +103,11 @@ main .menu-languages a img {
 main .menu-languages a::after {
   position: absolute;
   content: "";
-  width: 1px;
+  width: 2px;
   height: 20px;
   top: 15px;
-  right: 0;
-  background-color: #212121;
+  right: -1px;
+  background-color: #B;
 }
 main .menu-languages a.active {
   color: #FAFAFA;

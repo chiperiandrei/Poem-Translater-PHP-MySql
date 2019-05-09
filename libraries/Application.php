@@ -120,7 +120,7 @@ class Application
 
     private function usePoemController($URL)
     {
-        $this->current_controller->loadPoem($URL[2], $URL[1]);
+        $this->current_controller->loadPoemOrTranslation($URL[2], $URL[1]);
     }
 
     private function useAuthorController($URL)

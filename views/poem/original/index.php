@@ -14,11 +14,16 @@ if (Session::exists('user_id')) {
 <main>
     <div class="container">
         <section class="poem" id="poem">
-            <div class="poem-title">
-                <?php echo $this->poem_header['title']; ?>
-            </div>
+            <h1 class="poem-title">
+                <a href="<?php echo '/poem/' . $this->poem_header['language'] . '/' .
+                               str_replace(' ', '-', $this->poem_header['title']); ?>">
+                    <?php echo $this->poem_header['title']; ?>
+                </a>
+            </h1>
             <div class="poem-author">
-                <?php echo $this->poem_header['author_name']; ?>
+                <a href="<?php echo '/author/' . str_replace(' ', '-', $this->poem_header['author_name']); ?>">
+                    <?php echo $this->poem_header['author_name']; ?>
+                </a>
             </div>
             <div class="poem-strophes">
                 <?php foreach($this->poem_body as $poem_strophe) :
@@ -28,31 +33,30 @@ if (Session::exists('user_id')) {
         </section>
     </div>
     <nav class="menu-languages">
-        <a href="" class="active">
-            <img src="../../public/img/flags/blank.gif"
+        <a class="active"
+           href="<?php echo '/poem/' . $this->poem_header['language'] . '/' .
+                       str_replace(' ', '-', $this->poem_header['title']); ?>">
+            <img src="../../../public/img/flags/blank.gif"
                  class="flag flag-<?php echo $this->poem_header['language']; ?>"
                  alt="<?php echo $this->poem_header['language']; ?>"/>
             <?php echo $this->poem_header['language']; ?>
         </a>
         <?php foreach($this->poem_languages as $language) : ?>
-            <a href="">
-                <img src="../../public/img/flags/blank.gif"
-                     class="flag flag-<?php echo $language; ?>"
-                     alt="<?php echo $language; ?>"/>
-                <?php echo $language; ?>
-            </a>
-
+        <a href="<?php echo "/poem/$language/" . str_replace(' ', '-', $this->poem_header['title']); ?>">
+            <img src="../../../public/img/flags/blank.gif"
+                 class="flag flag-<?php echo $language === 'en' ? 'gb' : $language; ?>"
+                 alt="<?php echo $language; ?>"/>
+            <?php echo $language; ?>
+        </a>
         <?php endforeach; ?>
-
         <a href="" class="arrow"><i class="fas fa-angle-double-down"></i></a>
     </nav>
-
     <div id="add-comment-menu" hidden>
         <textarea></textarea>
         <input type="submit" value="Add comment">
     </div>
 </main>
 
-<script src="../../public/js/poem.js"></script>
+<script src="../../../public/js/poem.js"></script>
 
 <?php require_once('views/components/footer.php'); ?>

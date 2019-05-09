@@ -1,61 +1,21 @@
+$main-background-color: #FAFAFA;
+$main-color: #212121;
+$main-max-width: 1600px;
+
+
 main {
+  margin-top: 80px;
   display: flex;
   flex-direction: row;
   justify-content: center;
 
-  #add-comment-menu {
-    flex-direction: column;
-    display: none;
-
-    &.hidden {
-      display: flex;
-    }
-
-    background-color: #FAFAFA;
-    border: 1px solid #BDBDBD;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(0, 0, 0, .25);
-
-    textarea, input {
-      background-color: #FAFAFA;
-      font-family: 'Roboto', sans-serif;
-      border: 0;
-    }
-
-    textarea {
-      padding: 10px;
-      border-bottom: 1px solid #212121;
-      font-size: 0.8em;
-      min-width: 15vw;
-      min-height: 15vh;
-    }
-
-    input {
-      font-size: 0.7em;
-      font-weight: 300;
-      text-transform: uppercase;
-      padding: 15px 0;
-      cursor: pointer;
-    }
-  }
-
-
   .container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background-color: transparent;
+    background-color: $main-background-color;
     width: 100%;
+    max-width: $main-max-width;
+    padding: 20px;
 
-    .poem {
-      display: block;
-      width: 100%;
-      max-width: 1600px;
-      padding: 100px 0 40px 0;
-      border: 1px solid #BDBDBD;
-      background-color: #FAFAFA;
-      box-shadow: 0 0 15px rgba(0, 0, 0, .25);
-
+    & > .poem {
       .poem-title, .poem-author {
         text-align: center;
         font-family: 'Parisienne', cursive;
@@ -74,18 +34,19 @@ main {
         font-size: 1.7em;
         padding-bottom: 30px;
       }
+    }
 
-      .poem-strophes {
-        display: block;
+    & > .translations {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 200px;
 
-        pre {
-          font-family: 'Roboto', sans-serif;
-          text-align: center;
-          margin-bottom: 20px;
-          font-size: 1em;
-        }
+      & > .translation {
+        flex: 1;
+        border: 1px solid red;
+        margin-bottom: 20px;
       }
-
     }
   }
 
@@ -148,15 +109,7 @@ main {
 }
 
 @media screen and (max-width: 1000px) {
-  main .container .poem {
-    margin: 0;
-
-    padding: 180px 0 40px 0;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  main .container .poem pre {
-    column-count: 1;
+  main {
+    margin-top: 160px;
   }
 }

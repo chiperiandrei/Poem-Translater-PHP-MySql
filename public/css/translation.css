@@ -1,0 +1,94 @@
+main {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+main .container {
+  background-color: #FAFAFA;
+  width: 100%;
+  max-width: 1600px;
+  padding: 20px;
+}
+main .container > .poem .poem-title, main .container > .poem .poem-author {
+  text-align: center;
+  font-family: "Parisienne", cursive;
+}
+main .container > .poem .poem-title > a, main .container > .poem .poem-author > a {
+  color: #212121;
+}
+main .container > .poem .poem-title {
+  font-weight: bold;
+  font-size: 3em;
+}
+main .container > .poem .poem-author {
+  font-size: 1.7em;
+  padding-bottom: 30px;
+}
+main .container > .translations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 200px;
+}
+main .container > .translations > .translation {
+  flex: 1;
+  border: 1px solid red;
+  margin-bottom: 20px;
+}
+main .menu-languages {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: fixed;
+  width: 100%;
+  max-width: 1300px;
+  min-height: 50px;
+  bottom: 0;
+  padding-right: 50px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+main .menu-languages a {
+  line-height: 50px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 300;
+  color: #212121;
+  position: relative;
+  vertical-align: middle;
+}
+main .menu-languages a img {
+  margin-right: 7px;
+}
+main .menu-languages a::after {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 20px;
+  top: 15px;
+  right: -1px;
+  background-color: #212121;
+}
+main .menu-languages a.active {
+  color: #FAFAFA;
+  background-color: #212121;
+}
+main .menu-languages a.arrow {
+  position: absolute;
+  right: 0;
+  font-size: 1em;
+}
+main .menu-languages a.arrow::after {
+  right: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    margin-top: 160px;
+  }
+}
+
+/*# sourceMappingURL=translation.css.map */

@@ -25,8 +25,7 @@ class PoemModel extends Model
 
         $result = $statement->fetch();
 
-        if ($statement->rowCount() != 1)
-        {
+        if ($statement->rowCount() != 1) {
             return;
         }
 
@@ -67,5 +66,48 @@ class PoemModel extends Model
             return $result;
         }
         return;
+    }
+
+    public function loadTranslations($poem_title, $poem_language)
+    {
+        $SQL = 'SELECT u.ID AS USER_ID, u.FIRST_NAME AS USER_FN, u.LAST_NAME AS USER_LN, u.USERNAME, u.EMAIL AS USER_EMAIL,
+                       t.id AS TRANSLATION_ID, t.RATING AS TRANSLATION_RATING
+                FROM poems p
+                JOIN authors a ON p.ID_AUTHOR = a.ID
+                JOIN translations t ON p.ID = t.ID_POEM
+                JOIN users u ON t.ID_USER = u.ID
+                WHERE p.TITLE = "' . $poem_title . '" AND t.LANGUAGE = "' . $poem_language . '";';
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        if ($statement->rowCount() < 1) {
+            return;
+        }
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function loadInfos($poem_title) {
+        $SQL = 'SELECT a.NAME, LOWER(p.LANGUAGE) AS LANGUAGE, p.ID AS POEM_ID FROM authors a 
+                JOIN poems p ON p.ID_AUTHOR = a.ID
+                WHERE LOWER(P.TITLE) = LOWER("' . $poem_title . '");';
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        if ($statement->rowCount() != 1) {
+            return;
+        }
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $this->poem_id = $result['POEM_ID'];
+
+        return $result;
     }
 }
