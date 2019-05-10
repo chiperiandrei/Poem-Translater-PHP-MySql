@@ -54,7 +54,19 @@ class LoginController extends Controller
     {
         $var = $this->generateRandomString();
         setcookie("captcha",$var,0,"/");
-        $this->view->codeCap = $var;
+
+        $this->view->codeCap = imagecreate(100, 30);
+
+        // White background and blue text
+        $bg = imagecolorallocate($this->view->codeCap, 255, 255, 255);
+        $textcolor = imagecolorallocate($this->view->codeCap, 0, 0, 255);
+        // Write the string at the top left
+        imagestring($this->view->codeCap, 5, 0, 0, $var, $textcolor);
+
+        // Output the image
+
+        imagepng($this->view->codeCap);
+        imagedestroy($this->view->codeCap);
     }
 
     public function connect()

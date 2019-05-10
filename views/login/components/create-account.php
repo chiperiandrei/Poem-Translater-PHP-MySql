@@ -34,7 +34,7 @@
         </div>
         <div class="captcha">
             <font color="#006400">Insert captcha</font>
-            <font color="red"> <?php echo $this->codeCap;?></font>
+            <img src="/login/code_cap" width="120">
             <br/>
             <input type="text" name="captcha" placeholder="Captcha will go here" required>
         </div>
