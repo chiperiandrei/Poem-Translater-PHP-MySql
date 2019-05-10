@@ -9,23 +9,25 @@ main .container {
   width: 100%;
   max-width: 1600px;
   padding: 20px;
+}
+main .container form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "fn ln" "email email" "ta ta" "submit submit";
 }
-main .container .contact-name, main .container .first-name, main .container .last-name, main .container .email, main .container .textarea {
+main .container form .contact-name, main .container form .first-name, main .container form .last-name, main .container form .email, main .container form .textarea {
   display: flex;
   flex-direction: column;
   padding: 20px;
   position: relative;
 }
-main .container .contact-name label, main .container .first-name label, main .container .last-name label, main .container .email label, main .container .textarea label {
+main .container form .contact-name label, main .container form .first-name label, main .container form .last-name label, main .container form .email label, main .container form .textarea label {
   padding-bottom: 20px;
   text-transform: uppercase;
   font-weight: 300;
   font-size: 1.1em;
 }
-main .container .contact-name input, main .container .first-name input, main .container .last-name input, main .container .email input, main .container .textarea input {
+main .container form .contact-name input, main .container form .first-name input, main .container form .last-name input, main .container form .email input, main .container form .textarea input {
   border: 1px solid #E0E0E0;
   height: 50px;
   padding: 0 40px;
@@ -33,7 +35,7 @@ main .container .contact-name input, main .container .first-name input, main .co
   font-size: 1em;
   font-weight: 400;
 }
-main .container .contact-name span, main .container .first-name span, main .container .last-name span, main .container .email span, main .container .textarea span {
+main .container form .contact-name span, main .container form .first-name span, main .container form .last-name span, main .container form .email span, main .container form .textarea span {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,20 +47,20 @@ main .container .contact-name span, main .container .first-name span, main .cont
   height: 50px;
   background-color: #BDBDBD;
 }
-main .container .first-name {
+main .container form .first-name {
   grid-area: fn;
 }
-main .container .last-name {
+main .container form .last-name {
   grid-area: ln;
 }
-main .container .email {
+main .container form .email {
   grid-area: email;
 }
-main .container .textarea {
+main .container form .textarea {
   grid-area: ta;
   position: relative;
 }
-main .container .textarea textarea {
+main .container form .textarea textarea {
   border: 1px solid #E0E0E0;
   font-family: "Roboto", sans-serif;
   font-size: 1em;
@@ -69,13 +71,13 @@ main .container .textarea textarea {
   max-width: 100%;
   min-width: 100%;
 }
-main .container .submit {
+main .container form .submit {
   grid-area: submit;
   margin: 10px 20px;
   position: relative;
   text-align: right;
 }
-main .container .submit button {
+main .container form .submit button {
   cursor: pointer;
   width: 200px;
   height: 50px;
@@ -86,30 +88,37 @@ main .container .submit button {
   border: 1px solid #E0E0E0;
   text-align: center;
 }
-main .container .submit button .fas {
+main .container form .submit button .fas {
   margin-left: 6px;
   font-size: 0.8em;
 }
 
+@media screen and (max-width: 1000px) {
+  main {
+    margin-top: 160px;
+  }
+}
 @media screen and (max-width: 650px) {
   main .container {
     padding: 0;
+  }
+  main .container form {
     grid-template-columns: 1fr;
     grid-template-areas: "fn" "ln" "email" "ta" "submit";
   }
-  main .container .first-name {
+  main .container form .first-name {
     grid-area: fn;
   }
-  main .container .last-name {
+  main .container form .last-name {
     grid-area: ln;
   }
-  main .container .email {
+  main .container form .email {
     grid-area: email;
   }
-  main .container .textarea {
+  main .container form .textarea {
     grid-area: ta;
   }
-  main .container .submit {
+  main .container form .submit {
     grid-area: submit;
   }
 }
