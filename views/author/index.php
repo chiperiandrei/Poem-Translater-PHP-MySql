@@ -22,8 +22,15 @@ if (Session::exists('user_id')) {
                     <?php echo $this->author_info['DATA_NASTERE']; ?>
                     - <?php echo $this->author_info['DATA_DECEDARE']; ?>
                 </div>
-                <img src="../storage/authors/vasilealecsandri<?php echo $this->photo['IMAGINE'] ?>" height="70%"
-                     width="40%">
+                <?php
+                if ($this->photo['IMAGINE'])
+
+                    echo "<img src=../storage/authors/vasilealecsandri" . $this->photo['IMAGINE'] . " height=70%
+                     width=40%>";
+                else
+                    echo "<br/>";
+
+                ?>
                 <div class="poem-strophes">
                     <ol>
 
