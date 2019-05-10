@@ -105,6 +105,13 @@
                     </span>
                         </div>
                     <?php endif; ?>
+                    <?php if (Session::exists('captcha-wrong')) : ?>
+                        <div>
+                    <span id="login-error">
+                        <?php Session::print('captcha-wrong'); ?>
+                    </span>
+                        </div>
+                    <?php endif; ?>
                     <?php if (Session::exists('log-register')) : ?>
                         <div>
                     <span id="login-ok">

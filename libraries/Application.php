@@ -91,6 +91,7 @@ class Application
                 Session::unset('error-register');
                 Session::unset('email-is-used');
                 Session::unset('password-not-same');
+                Session::unset('captcha-wrong');
                 Session::set('log-register', 'Congratulations! You joined us.');
                 header('Location: /login');
             } else {

@@ -33,7 +33,10 @@
             <input type="password" name="repeat-password" placeholder="*******" required>
         </div>
         <div class="captcha">
-            TODO: Captcha
+            <font color="#006400">Insert captcha</font>
+            <font color="red"> <?php echo $this->codeCap;?></font>
+            <br/>
+            <input type="text" name="captcha" placeholder="Captcha will go here" required>
         </div>
         <div class="submit">
             <button type="submit"><i class="fas fa-share"></i>Send</button>

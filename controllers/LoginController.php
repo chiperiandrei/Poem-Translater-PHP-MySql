@@ -20,7 +20,7 @@ class LoginController extends Controller
         // from the administration panel
         $this->poemOneId = 4;
         $this->poemTwoId = 1;
-
+        $this->code_cap();
         $this->view->poemOne = $this->packPoem(
             $this->model->loadPoemHeader($this->poemOneId),
             $this->model->loadPoemBody($this->poemOneId)
@@ -39,6 +39,24 @@ class LoginController extends Controller
         $this->view->render('login/index');
     }
 
+    function generateRandomString($length = 6)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function code_cap()
+    {
+        $var = $this->generateRandomString();
+        setcookie("captcha",$var,0,"/");
+        $this->view->codeCap = $var;
+    }
+
     public function connect()
     {
         return $this->model->verifyUser();
@@ -50,12 +68,17 @@ class LoginController extends Controller
         $username = $_POST["username"];
         $password1 = $_POST["password"];
         $password2 = $_POST["repeat-password"];
+        $captcha = $_POST['captcha'];
+        $captchaSession = $_COOKIE["captcha"];
         if ($this->model->verifyUserReg($email, $username)) {
-            if ($password2==$password1) {
-                return $this->model->register();
-            }
-            else
-            {
+            if ($password2 == $password1) {
+                if ($captcha == $captchaSession) {
+                    return $this->model->register();
+                } else {
+                    Session::set('captcha-wrong', 'Sorry! The captcha code is incorrect.');
+                    return false;
+                }
+            } else {
                 Session::set('password-not-same', 'Sorry! The passwords must be equals.');
                 return false;
             }
