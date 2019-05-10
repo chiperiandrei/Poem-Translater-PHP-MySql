@@ -18,6 +18,7 @@ main .container .introduction {
   margin-right: 35px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-content: baseline;
 }
 main .container .introduction h1 {
   font-size: 1.6em;
@@ -187,7 +188,7 @@ main .container .login > div #login-error {
   padding: 10px 5px;
 }
 main .container .login > div #login-ok {
-  color: #19c622;
+  color: #19C622;
   font-weight: 600;
   transition: all 300ms ease-in-out;
   border: 1px solid #2ec646;
@@ -225,7 +226,7 @@ main .container .login > div:last-child span .fas {
 .create-account .container {
   display: grid;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 30px auto 0 auto;
   padding: 15px 30px;
   background-color: #FAFAFA;
@@ -242,10 +243,6 @@ main .container .login > div:last-child span .fas {
   flex: 1;
   font-size: 1.6em;
   font-weight: 400;
-}
-.create-account .container .title > button {
-  display: flex;
-  justify-content: center;
 }
 .create-account .container .title > button > i {
   margin-left: 5px;
@@ -285,7 +282,25 @@ main .container .login > div:last-child span .fas {
   padding-left: 10px;
 }
 .create-account .container .captcha {
+  display: grid;
+  grid-template-columns: 150px 1fr;
   grid-area: captcha;
+}
+.create-account .container .captcha > label {
+  display: block;
+  grid-column: 1/3;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 300;
+  font-size: 1em;
+}
+.create-account .container .captcha > img {
+  width: 120px;
+  height: 40px;
+  border: 1px solid #E0E0E0;
+}
+.create-account .container .captcha > input {
+  padding-left: 10px;
 }
 .create-account .container .submit {
   grid-area: send;

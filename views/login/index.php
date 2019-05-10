@@ -78,59 +78,58 @@
                         <button type="submit" id="login">Login</button>
                     </div>
                     <?php if (Session::exists('error-login')) : ?>
-                        <div>
-                    <span id="login-error">
-                        <?php Session::print('error-login'); ?>
-                    </span>
-                        </div>
+                    <div>
+                        <span id="login-error">
+                            <?php Session::print('error-login'); ?>
+                        </span>
+                    </div>
                     <?php endif; ?>
                     <?php if (Session::exists('error-register')) : ?>
-                        <div>
-                    <span id="login-error">
-                        <?php Session::print('error-register'); ?>
-                    </span>
-                        </div>
+                    <div>
+                        <span id="login-error">
+                            <?php Session::print('error-register'); ?>
+                        </span>
+                    </div>
                     <?php endif; ?>
                     <?php if (Session::exists('password-not-same')) : ?>
-                        <div>
-                    <span id="login-error">
-                        <?php Session::print('password-not-same'); ?>
-                    </span>
-                        </div>
+                    <div>
+                        <span id="login-error">
+                            <?php Session::print('password-not-same'); ?>
+                        </span>
+                    </div>
                     <?php endif; ?>
                     <?php if (Session::exists('email-is-used')) : ?>
-                        <div>
-                    <span id="login-error">
-                        <?php Session::print('email-is-used'); ?>
-                    </span>
-                        </div>
+                    <div>
+                        <span id="login-error">
+                            <?php Session::print('email-is-used'); ?>
+                        </span>
+                    </div>
                     <?php endif; ?>
                     <?php if (Session::exists('captcha-wrong')) : ?>
-                        <div>
-                    <span id="login-error">
-                        <?php Session::print('captcha-wrong'); ?>
-                    </span>
-                        </div>
+                    <div>
+                        <span id="login-error">
+                            <?php Session::print('captcha-wrong'); ?>
+                        </span>
+                    </div>
                     <?php endif; ?>
                     <?php if (Session::exists('log-register')) : ?>
-                        <div>
-                    <span id="login-ok">
-                        <?php Session::print('log-register'); ?>
-                    </span>
+                    <div>
+                        <span id="login-ok">
+                            <?php Session::print('log-register'); ?>
+                        </span>
                         </div>
                     <?php endif; ?>
                     <?php if (Session::exists('cui')) : ?>
-                        <div>
-                    <span id="login-ok">
-                        We sent you an e-mail.<?php Session::print('cui'); ?>
-                    </span>
-                        </div>
-                    <?php endif; ?>
-
                     <div>
-                <span id="create-account-on">
-                    <i class="fas fa-user-plus"></i>Create account
-                </span>
+                        <span id="login-ok">
+                            We sent you an e-mail.<?php Session::print('cui'); ?>
+                        </span>
+                    </div>
+                    <?php endif; ?>
+                    <div>
+                        <span id="create-account-on">
+                            <i class="fas fa-user-plus"></i>Create account
+                        </span>
                     </div>
                 </div>
             </form>

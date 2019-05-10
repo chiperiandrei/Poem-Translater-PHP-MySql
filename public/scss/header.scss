@@ -23,7 +23,7 @@ header {
         flex: 1;
 
         width: 100%; max-width: $header-max-width;
-        height: $header-height;
+        min-height: $header-height;
         padding: 0 20px;
 
         .title {
@@ -156,7 +156,7 @@ header {
         position: absolute;
 
         .container {
-            height: 2 * $header-height;
+            min-height: 2 * $header-height;
             flex-direction: column;
 
             .title {
@@ -166,7 +166,6 @@ header {
 
             .navigation {
                 height: $header-height;
-                // justify-content: space-between;
                 justify-content: space-around;
 
                 .navigation-link, #navigation-user {
@@ -186,18 +185,36 @@ header {
 }
 
 @media screen and (max-width: 450px) {
-    header .container .navigation .navigation-link, #navigation-user {
-        font-size: 0.8em;
-    }
-}
+    header {
+        position: relative;
 
-@media screen and (max-width: 320px) {
-    header .container {
-        padding-left: 15px;
-        padding-right: 15px;
+        .container {
+            padding-bottom: 15px;
 
-        .title {
-            font-size: 0.8em
+            .navigation {
+                height: auto;
+                flex-direction: column;
+                padding: 0 30px;
+
+                .navigation-link, #navigation-user {
+                    font-size: 0.8em;
+                    margin: 0;
+                    border-top: 1px solid #BDBDBD;
+                }
+
+                .navigation-link:first-child {
+                    border-color: transparent;
+                }
+
+                #navigation-user {
+                    padding-top: 10px;
+                }
+            }
         }
     }
+
+    main {
+        margin-top: 0 !important;
+    }
 }
+

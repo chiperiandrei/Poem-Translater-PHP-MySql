@@ -18,9 +18,10 @@ class LoginController extends Controller
 
         // TODO: these will be set by the admin
         // from the administration panel
+
         $this->poemOneId = 4;
         $this->poemTwoId = 1;
-        $this->code_cap();
+
         $this->view->poemOne = $this->packPoem(
             $this->model->loadPoemHeader($this->poemOneId),
             $this->model->loadPoemBody($this->poemOneId)
@@ -30,6 +31,8 @@ class LoginController extends Controller
             $this->model->loadPoemHeader($this->poemTwoId),
             $this->model->loadPoemBody($this->poemTwoId)
         );
+
+        $this->view->captcha = $this->generateCaptcha();
     }
 
     public function index()
@@ -39,7 +42,7 @@ class LoginController extends Controller
         $this->view->render('login/index');
     }
 
-    function generateRandomString($length = 6)
+    private function generateRandomString($length = 6)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -50,23 +53,29 @@ class LoginController extends Controller
         return $randomString;
     }
 
-    public function code_cap()
+    public function generateCaptcha()
     {
-        $var = $this->generateRandomString();
-        setcookie("captcha",$var,0,"/");
+        $randomString = $this->generateRandomString();
 
-        $this->view->codeCap = imagecreate(100, 30);
+        setcookie("captcha", $randomString,0,"/");
 
-        // White background and blue text
-        $bg = imagecolorallocate($this->view->codeCap, 255, 255, 255);
-        $textcolor = imagecolorallocate($this->view->codeCap, 0, 0, 255);
-        // Write the string at the top left
-        imagestring($this->view->codeCap, 5, 0, 0, $var, $textcolor);
+        $image = imagecreate(150, 40);
+
+        // set colors for background and text
+        imagecolorallocate($image, 255, 255, 255);
+        $textColor = imagecolorallocate($image, 0, 0, 0);
+
+        // write the string
+        imagestring($image, 5, 10, 10, $randomString, $textColor);
 
         // Output the image
+        imagepng($image);
+        imagedestroy($image);
+        $image = ob_get_contents();
+        ob_end_clean();
+        ob_start();
 
-        imagepng($this->view->codeCap);
-        imagedestroy($this->view->codeCap);
+        return '<img src="data:image/png;base64, ' . base64_encode($image) . '">';
     }
 
     public function connect()
@@ -95,7 +104,6 @@ class LoginController extends Controller
                 return false;
             }
         } else {
-
             return false;
         }
     }

@@ -3,6 +3,8 @@ function showCreateAccount() {
     const firstNameElement = document.querySelector('#create-account input[name=first-name]');
 
     document.body.style.overflowY = 'hidden';
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     createAccountView.style.display = 'block';
     firstNameElement.focus();
 
@@ -27,6 +29,8 @@ function showForgotPassword() {
     const emailElement = document.querySelector('#forgot-password input[name=email]');
 
     document.body.style.overflowY = 'hidden';
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     forgotPasswordView.style.display = 'block';
     emailElement.focus();
 

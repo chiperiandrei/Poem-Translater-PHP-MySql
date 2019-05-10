@@ -20,7 +20,7 @@
             <span><i class="fas fa-at"></i></span>
         </div>
         <div class="username">
-            <label for="username">username:</label>
+            <label for="username">Username:</label>
             <input type="text" name="username" placeholder="john_doe" required>
         </div>
         <div class="password">
@@ -33,10 +33,9 @@
             <input type="password" name="repeat-password" placeholder="*******" required>
         </div>
         <div class="captcha">
-            <font color="#006400">Insert captcha</font>
-            <img src="/login/code_cap" width="120">
-            <br/>
-            <input type="text" name="captcha" placeholder="Captcha will go here" required>
+            <label for="captcha">Captcha:</label>
+            <?php echo $this->captcha; ?>
+            <input type="text" name="captcha" placeholder="Write the captcha code here" required>
         </div>
         <div class="submit">
             <button type="submit"><i class="fas fa-share"></i>Send</button>

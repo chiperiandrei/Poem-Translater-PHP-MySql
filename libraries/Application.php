@@ -68,7 +68,6 @@ class Application
 
         // user arrived at login page
         if ($URL[1] == 'connect') {
-
             // user tries to login / connect
             if ($controller->connect()) {
                 Session::unset('error-login');
@@ -85,7 +84,6 @@ class Application
             header('Location: /login');
 
         } else if ($URL[1] == 'create-account') {
-
             // user want to create an account
             if ($controller->sign_up()) {
                 Session::unset('error-register');
@@ -97,12 +95,10 @@ class Application
             } else {
                 Session::unset('log-register');
                 Session::set('error-register', 'Something went wrong. Please try again.');
-                Session::set('email-is-used', 'Sorry ! The email or the username is unavailable');
+                Session::set('email-is-used', 'Sorry! The email or the username is unavailable');
                 header('Location: /login');
             }
-
         } else if ($URL[1] == 'forgot-password') {
-
             // user wants to discover his password
             if ($controller->forgot()) {
                 Session::unset('error-forgot');
@@ -112,7 +108,6 @@ class Application
                 Session::unset('cui');
                 header('Location: /login');
             }
-
         } else {
             // login link is corrupted
             header('Location: /login');
