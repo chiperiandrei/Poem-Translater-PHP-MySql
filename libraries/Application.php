@@ -41,6 +41,8 @@ class Application
                         $this->useAuthorController($URL);
                     } else if ($URL[0] === 'ContactController') {
                         $this->useContactController($URL);
+                    } else if ($URL[0] === 'SettingsController') {
+                        $this->useSettingsController($URL);
                     }
                     break;
 
@@ -129,9 +131,27 @@ class Application
         }
     }
 
-
     private function useAuthorController($URL)
     {
         $this->current_controller->loadAuthor($URL[1]);
+    }
+
+    private function useSettingsController($URL)
+    {
+        if ($URL[1] == 'edit-info') {
+            if ($this->current_controller->editinfo()) {
+                Session::unset('update-info-email-already-exists');
+                Session::unset('update-info-username-already-exists');
+                Session::unset('something-went-wrong-try-again-later');
+                Session::unset('password-dont-match');
+                header('Location: /settings');
+            } else {
+                Session::unset('update-info-complete');
+                header('Location: /settings');
+            }
+        } else if ($URL[1] == 'edit-photo') {
+            $this->current_controller->editphoto();
+            header('Location: /settings');
+        }
     }
 }

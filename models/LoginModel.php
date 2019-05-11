@@ -38,7 +38,7 @@ class LoginModel extends Model
 
     public function verifyUserReg($email, $username)
     {
-        $SQL = 'SELECT * FROM users WHERE email = ' . $email . 'or username = ' . $username;
+        $SQL = 'SELECT * FROM users WHERE email ='.$email.'or username='.$username;
 
         $result = $this->db->prepare($SQL);
         if ($result->rowCount() === 0)
@@ -60,8 +60,8 @@ class LoginModel extends Model
             ':password' => md5($_POST['password'])
         ]);
         if ($ok) {
-            if (!file_exists('storage/' . $_POST['username'])) {
-                mkdir('storage/' . $_POST['username'], 0777, true);
+            if (!file_exists('storage/users/' . $_POST['username'])) {
+                mkdir('storage/users/' . $_POST['username'], 0777, true);
             }
             $pentru = $_POST["email"];
             $subject = 'PoTr ADMIN PANEL';

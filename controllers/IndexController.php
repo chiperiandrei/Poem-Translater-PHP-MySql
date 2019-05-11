@@ -43,10 +43,10 @@ class IndexController extends Controller
         $avatar_path = $this->model->loadAvatar();
 
         if ($avatar_path) {
-            return HOST . 'storage/' . Session::get('username') . '/' . $avatar_path;
+            return HOST . 'storage/users/' . Session::get('username') . '/' . $avatar_path;
         }
 
-        return HOST . 'storage/default/avatar.png';
+        return HOST . 'storage/users/default/avatar.png';
     }
 
     private function packPoem($headers, $bodies)
