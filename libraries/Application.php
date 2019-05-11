@@ -51,6 +51,11 @@ class Application
                         $this->usePoemController($URL);
                     }
                     break;
+                case 4:
+                    if ($URL[0] === 'PoemController') {
+                        $this->usePoemController($URL);
+                    }
+                    break;
 
                 default:
                     header('Location: /login');
@@ -118,9 +123,17 @@ class Application
         }
     }
 
-    private function usePoemController($URL)
-    {
-        $this->current_controller->loadPoemOrTranslation($URL[2], $URL[1]);
+    private function usePoemController($URL) {
+
+        switch (count($URL)) {
+            case 3:
+                $this->current_controller->loadPoemOrTranslations($URL[2], $URL[1]);
+                break;
+
+            case 4:
+                $this->current_controller->loadTranslation($URL[2], $URL[1], $URL[3]);
+                break;
+        }
     }
 
     private function useContactController($URL)

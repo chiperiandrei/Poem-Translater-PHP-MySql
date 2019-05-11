@@ -16,16 +16,16 @@ if (Session::exists('user_id')) {
     <div class="container">
         <?php if (Session::exists('contact-error')) : ?>
             <div>
-                        <span id="contact-error">
-                            <?php Session::print('contact-error'); ?>
-                        </span>
+                <span id="contact-error">
+                    <?php Session::print('contact-error'); ?>
+                </span>
             </div>
         <?php endif; ?>
         <?php if (Session::exists('contact-sent')) : ?>
             <div>
-                        <span id="contact-ok">
-                            <?php Session::print('contact-sent'); ?>
-                        </span>
+                <span id="contact-ok">
+                    <?php Session::print('contact-sent'); ?>
+                </span>
             </div>
         <?php endif; ?>
         <form action="/contact/contact" method="post">

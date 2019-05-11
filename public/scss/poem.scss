@@ -39,13 +39,20 @@ main {
     }
   }
 
-
   .container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     background-color: transparent;
     width: 100%;
+
+    & > .info {
+      font-size: 1.2em;
+      font-weight: 300;
+      text-align: center;
+      text-transform: uppercase;
+      padding-bottom: 10px;
+    }
 
     .poem {
       display: block;
@@ -117,16 +124,6 @@ main {
 
       img {
         margin-right: 7px;
-      }
-
-      &::after {
-        position: absolute;
-        content: '';
-        width: 2px;
-        height: 20px;
-        top: 15px;
-        right: -1px;
-        background-color: #212121;
       }
 
       &.active {

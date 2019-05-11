@@ -10,6 +10,17 @@ main .container {
   max-width: 1600px;
   padding: 20px;
 }
+main .container > .info {
+  font-size: 1.2em;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+main .container > .poem {
+  display: block;
+  width: 100%;
+}
 main .container > .poem .poem-title, main .container > .poem .poem-author {
   text-align: center;
   font-family: "Parisienne", cursive;
@@ -25,16 +36,31 @@ main .container > .poem .poem-author {
   font-size: 1.7em;
   padding-bottom: 30px;
 }
-main .container > .translations {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 200px;
+main .container > .poem .poem-strophes {
+  display: block;
 }
-main .container > .translations > .translation {
-  flex: 1;
-  border: 1px solid red;
+main .container > .poem .poem-strophes pre {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
   margin-bottom: 20px;
+  font-size: 1em;
+}
+main .container > .poem .poem-strophes pre.announce {
+  text-transform: uppercase;
+  font-size: 0.7em;
+  color: #FF1744;
+}
+main .container > .author > .container {
+  margin: 0 auto;
+  max-width: 800px;
+  border-top: 1px solid #BDBDBD;
+  text-align: center;
+}
+main .container > .author > .container > a {
+  color: #757575;
+}
+main .container > .author > .container > a:hover {
+  text-decoration: underline;
 }
 main .menu-languages {
   display: flex;
@@ -62,15 +88,6 @@ main .menu-languages a {
 }
 main .menu-languages a img {
   margin-right: 7px;
-}
-main .menu-languages a::after {
-  position: absolute;
-  content: "";
-  width: 2px;
-  height: 20px;
-  top: 15px;
-  right: -1px;
-  background-color: #212121;
 }
 main .menu-languages a.active {
   color: #FAFAFA;

@@ -76,7 +76,8 @@ class PoemModel extends Model
                 JOIN authors a ON p.ID_AUTHOR = a.ID
                 JOIN translations t ON p.ID = t.ID_POEM
                 JOIN users u ON t.ID_USER = u.ID
-                WHERE p.TITLE = "' . $poem_title . '" AND t.LANGUAGE = "' . $poem_language . '";';
+                WHERE p.TITLE = "' . $poem_title . '" AND t.LANGUAGE = "' . $poem_language . '"
+                ORDER BY t.RATING DESC;';
 
         $statement = $this->db->prepare($SQL);
 
@@ -85,6 +86,9 @@ class PoemModel extends Model
         if ($statement->rowCount() < 1) {
             return;
         }
+
+        $this->poem_title = $poem_title;
+        $this->poem_language = $poem_language;
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -107,6 +111,105 @@ class PoemModel extends Model
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         $this->poem_id = $result['POEM_ID'];
+
+        return $result;
+    }
+
+    public function loadPoemForTranslationHeader($poem_title) {
+        $SQL = 'SELECT p.ID AS POEM_ID, p.TITLE as POEM_TITLE, p.LANGUAGE AS LANGUAGE, p.ID_AUTHOR AS AUTHOR_ID, 
+                       a.NAME AS AUTHOR_NAME
+                FROM poems p 
+                JOIN authors a ON p.ID_AUTHOR = a.ID
+                WHERE p.TITLE = "' . $poem_title . '"';
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($statement->rowCount() != 1) {
+            return;
+        }
+
+        $this->poem_id = $result['POEM_ID'];
+
+        return $result;
+    }
+
+    /**
+     * use countPoemStrophes() always after loadTranslationHeader($poem_title)
+     */
+    public function countPoemStrophes() {
+        $SQL = 'SELECT COUNT(*) AS COUNT FROM strophes 
+                WHERE ID_POEM = ' .  $this->poem_id;
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($statement->rowCount() != 1) {
+            return;
+        }
+
+        return $result['COUNT'];
+    }
+
+    public function selectUser($username) {
+        $SQL = 'SELECT u.ID AS USER_ID, u.FIRST_NAME AS USER_FN, u.LAST_NAME AS USER_LN,
+                ui.PATH as USER_AVATAR
+                FROM users u
+                LEFT JOIN user_images ui ON u.ID = ui.ID_USER
+                WHERE u.USERNAME = "' . $username . '"';
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($statement->rowCount() != 1) {
+            return;
+        }
+
+        return $result;
+    }
+
+    public function loadTranslationHeader($poem_id, $user_id, $translation_language) {
+        $SQL = 'SELECT ID AS TRANSLATION_ID, RATING
+                FROM translations
+                WHERE ID_POEM = ' . $poem_id . ' AND ID_USER = ' . $user_id . ' AND
+                LANGUAGE = "' . $translation_language . '"';
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($statement->rowCount() != 1) {
+            return;
+        }
+
+        return $result;
+    }
+
+    public function loadTranslationBody($translation_id) {
+        $SQL = 'SELECT NTH, TEXT FROM translation_strophes
+                WHERE ID_TRANSLATION = ' . $translation_id . '
+                ORDER BY NTH ASC';
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($statement->rowCount() < 1) {
+            return;
+        }
 
         return $result;
     }

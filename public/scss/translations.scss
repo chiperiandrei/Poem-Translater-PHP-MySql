@@ -1,0 +1,194 @@
+$main-background-color: #FAFAFA;
+$main-color: #212121;
+$main-max-width: 1600px;
+
+main {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .container {
+    background-color: $main-background-color;
+    width: 100%;
+    max-width: $main-max-width;
+    padding: 20px;
+
+    & > .info {
+      font-size: 1.2em;
+      font-weight: 300;
+      text-align: center;
+      text-transform: uppercase;
+      padding-bottom: 10px;
+    }
+
+    & > .poem {
+      .poem-title, .poem-author {
+        text-align: center;
+        font-family: 'Parisienne', cursive;
+
+        & > a {
+          color: #212121;
+        }
+      }
+
+      .poem-title {
+        font-weight: bold;
+        font-size: 3em;
+      }
+
+      .poem-author {
+        font-size: 1.7em;
+        padding-bottom: 20px;
+      }
+    }
+
+    & > .about {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 auto;
+      max-width: 800px;
+
+      & > .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 0 0 15px 0;
+        text-transform: uppercase;
+        font-size: 0.8em;
+        font-weight: 300;
+
+        & > .language {
+          margin: 0 11px 0 3px;
+        }
+
+        & > .user {
+          margin: 0 5px;
+        }
+
+        & > .rating {
+          margin: 0 3px 0 auto;
+        }
+      }
+    }
+
+    & > .translations {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 auto;
+      max-width: 800px;
+
+      & > .translation {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+        border: 1px solid transparent;
+        border-bottom-color: #cdcdcd;
+        cursor: crosshair;
+
+        background-color: rgba(0, 0, 0, 0.1);
+
+        & > div, & > a {
+          padding: 15px 0;
+          font-size: 1em;
+
+          &.language, &.avatar, &.first-name, &.last-name, &.username, &.rating{
+            display: flex;
+            align-items: center;
+          }
+
+          &.language {
+            text-transform: uppercase;
+            font-size: 0.8em;
+            font-weight: 400;
+            margin-right: 15px;
+            color: #FAFAFA;
+            background-color: #212121;
+            padding: 15px;
+            min-width: 68px;
+            max-width: 68px;
+
+            & > .flag {
+              margin-right: 8px;
+            }
+          }
+
+          &.first-name {
+            margin-right: 3px;
+          }
+
+          &.username {
+            margin-left: 10px;
+            font-weight: 300;
+            font-size: 0.8em;
+          }
+
+          &.rating {
+            margin-left: auto;
+            padding: 15px;
+          }
+        }
+      }
+
+    }
+  }
+
+  .menu-languages {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    position: fixed;
+    width: 100%; max-width: 1300px;
+    min-height: 50px;
+    bottom: 0;
+    padding-right: 50px;
+
+    margin: 0 auto;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    background-color: rgba(255, 255, 255, .95);
+
+    a {
+      line-height: 50px;
+      padding: 0 20px;
+      text-transform: uppercase;
+      font-size: 0.8em;
+      font-weight: 300;
+      color: #212121;
+      position: relative;
+      vertical-align: middle;
+
+      img {
+        margin-right: 7px;
+      }
+
+      &.active {
+        color: #FAFAFA;
+        background-color: #212121;
+      }
+
+      &.arrow {
+        position: absolute;
+        right: 0;
+        font-size: 1em;
+
+        &::after {
+          right: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    margin-top: 160px;
+  }
+}

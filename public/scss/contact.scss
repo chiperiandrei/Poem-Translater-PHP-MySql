@@ -54,6 +54,7 @@ main {
                     background-color: #BDBDBD;
                 }
             }
+
             #contact-error {
                 color: #C62828;
                 font-weight: 600;
@@ -69,6 +70,7 @@ main {
                 border: 1px solid #2ec646;
                 padding: 10px 5px;
             }
+
             .first-name {
                 grid-area: fn;
             }
@@ -113,7 +115,6 @@ main {
                     background-color: #BDBDBD;
                     border: 1px solid #E0E0E0;
                     text-align: center;
-                    // text-transform: uppercase;
 
                     .fas {
                         margin-left: 6px;

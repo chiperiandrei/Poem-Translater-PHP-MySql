@@ -13,15 +13,15 @@ if (Session::exists('user_id')) {
 
 <main>
     <div class="container">
-        <section class="poem" id="poem">
+        <section class="poem">
             <h1 class="poem-title">
                 <a href="<?php echo '/poem/' . $this->poem_header['language'] . '/' .
-                               str_replace(' ', '-', $this->poem_header['title']); ?>">
+                               str_replace(' ', '+', $this->poem_header['title']); ?>">
                     <?php echo $this->poem_header['title']; ?>
                 </a>
             </h1>
             <div class="poem-author">
-                <a href="<?php echo '/author/' . str_replace(' ', '-', $this->poem_header['author_name']); ?>">
+                <a href="<?php echo '/author/' . str_replace(' ', '+', $this->poem_header['author_name']); ?>">
                     <?php echo $this->poem_header['author_name']; ?>
                 </a>
             </div>
@@ -35,14 +35,14 @@ if (Session::exists('user_id')) {
     <nav class="menu-languages">
         <a class="active"
            href="<?php echo '/poem/' . $this->poem_header['language'] . '/' .
-                       str_replace(' ', '-', $this->poem_header['title']); ?>">
+                       str_replace(' ', '+', $this->poem_header['title']); ?>">
             <img src="../../../public/img/flags/blank.gif"
                  class="flag flag-<?php echo $this->poem_header['language']; ?>"
                  alt="<?php echo $this->poem_header['language']; ?>"/>
             <?php echo $this->poem_header['language']; ?>
         </a>
         <?php foreach($this->poem_languages as $language) : ?>
-        <a href="<?php echo "/poem/$language/" . str_replace(' ', '-', $this->poem_header['title']); ?>">
+        <a href="<?php echo "/poem/$language/" . str_replace(' ', '+', $this->poem_header['title']); ?>">
             <img src="../../../public/img/flags/blank.gif"
                  class="flag flag-<?php echo $language === 'en' ? 'gb' : $language; ?>"
                  alt="<?php echo $language; ?>"/>
