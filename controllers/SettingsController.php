@@ -34,6 +34,16 @@ class SettingsController extends Controller
                 if ($new_password1 == $new_password2) {
                     if ($this->model->updateInfo($new_firstname, $new_lastname, $new_email, $new_password1, $new_username)) {
                         Session::set('update-info-complete', 'CONGRATS !!!!!!!!!!!');
+                        $pentru = $new_email;
+                        $subject = 'PoTr ADMIN PANEL';
+                        $mesaj = "Hello ".$_POST["first-name"]." ".$_POST["last-name"]."! You're just changed some informations. Your password is  " . $new_password1. " .\n Tip! Your new nickname is ".$new_username."
+                         
+                         All notifications from website will be sent to your new email adress ".$new_email."\nHave fun!";
+                        $header = 'From: PoTr TEAM' . "\r\n" .
+                            'No replay: potrTEAM@poem-translator.tw' . "\r\n" .
+                            'X-Mailer: PHP/';
+
+                        mail($pentru, $subject, $mesaj, $header);
                         return true;
                     } else {
                         Session::set('something-went-wrong-try-again-later', ':((((( NOOOO');
