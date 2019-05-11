@@ -39,6 +39,8 @@ class Application
                         $this->useLoginController($URL);
                     } else if ($URL[0] === 'AuthorController') {
                         $this->useAuthorController($URL);
+                    } else if ($URL[0] === 'ContactController') {
+                        $this->useContactController($URL);
                     }
                     break;
 
@@ -118,6 +120,15 @@ class Application
     {
         $this->current_controller->loadPoemOrTranslation($URL[2], $URL[1]);
     }
+
+    private function useContactController($URL)
+    {
+        if ($URL[1] == 'contact' && count($URL) == 2) {
+            $this->current_controller->contact();
+            header('Location: /contact');
+        }
+    }
+
 
     private function useAuthorController($URL)
     {
