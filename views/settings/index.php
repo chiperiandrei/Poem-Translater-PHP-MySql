@@ -11,7 +11,7 @@ if (Session::exists('user_id')) {
 }
 
 ?>
-
+<?php if (Session::exists('user_id')) : ?>
 
     <form action="/settings/edit-info" method="POST">
         <br>
@@ -70,7 +70,7 @@ if (Session::exists('user_id')) {
         <input type="file" name="fileToUpload" id="fileToUpload">
         <input type="submit" value="Upload Image" name="submit">
     </form>
-
+<?php endif;?>
 <?php if (Session::exists('update-info-complete')) : ?>
     <div>
                         <span id="login-ok">
