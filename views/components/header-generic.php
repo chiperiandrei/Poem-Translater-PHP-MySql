@@ -1,4 +1,5 @@
 </head>
+<body>
 <header>
     <div class="container">
         <div class="title">
@@ -10,4 +11,3 @@
         </nav>
     </div>
 </header>
-<body>
