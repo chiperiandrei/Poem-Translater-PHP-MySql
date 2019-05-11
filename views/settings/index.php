@@ -65,11 +65,12 @@ if (Session::exists('user_id')) {
     </form>
 
 <font color="red">UPDATE PHOTO!!!!!!!!!</font>
-    <form action="/settings/edit-photo">
-        <input type="file" name="fileupload" value="fileupload" id="fileupload">
-        <label for="fileupload"> Select a file to upload</label>
-        <br><input type="image" alt="Submit" width="100">
+    <form action="/settings/edit-photo" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit">
     </form>
+
 <?php if (Session::exists('update-info-complete')) : ?>
     <div>
                         <span id="login-ok">
@@ -107,5 +108,38 @@ if (Session::exists('user_id')) {
                         </span>
     </div>
 <?php endif; ?>
+
+
+
+<?php if (Session::exists('upload-complete')) : ?>
+    <div>
+                        <span id="login-ok">
+                            <?php Session::print('upload-complete'); ?>
+                        </span>
+    </div>
+<?php endif; ?>
+
+<?php if (Session::exists('error-upload')) : ?>
+    <div>
+                        <span id="login-error">
+                            <?php Session::print('error-upload'); ?>
+                        </span>
+    </div>
+<?php endif; ?>
+<?php if (Session::exists('not-valid')) : ?>
+    <div>
+                        <span id="login-error">
+                            <?php Session::print('not-valid'); ?>
+                        </span>
+    </div>
+<?php endif; ?>
+<?php if (Session::exists('not-image')) : ?>
+    <div>
+                        <span id="login-error">
+                            <?php Session::print('not-image'); ?>
+                        </span>
+    </div>
+<?php endif; ?>
+
     <script src="public/js/main.js" type="text/javascript"></script>
 <?php require_once('views/components/footer.php'); ?>

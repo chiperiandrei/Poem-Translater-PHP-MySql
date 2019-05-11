@@ -150,8 +150,15 @@ class Application
                 header('Location: /settings');
             }
         } else if ($URL[1] == 'edit-photo') {
-            $this->current_controller->editphoto();
-            header('Location: /settings');
+            if ($this->current_controller->editphoto()) {
+                Session::unset('error-upload');
+                Session::unset('not-valid');
+                Session::unset('not-image');
+                header('Location: /settings');
+            } else {
+                Session::unset('upload-complete');
+                header('Location: /settings');
+            }
         }
     }
 }
