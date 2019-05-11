@@ -63,16 +63,50 @@ class SettingsModel extends Model
 
     }
 
+    /**
+     * @param $new_path
+     * @param $user_id
+     * @return bool
+     */
     public function updatePhoto($new_path, $user_id)
     {
-        $SQL = 'update user_images set path="' . $new_path . '" where id_user=' . $user_id;
+        if ($this->verifyUser($user_id)) {
+            $SQL = 'UPDATE user_images SET PATH="'.$new_path.'" WHERE ID_USER="'.$user_id.'"';
 
-        $statement = $this->db->prepare($SQL);
+            $statement = $this->db->prepare($SQL);
 
-        if ($statement->execute())
+            if ($statement->execute())
+                return true;
+            else
+                return false;
+        } else {
+            $SQL = 'INSERT INTO user_images(id_user,path) VALUES (:id,:path)';
+
+            $result = $this->db->prepare($SQL);
+            return $result->execute([
+                ':id' => $user_id,
+                ':path' => $new_path
+            ]) ? true : false;
+        }
+    }
+
+    /**
+     * @param $user_id
+     * @return bool
+     */
+    private function verifyUser($user_id)
+    {
+        $SQL = 'SELECT * FROM user_images WHERE id_user="'.$user_id.'"';
+
+        $result = $this->db->prepare($SQL);
+
+        $result->execute();
+
+        if ($result->rowCount() == 1) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
 }
