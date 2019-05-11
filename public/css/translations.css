@@ -1,0 +1,159 @@
+main {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+main .container {
+  background-color: #FAFAFA;
+  width: 100%;
+  max-width: 1600px;
+  padding: 20px;
+}
+main .container > .info {
+  font-size: 1.2em;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+main .container > .poem .poem-title, main .container > .poem .poem-author {
+  text-align: center;
+  font-family: "Parisienne", cursive;
+}
+main .container > .poem .poem-title > a, main .container > .poem .poem-author > a {
+  color: #212121;
+}
+main .container > .poem .poem-title {
+  font-weight: bold;
+  font-size: 3em;
+}
+main .container > .poem .poem-author {
+  font-size: 1.7em;
+  padding-bottom: 20px;
+}
+main .container > .about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 800px;
+}
+main .container > .about > .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0 0 15px 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 300;
+}
+main .container > .about > .container > .language {
+  margin: 0 11px 0 3px;
+}
+main .container > .about > .container > .user {
+  margin: 0 5px;
+}
+main .container > .about > .container > .rating {
+  margin: 0 3px 0 auto;
+}
+main .container > .translations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 800px;
+}
+main .container > .translations > .translation {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  border: 1px solid transparent;
+  border-bottom-color: #cdcdcd;
+  cursor: crosshair;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+main .container > .translations > .translation > div, main .container > .translations > .translation > a {
+  padding: 15px 0;
+  font-size: 1em;
+}
+main .container > .translations > .translation > div.language, main .container > .translations > .translation > div.avatar, main .container > .translations > .translation > div.first-name, main .container > .translations > .translation > div.last-name, main .container > .translations > .translation > div.username, main .container > .translations > .translation > div.rating, main .container > .translations > .translation > a.language, main .container > .translations > .translation > a.avatar, main .container > .translations > .translation > a.first-name, main .container > .translations > .translation > a.last-name, main .container > .translations > .translation > a.username, main .container > .translations > .translation > a.rating {
+  display: flex;
+  align-items: center;
+}
+main .container > .translations > .translation > div.language, main .container > .translations > .translation > a.language {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 400;
+  margin-right: 15px;
+  color: #FAFAFA;
+  background-color: #212121;
+  padding: 15px;
+  min-width: 68px;
+  max-width: 68px;
+}
+main .container > .translations > .translation > div.language > .flag, main .container > .translations > .translation > a.language > .flag {
+  margin-right: 8px;
+}
+main .container > .translations > .translation > div.first-name, main .container > .translations > .translation > a.first-name {
+  margin-right: 3px;
+}
+main .container > .translations > .translation > div.username, main .container > .translations > .translation > a.username {
+  margin-left: 10px;
+  font-weight: 300;
+  font-size: 0.8em;
+}
+main .container > .translations > .translation > div.rating, main .container > .translations > .translation > a.rating {
+  margin-left: auto;
+  padding: 15px;
+}
+main .menu-languages {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: fixed;
+  width: 100%;
+  max-width: 1300px;
+  min-height: 50px;
+  bottom: 0;
+  padding-right: 50px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.95);
+}
+main .menu-languages a {
+  line-height: 50px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 300;
+  color: #212121;
+  position: relative;
+  vertical-align: middle;
+}
+main .menu-languages a img {
+  margin-right: 7px;
+}
+main .menu-languages a.active {
+  color: #FAFAFA;
+  background-color: #212121;
+}
+main .menu-languages a.arrow {
+  position: absolute;
+  right: 0;
+  font-size: 1em;
+}
+main .menu-languages a.arrow::after {
+  right: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  main {
+    margin-top: 160px;
+  }
+}
+
+/*# sourceMappingURL=translations.css.map */
