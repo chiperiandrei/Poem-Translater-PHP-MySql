@@ -54,7 +54,21 @@ main {
                     background-color: #BDBDBD;
                 }
             }
+            #contact-error {
+                color: #C62828;
+                font-weight: 600;
+                transition: all 300ms ease-in-out;
+                border: 1px solid #C62828;
+                padding: 10px 5px;
+            }
 
+            #contact-ok {
+                color: #19C622;
+                font-weight: 600;
+                transition: all 300ms ease-in-out;
+                border: 1px solid #2ec646;
+                padding: 10px 5px;
+            }
             .first-name {
                 grid-area: fn;
             }
