@@ -26,11 +26,11 @@ class UserController extends Controller
      */
     public function userInfo($user)
     {
-        $this->view->avatar=[];
-        $this->view->userInformation=[];
+        $this->view->avatar = [];
+        $this->view->userInformation = [];
         if ($this->model->verifyUsername($user)) {
-            var_dump(
-            $this->view->userInformation = $this->model->selectAllUserInfo($user));
+
+            $this->view->userInformation = $this->model->selectAllUserInfo($user);
 
             $this->view->avatar = $this->model->getAvatar();
         } else {
