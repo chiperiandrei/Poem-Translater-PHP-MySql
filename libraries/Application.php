@@ -43,6 +43,8 @@ class Application
                         $this->useContactController($URL);
                     } else if ($URL[0] === 'SettingsController') {
                         $this->useSettingsController($URL);
+                    } else if ($URL[0] === 'UserController') {
+                        $this->useUserController($URL);
                     }
                     break;
 
@@ -173,5 +175,10 @@ class Application
                 header('Location: /settings');
             }
         }
+    }
+
+    private function useUserController($URL)
+    {
+        $this->current_controller->userInfo($URL[1]);
     }
 }
