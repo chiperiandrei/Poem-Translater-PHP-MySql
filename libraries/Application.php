@@ -1,15 +1,19 @@
 <?php
 
 require_once('Session.php');
+require_once('models/ApplicationModel.php');
 
 class Application
 {
     private $current_controller;
+    private $model;
 
     public function __construct()
     {
-        ob_start();
+        $this->model = new ApplicationModel();
+        $this->model->generateRSS();
 
+        ob_start();
         Session::start();
         if (isset($_GET['url'])) {
             $URL = explode('/', $_GET['url']);
@@ -190,4 +194,6 @@ class Application
     {
         $this->current_controller->userInfo($URL[1]);
     }
+
+
 }
