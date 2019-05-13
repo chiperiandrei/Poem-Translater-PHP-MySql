@@ -58,6 +58,10 @@ class Application
                         $this->usePoemController($URL);
                     }
                     break;
+                case 5:
+                    if ($URL[0] === 'PoemController') {
+                        $this->usePoemController($URL);
+                    }
 
                 default:
                     header('Location: /login');
@@ -125,7 +129,8 @@ class Application
         }
     }
 
-    private function usePoemController($URL) {
+    private function usePoemController($URL)
+    {
 
         switch (count($URL)) {
             case 3:
@@ -134,6 +139,10 @@ class Application
 
             case 4:
                 $this->current_controller->loadTranslation($URL[2], $URL[1], $URL[3]);
+                break;
+            case 5:
+                if ($URL[4] == 'wordpress')
+                    $this->current_controller->shareWordpress($URL[1], $URL[2]);
                 break;
         }
     }

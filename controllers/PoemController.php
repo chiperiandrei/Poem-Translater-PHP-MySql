@@ -51,7 +51,7 @@ class PoemController extends Controller
             $this->view->translation_language = strtolower($poem_language);
             $this->view->poem_language = $this->model->loadInfos($poem_title)['LANGUAGE'];
             $this->view->poem_link = '/poem/' . $this->view->poem_language .
-                                     '/' . str_replace(' ', '+', $this->view->poem_title);
+                '/' . str_replace(' ', '+', $this->view->poem_title);
             $this->view->author_name = $this->model->loadInfos($poem_title)['NAME'];
             $this->view->author_link = '/author/' . str_replace(' ', '+', $this->view->author_name);
             $this->view->translations = $this->packTranslations($translations);
@@ -75,7 +75,8 @@ class PoemController extends Controller
      *
      * This function store all the data needed for a page with a translation
      */
-    public function loadTranslation($poem_title, $poem_language, $username) {
+    public function loadTranslation($poem_title, $poem_language, $username)
+    {
         $this->view_path = 'translation';
 
         $poem_title = str_replace('-+', ' ', $poem_title);
@@ -108,7 +109,7 @@ class PoemController extends Controller
          * Stores data about the translation
          * Can be accessed from view
          */
-        $this->view->translation = $this->packTranslation (
+        $this->view->translation = $this->packTranslation(
             $this->model->loadTranslationHeader($this->view->poem['id'], $this->view->user['id'], $poem_language),
             $poem_language,
             $this->view->poem['title'],
@@ -130,7 +131,7 @@ class PoemController extends Controller
         $poem['author_name'] = $header['AUTHOR_NAME'];
         $poem['language'] = strtolower($header['LANGUAGE'] === 'EN' ? 'gb' : $header['LANGUAGE']);
         $poem['link'] = 'poem/' . strtolower($header['LANGUAGE']) . '/' .
-                         str_replace(' ', '-+', $poem['title']);
+            str_replace(' ', '-+', $poem['title']);
         $poem['author_link'] = 'author/' .
             str_replace(' ', '-+', $poem['author_name']);
 
@@ -152,8 +153,7 @@ class PoemController extends Controller
     {
         $translations = [];
 
-        foreach ($languages as $language)
-        {
+        foreach ($languages as $language) {
             array_push($translations, strtolower($language['LANGUAGE'])
             );
         }
@@ -161,7 +161,8 @@ class PoemController extends Controller
         return $translations;
     }
 
-    private function packTranslations($translations) {
+    private function packTranslations($translations)
+    {
         $i = 0;
         $result = [];
 
@@ -177,7 +178,8 @@ class PoemController extends Controller
     }
 
     // #cleanCodeBelow
-    private function packPoemTranslation($header, $count) {
+    private function packPoemTranslation($header, $count)
+    {
         $poem['id'] = $header['POEM_ID'];
         $poem['title'] = $header['POEM_TITLE'];
         $poem['size'] = ($count != null ? $count : '0');
@@ -190,12 +192,13 @@ class PoemController extends Controller
 
         $poem['author']['id'] = $header['AUTHOR_ID'];
         $poem['author']['name'] = $header['AUTHOR_NAME'];
-        $poem['author']['link'] = '/author/' .  str_replace(' ', '+', $poem['author']['name']);
+        $poem['author']['link'] = '/author/' . str_replace(' ', '+', $poem['author']['name']);
 
         return $poem;
     }
 
-    private function packUserTranslation($model, $username) {
+    private function packUserTranslation($model, $username)
+    {
         $user['id'] = $model['USER_ID'];
         $user['first_name'] = $model['USER_FN'];
         $user['last_name'] = $model['USER_LN'];
@@ -210,7 +213,8 @@ class PoemController extends Controller
         return $user;
     }
 
-    private function packTranslation($header, $language, $title, $username, $available_languages) {
+    private function packTranslation($header, $language, $title, $username, $available_languages)
+    {
         $translation['id'] = $header['TRANSLATION_ID'];
         $translation['rating'] = $header['RATING'];
 
@@ -237,7 +241,8 @@ class PoemController extends Controller
         return $translation;
     }
 
-    private function packTranslationStrophes($header, $body, $count) {
+    private function packTranslationStrophes($header, $body, $count)
+    {
         $translation = $header;
 
         for ($i = 0; $i < $count; $i++) {
@@ -251,5 +256,44 @@ class PoemController extends Controller
         }
 
         return $translation;
+    }
+
+    /**
+     * @param $poem_language
+     * @param $poem_title
+     * @return bool
+     */
+    public function shareWordpress($poem_language, $poem_title)
+    {
+        $poem_title = str_replace('-+', ' ', $poem_title);
+        $poem_language = strtoupper($poem_language);
+        $this->view_path = 'original';
+        $header = $this->packHeader(
+            $this->model->loadPoemHeader($poem_title, $poem_language)
+        );
+
+        $body = $this->packBody(
+            $this->model->loadPoemBody()
+        );
+        $new_body = '';
+        foreach ($body as $poem_strophe)
+            $new_body = $new_body . " " . $poem_strophe;
+        $username = 'admin';
+        $password = 'admin';
+        $process = curl_init('http://localhost/wordpress/wp-json/wp/v2/posts');
+        $data = array('slug' => $header['title'].'-'.$header['author_name'].'-'.$header['language'], 'title' => $header['title'].' - '.$header['author_name'], 'content' => $new_body, 'status' => 'publish');
+        $data_string = json_encode($data);
+        curl_setopt($process, CURLOPT_USERPWD, $username . ":" . $password);
+        curl_setopt($process, CURLOPT_TIMEOUT, 30);
+        curl_setopt($process, CURLOPT_POST, 1);
+        curl_setopt($process, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($process, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($process, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($process, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string))
+        );
+        curl_exec($process);
+        curl_close($process);
     }
 }

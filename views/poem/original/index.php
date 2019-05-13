@@ -25,6 +25,7 @@ if (Session::exists('user_id')) {
                     <?php echo $this->poem_header['author_name']; ?>
                 </a>
             </div>
+            <a href="<?php echo $this->poem_header['title']; ?>/share/wordpress">Share wordpress</a>
             <div class="poem-strophes">
                 <?php foreach($this->poem_body as $poem_strophe) :
                     echo "<pre>$poem_strophe</pre>";
