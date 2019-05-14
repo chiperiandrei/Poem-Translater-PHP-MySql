@@ -1,0 +1,7 @@
+Date de conectare API wordpress pentru https://potrtw.home.blog :
+
+code: 5eo4IWRUrg
+YOUR_API_TOKEN: uJJ0CaGiST8nrO9G3G8)NWErbv7NL#FZBNfMGvU1g1P@^mqAh3#fJQVv&74hmw$s
+site_id=162188338
+token_type=bearer
+access_token=uJJ0CaGiST8nrO9G3G8%29NWErbv7NL%23FZBNfMGvU1g1P%40%5EmqAh3%23fJQVv%2674hmw%24s
