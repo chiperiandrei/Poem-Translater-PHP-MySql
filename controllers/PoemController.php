@@ -280,7 +280,7 @@ class PoemController extends Controller
             $new_body = $new_body . " " . $poem_strophe;
         $username = 'admin';
         $password = 'admin';
-        $process = curl_init('http://localhost/wordpress/wp-json/wp/v2/posts');
+        /*$process = curl_init('http://localhost/wordpress/wp-json/wp/v2/posts');
         $data = array('slug' => $header['title'].'-'.$header['author_name'].'-'.$header['language'], 'title' => $header['title'].' - '.$header['author_name'], 'content' => $new_body, 'status' => 'publish');
         $data_string = json_encode($data);
         curl_setopt($process, CURLOPT_USERPWD, $username . ":" . $password);
@@ -294,6 +294,37 @@ class PoemController extends Controller
                 'Content-Length: ' . strlen($data_string))
         );
         curl_exec($process);
-        curl_close($process);
+        curl_close($process);*/
+
+        $options = array(
+            'http' =>
+                array(
+                    'ignore_errors' => true,
+                    'method' => 'POST',
+                    'header' =>
+                        array(
+                            0 => 'authorization: Bearer uJJ0CaGiST8nrO9G3G8)NWErbv7NL#FZBNfMGvU1g1P@^mqAh3#fJQVv&74hmw$s',
+                            1 => 'Content-Type: application/x-www-form-urlencoded',
+                        ),
+                    'content' =>
+                        http_build_query(array(
+                            'slug' => $header['title'].'-'.$header['author_name'].'-'.$header['language'],
+                            'title' => $header['title'],
+                            'content' => $new_body,
+                            'tags' => 'POTR',
+                            'categories' => 'API-WORDPRESS-POTR',
+                            'status' => 'publish'
+                        )),
+                ),
+        );
+
+        $context = stream_context_create($options);
+        $response = file_get_contents(
+            'https://public-api.wordpress.com/rest/v1.2/sites/162188338/posts/new/',
+            false,
+            $context
+        );
+        $response = json_decode($response);
+
     }
 }
