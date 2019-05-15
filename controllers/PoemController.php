@@ -280,7 +280,7 @@ class PoemController extends Controller
             $new_body = $new_body . " " . $poem_strophe;
         $username = 'admin';
         $password = 'admin';
-        /*$process = curl_init('http://localhost/wordpress/wp-json/wp/v2/posts');
+        $process = curl_init('http://localhost/wordpress/wp-json/wp/v2/posts');
         $data = array('slug' => $header['title'].'-'.$header['author_name'].'-'.$header['language'], 'title' => $header['title'].' - '.$header['author_name'], 'content' => $new_body, 'status' => 'publish');
         $data_string = json_encode($data);
         curl_setopt($process, CURLOPT_USERPWD, $username . ":" . $password);
@@ -294,7 +294,7 @@ class PoemController extends Controller
                 'Content-Length: ' . strlen($data_string))
         );
         curl_exec($process);
-        curl_close($process);*/
+        curl_close($process);
 
         $options = array(
             'http' =>
