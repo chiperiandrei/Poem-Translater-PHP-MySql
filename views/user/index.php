@@ -15,7 +15,7 @@ if (Session::exists('user_id')) {
         <ol>
             <li>
                 <?php
-                echo "<hr>Nume : " . $this->userInformation['FIRST_NAME'] . "        <br> Usernamme:  " . $this->userInformation['USERNAME'] . "   <br> Lastname:- - -- " . $this->userInformation["LAST_NAME"] . " <hr>";
+                echo "<hr>Nume : " . $this->userInformation['FIRST_NAME'] . "        <br> Usernamme:  " . $this->userInformation['USERNAME'] . "   <br> Lastname:  " . $this->userInformation["LAST_NAME"] . " <hr>";
 
                 ?>
 
