@@ -141,15 +141,21 @@ class Application
                 break;
 
             case 4:
-                if ($URL[4] == 'add-comment') {
-                    // echo '<script>console.log("' . var_dump($URL) . '")</script>';
+                if ($URL[3] == 'add-comment') {
+                    $this->current_controller->addComment($URL[2], $URL[1]);
+                    $poem_title = str_replace(' ', '+', $URL[2]);
+                    header('Location: /poem/'. $URL[1] . '/' . $poem_title);
                 } else {
                     $this->current_controller->loadTranslation($URL[2], $URL[1], $URL[3]);
                 }
                 break;
 
             case 5:
-                if ($URL[4] == 'wordpress') {
+                if ($URL[3] == 'delete-comment') {
+                    $this->current_controller->deleteComment($URL[2], $URL[1], $URL[4]);
+                    $poem_title = str_replace(' ', '+', $URL[2]);
+                    header('Location: /poem/'. $URL[1] . '/' . $poem_title);
+                } else if ($URL[4] == 'wordpress') {
                     $this->current_controller->shareWordpress($URL[1], $URL[2]);
                 }
                 break;

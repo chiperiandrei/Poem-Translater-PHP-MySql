@@ -19,13 +19,12 @@ if (Session::exists('user_id')) {
                 <a href="">Translate <i class="fas fa-language"></i></a>
             </div>
             <h1 class="poem-title">
-                <a href="<?php echo '/poem/' . $this->poem_header['language'] . '/' .
-                               str_replace(' ', '+', $this->poem_header['title']); ?>">
+                <a href="<?php echo $this->poem_header['link']; ?>">
                     <?php echo $this->poem_header['title']; ?>
                 </a>
             </h1>
             <div class="poem-author">
-                <a href="<?php echo '/author/' . str_replace(' ', '+', $this->poem_header['author_name']); ?>">
+                <a href="<?php echo $this->poem_header['author_link']; ?>">
                     <?php echo $this->poem_header['author_name']; ?>
                 </a>
             </div>
@@ -57,7 +56,7 @@ if (Session::exists('user_id')) {
                     <?php if (Session::exists('username')) : ?>
                         <?php if ($comment['user']['username'] == Session::get('username')) : ?>
                             <div class="delete">
-                                <a href="">
+                                <a href="<?php echo $this->poem_header['link']; ?>/delete-comment/<?php echo $comment['id'] ?>">
                                     <i class="fas fa-times"></i>
                                 </a>
                             </div>
@@ -76,34 +75,35 @@ if (Session::exists('user_id')) {
         </section>
         <section>
             <?php if (Session::exists('user_id')) : ?>
-            <div class="add-comment">
-                <div class="avatar">
-                    <img src="<?php Session::print('avatar'); ?>" alt="<?php Session::print('complete_name'); ?>">
-                </div>
-                <div class="name">
-                    <a href="<?php Session::print('user_link'); ?>">
-                        <?php Session::print('complete_name'); ?>
-                    </a>
-                </div>
-                <div class="username">
-                    <a href="<?php Session::print('user_link'); ?>">
-                        (<?php Session::print('username'); ?>)
-                    </a>
-                </div>
-                <div class="input">
-                    <textarea name="" id=""></textarea>
-                </div>
-                <div class="submit">
-                    <input type="submit" value="Add">
-                </div>
-            </div>
+                <form action="<?php echo $this->poem_header['link']; ?>/add-comment" method="post">
+                    <div class="add-comment">
+                        <div class="avatar">
+                            <img src="<?php Session::print('avatar'); ?>" alt="<?php Session::print('complete_name'); ?>">
+                        </div>
+                        <div class="name">
+                            <a href="<?php Session::print('user_link'); ?>">
+                                <?php Session::print('complete_name'); ?>
+                            </a>
+                        </div>
+                        <div class="username">
+                            <a href="<?php Session::print('user_link'); ?>">
+                                (<?php Session::print('username'); ?>)
+                            </a>
+                        </div>
+                        <div class="input">
+                            <textarea name="add-comment" id="add-comment"></textarea>
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="Add">
+                        </div>
+                    </div>
+                </form>
             <?php endif; ?>
         </section>
     </div>
     <nav class="menu-languages">
         <a class="active"
-           href="<?php echo '/poem/' . $this->poem_header['language'] . '/' .
-               str_replace(' ', '+', $this->poem_header['title']); ?>">
+           href="<?php echo $this->poem_header['link']; ?>">
             <img src="../../../public/img/flags/blank.gif"
                  class="flag flag-<?php echo $this->poem_header['language']; ?>"
                  alt="<?php echo $this->poem_header['language']; ?>"/>
@@ -120,10 +120,8 @@ if (Session::exists('user_id')) {
         <a href="" class="arrow"><i class="fas fa-angle-double-down"></i></a>
     </nav>
     <div id="add-comment-menu" hidden>
-        <form action="/add-comment" method="post">
-            <textarea name="comment" id="comment"></textarea>
-            <input name="submit" type="submit" value="Add">
-        </form>
+        <textarea name="comment" id="comment"></textarea>
+        <input name="submit" type="submit" value="Add">
     </div>
 </main>
 

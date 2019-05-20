@@ -85,7 +85,7 @@ class PoemController extends Controller
     {
         $this->view_path = 'translation';
 
-        $poem_title = str_replace('-+', ' ', $poem_title);
+        $poem_title = str_replace('+', ' ', $poem_title);
         $poem_language = strtoupper($poem_language);
 
         /**
@@ -137,10 +137,10 @@ class PoemController extends Controller
         $poem['title'] = $header['POEM_TITLE'];
         $poem['author_name'] = $header['AUTHOR_NAME'];
         $poem['language'] = strtolower($header['LANGUAGE'] === 'EN' ? 'gb' : $header['LANGUAGE']);
-        $poem['link'] = 'poem/' . strtolower($header['LANGUAGE']) . '/' .
-            str_replace(' ', '-+', $poem['title']);
-        $poem['author_link'] = 'author/' .
-            str_replace(' ', '-+', $poem['author_name']);
+        $poem['link'] = '/poem/' . strtolower($header['LANGUAGE']) . '/' .
+            str_replace(' ', '+', $poem['title']);
+        $poem['author_link'] = '/author/' .
+            str_replace(' ', '+', $poem['author_name']);
 
         return $poem;
     }
@@ -208,6 +208,28 @@ class PoemController extends Controller
         return null;
     }
 
+    public function addComment($poem_title, $poem_language) {
+        if (isset($_POST)) {
+            $poem_id = $this->model->loadPoemHeader($poem_title, $poem_language)['POEM_ID'];
+
+            if ($poem_id && Session::exists('user_id')) {
+                $comment = $_POST['add-comment'];
+                $user_id = Session::get('user_id');
+                $this->model->insertComment($poem_id, $user_id, $comment);
+            }
+        }
+    }
+
+    public function deleteComment($poem_title, $poem_language, $comment_id) {
+        if (isset($_POST)) {
+            $poem_id = $this->model->loadPoemHeader($poem_title, $poem_language)['POEM_ID'];
+
+            if ($poem_id && Session::exists('user_id')) {
+                $user_id = Session::get('user_id');
+                $this->model->removeComment($poem_id, $user_id, $comment_id);
+            }
+        }
+    }
 
     // #cleanCodeBelow
     private function packPoemTranslation($header, $count)

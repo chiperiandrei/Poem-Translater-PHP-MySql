@@ -125,9 +125,9 @@ class LoginController extends Controller
         $poem['author_name'] = $header['AUTHOR_NAME'];
         $poem['language'] = ($header['LANGUAGE'] === 'en' ? 'gb' : $header['LANGUAGE']);
         $poem['link'] = 'poem/' . $header['LANGUAGE'] . '/' .
-            str_replace(' ', '-', $poem['title']);
+            str_replace(' ', '+', $poem['title']);
         $poem['author_link'] = 'author/' .
-            str_replace(' ', '-', $poem['author_name']);
+            str_replace(' ', '+', $poem['author_name']);
         $poem['content'] = $body['POEM_CONTENT'];
 
         return $poem;

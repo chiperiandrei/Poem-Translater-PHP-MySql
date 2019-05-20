@@ -60,9 +60,9 @@ class IndexController extends Controller
             $poems[$i]['author_name'] = $header['AUTHOR_NAME'];
             $poems[$i]['language'] = ($header['LANGUAGE'] === 'en' ? 'gb' : $header['LANGUAGE']);
             $poems[$i]['link'] = 'poem/' . $header['LANGUAGE'] . '/' .
-                                str_replace(' ', '-', $poems[$i]['title']);
+                                str_replace(' ', '+', $poems[$i]['title']);
             $poems[$i]['author_link'] = 'author/' .
-                                       str_replace(' ', '-', $poems[$i]['author_name']);
+                                        str_replace(' ', '+', $poems[$i]['author_name']);
             $poems[$i]['content'] = $bodies[$i];
             $i++;
         }

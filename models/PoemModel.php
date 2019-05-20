@@ -219,7 +219,7 @@ class PoemModel extends Model
                 JOIN users u ON c.ID_USER = u.ID
                 LEFT JOIN user_images ui ON c.ID_USER = ui.ID_USER
                 WHERE c.ID_POEM = ' . $poem_id . '
-                ORDER BY c.ID';
+                ORDER BY c.ID DESC';
 
         $statement = $this->db->prepare($SQL);
 
@@ -232,5 +232,24 @@ class PoemModel extends Model
         }
 
         return $result;
+    }
+
+    public function insertComment($poem_id, $user_id, $text) {
+        $SQL = 'INSERT INTO comments (ID_POEM, ID_USER, TEXT) 
+                VALUES ("' . $poem_id . '","' . $user_id . '","' . $text . '")';
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+    }
+
+    public function removeComment($poem_id, $user_id, $comment_id) {
+        $SQL = 'DELETE FROM comments WHERE comments.ID = ' . $comment_id .
+               ' AND comments.ID_POEM = ' . $poem_id .
+               ' AND comments.ID_USER = ' . $user_id;
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
     }
 }
