@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/public/css/main.css">
 <link rel="stylesheet" href="/public/css/settings.css">
 
-<?php require_once('views/contact/components/header.php'); ?>
+<?php require_once('views/components/header.php'); ?>
 
 <main>
     <div class="container">

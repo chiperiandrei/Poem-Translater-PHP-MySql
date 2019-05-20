@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 20, 2019 at 07:55 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Gazdă: 127.0.0.1
+-- Timp de generare: mai 20, 2019 la 09:07 PM
+-- Versiune server: 10.1.38-MariaDB
+-- Versiune PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `poem_translator`
+-- Bază de date: `poem_translator`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `authors`
+-- Structură tabel pentru tabel `authors`
 --
 
 CREATE TABLE `authors` (
@@ -36,7 +36,7 @@ CREATE TABLE `authors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `authors`
+-- Eliminarea datelor din tabel `authors`
 --
 
 INSERT INTO `authors` (`ID`, `NAME`, `BIRTH_DATE`, `DEATH_DATE`) VALUES
@@ -52,7 +52,7 @@ INSERT INTO `authors` (`ID`, `NAME`, `BIRTH_DATE`, `DEATH_DATE`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `author_images`
+-- Structură tabel pentru tabel `author_images`
 --
 
 CREATE TABLE `author_images` (
@@ -61,16 +61,17 @@ CREATE TABLE `author_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Dumping data for table `author_images`
+-- Eliminarea datelor din tabel `author_images`
 --
 
 INSERT INTO `author_images` (`ID_AUTHOR`, `PATH`) VALUES
-(2, '/vasile_alecsandri.jpg');
+(2, 'vasile_alecsandri.jpg'),
+(7, 'victor_hugo.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Structură tabel pentru tabel `comments`
 --
 
 CREATE TABLE `comments` (
@@ -81,18 +82,20 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `comments`
+-- Eliminarea datelor din tabel `comments`
 --
 
 INSERT INTO `comments` (`ID`, `ID_POEM`, `ID_USER`, `TEXT`) VALUES
 (1, 2, 3, 'Nu îmi place această poezie!'),
 (2, 2, 2, 'Această poezie mi-a marcat profund existența...'),
-(3, 2, 1, 'Tema poeziei este dedusă din tristețea poetului, regretul anilor sumbri petrecuți în liceu, formarea lui ca adult în \"vâltorile grele\". Motivele literare sunt liceul și \r\ncimitirul.\r\n');
+(3, 2, 1, 'Tema poeziei este dedusă din tristețea poetului, regretul anilor sumbri petrecuți în liceu, formarea lui ca adult în \"vâltorile grele\". Motivele literare sunt liceul și \r\ncimitirul.\r\n'),
+(4, 1, 2, 'Am adaugat aici un comentariu.'),
+(19, 5, 1, 'E se talor de gli occhi miei mostrate/ Aver qualche pietate, Altro che pianto.');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `poems`
+-- Structură tabel pentru tabel `poems`
 --
 
 CREATE TABLE `poems` (
@@ -104,7 +107,7 @@ CREATE TABLE `poems` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `poems`
+-- Eliminarea datelor din tabel `poems`
 --
 
 INSERT INTO `poems` (`ID`, `TITLE`, `ID_AUTHOR`, `LANGUAGE`, `ID_STAFF`) VALUES
@@ -118,7 +121,7 @@ INSERT INTO `poems` (`ID`, `TITLE`, `ID_AUTHOR`, `LANGUAGE`, `ID_STAFF`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff`
+-- Structură tabel pentru tabel `staff`
 --
 
 CREATE TABLE `staff` (
@@ -126,7 +129,7 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Dumping data for table `staff`
+-- Eliminarea datelor din tabel `staff`
 --
 
 INSERT INTO `staff` (`ID`) VALUES
@@ -135,7 +138,7 @@ INSERT INTO `staff` (`ID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `strophes`
+-- Structură tabel pentru tabel `strophes`
 --
 
 CREATE TABLE `strophes` (
@@ -145,7 +148,7 @@ CREATE TABLE `strophes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Dumping data for table `strophes`
+-- Eliminarea datelor din tabel `strophes`
 --
 
 INSERT INTO `strophes` (`ID_POEM`, `NTH`, `TEXT`) VALUES
@@ -193,7 +196,7 @@ INSERT INTO `strophes` (`ID_POEM`, `NTH`, `TEXT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `translations`
+-- Structură tabel pentru tabel `translations`
 --
 
 CREATE TABLE `translations` (
@@ -205,7 +208,7 @@ CREATE TABLE `translations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `translations`
+-- Eliminarea datelor din tabel `translations`
 --
 
 INSERT INTO `translations` (`ID`, `ID_POEM`, `ID_USER`, `RATING`, `LANGUAGE`) VALUES
@@ -216,7 +219,7 @@ INSERT INTO `translations` (`ID`, `ID_POEM`, `ID_USER`, `RATING`, `LANGUAGE`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `translation_strophes`
+-- Structură tabel pentru tabel `translation_strophes`
 --
 
 CREATE TABLE `translation_strophes` (
@@ -226,7 +229,7 @@ CREATE TABLE `translation_strophes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `translation_strophes`
+-- Eliminarea datelor din tabel `translation_strophes`
 --
 
 INSERT INTO `translation_strophes` (`ID_TRANSLATION`, `NTH`, `TEXT`) VALUES
@@ -238,7 +241,7 @@ INSERT INTO `translation_strophes` (`ID_TRANSLATION`, `NTH`, `TEXT`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structură tabel pentru tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -251,7 +254,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Dumping data for table `users`
+-- Eliminarea datelor din tabel `users`
 --
 
 INSERT INTO `users` (`ID`, `FIRST_NAME`, `LAST_NAME`, `EMAIL`, `USERNAME`, `PASSWORD`) VALUES
@@ -262,7 +265,7 @@ INSERT INTO `users` (`ID`, `FIRST_NAME`, `LAST_NAME`, `EMAIL`, `USERNAME`, `PASS
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_images`
+-- Structură tabel pentru tabel `user_images`
 --
 
 CREATE TABLE `user_images` (
@@ -271,31 +274,31 @@ CREATE TABLE `user_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
 
 --
--- Dumping data for table `user_images`
+-- Eliminarea datelor din tabel `user_images`
 --
 
 INSERT INTO `user_images` (`ID_USER`, `PATH`) VALUES
-(2, 'profile_picture.jpg'),
-(3, 'profile_picture.jpg');
+(2, '0001.jpg'),
+(3, 'picture.jpg');
 
 --
--- Indexes for dumped tables
+-- Indexuri pentru tabele eliminate
 --
 
 --
--- Indexes for table `authors`
+-- Indexuri pentru tabele `authors`
 --
 ALTER TABLE `authors`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `author_images`
+-- Indexuri pentru tabele `author_images`
 --
 ALTER TABLE `author_images`
   ADD PRIMARY KEY (`ID_AUTHOR`);
 
 --
--- Indexes for table `comments`
+-- Indexuri pentru tabele `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`ID`),
@@ -303,7 +306,7 @@ ALTER TABLE `comments`
   ADD KEY `fk__comments__users` (`ID_USER`);
 
 --
--- Indexes for table `poems`
+-- Indexuri pentru tabele `poems`
 --
 ALTER TABLE `poems`
   ADD PRIMARY KEY (`ID`,`ID_AUTHOR`,`ID_STAFF`),
@@ -311,19 +314,19 @@ ALTER TABLE `poems`
   ADD KEY `fk_poems__staff` (`ID_STAFF`);
 
 --
--- Indexes for table `staff`
+-- Indexuri pentru tabele `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `strophes`
+-- Indexuri pentru tabele `strophes`
 --
 ALTER TABLE `strophes`
   ADD PRIMARY KEY (`ID_POEM`,`NTH`) USING BTREE;
 
 --
--- Indexes for table `translations`
+-- Indexuri pentru tabele `translations`
 --
 ALTER TABLE `translations`
   ADD PRIMARY KEY (`ID`),
@@ -331,13 +334,13 @@ ALTER TABLE `translations`
   ADD KEY `fk_translations__usrs` (`ID_USER`);
 
 --
--- Indexes for table `translation_strophes`
+-- Indexuri pentru tabele `translation_strophes`
 --
 ALTER TABLE `translation_strophes`
   ADD PRIMARY KEY (`ID_TRANSLATION`,`NTH`);
 
 --
--- Indexes for table `users`
+-- Indexuri pentru tabele `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`),
@@ -345,96 +348,96 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `USERNAME` (`USERNAME`);
 
 --
--- Indexes for table `user_images`
+-- Indexuri pentru tabele `user_images`
 --
 ALTER TABLE `user_images`
   ADD PRIMARY KEY (`ID_USER`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pentru tabele eliminate
 --
 
 --
--- AUTO_INCREMENT for table `authors`
+-- AUTO_INCREMENT pentru tabele `authors`
 --
 ALTER TABLE `authors`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT pentru tabele `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `poems`
+-- AUTO_INCREMENT pentru tabele `poems`
 --
 ALTER TABLE `poems`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `translations`
+-- AUTO_INCREMENT pentru tabele `translations`
 --
 ALTER TABLE `translations`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pentru tabele `users`
 --
 ALTER TABLE `users`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Constrângeri pentru tabele eliminate
 --
 
 --
--- Constraints for table `author_images`
+-- Constrângeri pentru tabele `author_images`
 --
 ALTER TABLE `author_images`
   ADD CONSTRAINT `fk_author_images__authors` FOREIGN KEY (`ID_AUTHOR`) REFERENCES `authors` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `comments`
+-- Constrângeri pentru tabele `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `fk__comments__poems` FOREIGN KEY (`ID_POEM`) REFERENCES `poems` (`ID`),
   ADD CONSTRAINT `fk__comments__users` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`);
 
 --
--- Constraints for table `poems`
+-- Constrângeri pentru tabele `poems`
 --
 ALTER TABLE `poems`
   ADD CONSTRAINT `fk_poems__authors` FOREIGN KEY (`ID_AUTHOR`) REFERENCES `authors` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_poems__staff` FOREIGN KEY (`ID_STAFF`) REFERENCES `staff` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `staff`
+-- Constrângeri pentru tabele `staff`
 --
 ALTER TABLE `staff`
   ADD CONSTRAINT `fk_staff__users` FOREIGN KEY (`ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `strophes`
+-- Constrângeri pentru tabele `strophes`
 --
 ALTER TABLE `strophes`
   ADD CONSTRAINT `fk_strophes__poems` FOREIGN KEY (`ID_POEM`) REFERENCES `poems` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `translations`
+-- Constrângeri pentru tabele `translations`
 --
 ALTER TABLE `translations`
   ADD CONSTRAINT `fk_translations__poems` FOREIGN KEY (`ID_POEM`) REFERENCES `poems` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_translations__usrs` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `translation_strophes`
+-- Constrângeri pentru tabele `translation_strophes`
 --
 ALTER TABLE `translation_strophes`
   ADD CONSTRAINT `fk_translation_strophes__translations` FOREIGN KEY (`ID_TRANSLATION`) REFERENCES `translations` (`ID`);
 
 --
--- Constraints for table `user_images`
+-- Constrângeri pentru tabele `user_images`
 --
 ALTER TABLE `user_images`
   ADD CONSTRAINT `fk_user_images__users` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
