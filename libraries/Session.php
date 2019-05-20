@@ -31,7 +31,7 @@ class Session
 
     public static function exists($key)
     {
-        return isset($_SESSION[$key]);
+        return isset($_SESSION[$key]) && !empty($_SESSION[$key]);
     }
 
     public static function print($key)

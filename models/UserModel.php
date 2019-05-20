@@ -10,7 +10,6 @@ class UserModel extends Model
     public function __construct()
     {
         parent::__construct();
-
     }
 
     public function selectAllUserInfo($username)
@@ -46,7 +45,25 @@ class UserModel extends Model
         $statement->execute();
 
         return $statement->rowCount() == 0 ? false : true;
+    }
 
+    public function loadPoems()
+    {
+        $SQL = 'SELECT p.TITLE, t.LANGUAGE FROM translations t 
+                JOIN poems p ON p.ID = t.ID_POEM
+                WHERE t.ID_USER = ' . $this->id;
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        if ($statement->rowCount() == 0) {
+            return null;
+        }
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 
 }

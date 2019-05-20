@@ -19,9 +19,9 @@
                     </span>
                 </div>
                 <div id="user-menu" class="hidden">
-                    <a href="http://poem-translator.tw/<?php Session::print('user_link'); ?>"><i class="fas fa-user"></i>Profile</a>
-                    <a href="http://poem-translator.tw/settings"><i class="fas fa-cog"></i>Settings</a>
-                    <a href="http://poem-translator.tw/login/disconnect"><i class="fas fa-sign-out-alt"></i>Log out</a>
+                    <a href="<?php echo 'http://' . PT_DB_SERVER;?><?php Session::print('user_link'); ?>"><i class="fas fa-user"></i>Profile</a>
+                    <a href="<?php echo 'http://' . PT_DB_SERVER;?>/settings"><i class="fas fa-cog"></i>Settings</a>
+                    <a href="<?php echo 'http://' . PT_DB_SERVER;?>/login/disconnect"><i class="fas fa-sign-out-alt"></i>Log out</a>
                 </div>
             </div>
         </nav>

@@ -10,17 +10,17 @@ class Application
 
     public function __construct()
     {
+        ob_start();
+        Session::start();
+
         $this->model = new ApplicationModel();
         $this->model->generateRSS();
 
-        ob_start();
-        Session::start();
         if (isset($_GET['url'])) {
             $URL = explode('/', $_GET['url']);
         } else {
             $URL[0] = 'index';
         }
-
 
         $URL[0] = ucwords(strtolower($URL[0])) . 'Controller';
 
@@ -32,9 +32,22 @@ class Application
             $this->current_controller = $controller;
 
             $count = count($URL);
+            // var_dump($URL);
+            // exit();
 
             switch ($count) {
                 case 1:
+                    if ($URL[0] === 'FavoritesController') {
+                        if (!Session::exists('user_id')) {
+                            http_response_code(404);
+                            require_once('views/errors/404.php');
+                            exit();
+                        }
+                    } else if ($URL[0] === 'AuthorController' || $URL[0] === 'UserController' || $URL[0] === 'PoemController')  {
+                        http_response_code(404);
+                        require_once('views/errors/404.php');
+                        exit();
+                    }
                     break;
 
                 case 2:
@@ -48,28 +61,45 @@ class Application
                         $this->useSettingsController($URL);
                     } else if ($URL[0] === 'UserController') {
                         $this->useUserController($URL);
+                    } else {
+                        http_response_code(404);
+                        require_once('views/errors/404.php');
+                        exit();
                     }
                     break;
 
                 case 3:
                     if ($URL[0] === 'PoemController') {
                         $this->usePoemController($URL);
+                    } else {
+                        http_response_code(404);
+                        require_once('views/errors/404.php');
+                        exit();
                     }
                     break;
                 case 4:
                     if ($URL[0] === 'PoemController') {
                         $this->usePoemController($URL);
+                    } else {
+                        http_response_code(404);
+                        require_once('views/errors/404.php');
+                        exit();
                     }
                     break;
                 case 5:
                     if ($URL[0] === 'PoemController') {
                         $this->usePoemController($URL);
+                    } else {
+                        http_response_code(404);
+                        require_once('views/errors/404.php');
+                        exit();
                     }
                     break;
 
                 default:
-                    header('Location: /login');
-                    break;
+                    http_response_code(404);
+                    require_once('views/errors/404.php');
+                    exit();
             }
 
             $controller->index();
@@ -145,8 +175,12 @@ class Application
                     $this->current_controller->addComment($URL[2], $URL[1]);
                     $poem_title = str_replace(' ', '+', $URL[2]);
                     header('Location: /poem/'. $URL[1] . '/' . $poem_title);
-                } else {
+                } else if (!empty($URL[3])) {
                     $this->current_controller->loadTranslation($URL[2], $URL[1], $URL[3]);
+                } else {
+                    http_response_code(404);
+                    require_once('views/errors/404.php');
+                    exit();
                 }
                 break;
 
@@ -167,12 +201,22 @@ class Application
         if ($URL[1] == 'contact' && count($URL) == 2) {
             $this->current_controller->contact();
             header('Location: /contact');
+        } else {
+            http_response_code(404);
+            require_once('views/errors/404.php');
+            exit();
         }
     }
 
     private function useAuthorController($URL)
     {
-        $this->current_controller->loadAuthor($URL[1]);
+        if (!empty($URL[1])) {
+            $this->current_controller->loadAuthor($URL[1]);
+        } else {
+            http_response_code(404);
+            require_once('views/errors/404.php');
+            exit();
+        }
     }
 
     private function useSettingsController($URL)

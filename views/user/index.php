@@ -1,7 +1,8 @@
 <?php require_once('views/components/meta.php'); ?>
 
-    <link rel="stylesheet" href="/public/css/main.css">
-    <link rel="stylesheet" href="/public/css/user.css">
+<link rel="stylesheet" href="/public/css/flags.min.css">
+<link rel="stylesheet" href="/public/css/main.css">
+<link rel="stylesheet" href="/public/css/user.css">
 
 <?php
 if (Session::exists('user_id')) {
@@ -10,19 +11,15 @@ if (Session::exists('user_id')) {
     require_once('views/components/header-generic.php');
 }
 ?>
-    <main>
+
+<main>
     <div class="container">
-    <div class="photo">
-        <form action="/settings/edit-photo" method="POST" enctype="multipart/form-data">
-            <div>
-                <img id="image"
-                     src="<?php Session::print('avatar'); ?>"
-                     alt="<?php Session::print('complete_name'); ?>">
-            </div>
-        </form>
-    </div>
-    <div class="about-info">
-        <form action="/settings/edit-info" method="POST">
+        <div class="photo">
+            <img id="image"
+                 src="<?php Session::print('avatar'); ?>"
+                 alt="<?php Session::print('complete_name'); ?>">
+        </div>
+        <div class="about-info">
             <div class="first-name">
                 <label for="first-name">First name:</label>
                 <input type="text" name="first-name" placeholder="Joe" disabled="disabled" value="<?php Session::print('first_name');?>">
@@ -43,16 +40,27 @@ if (Session::exists('user_id')) {
                 <input type="email" name="email" placeholder="john_doe@exemple.com" disabled="disabled" value="<?php Session::print('email');?>">
                 <span><i class="fas fa-envelope-open-text"></i></span>
             </div>
-        </form>
-    </div>
+        </div>
         <div class="translate">
-            <div class="intro">List of poems:</div>
+            <div class="intro">List of translated poems:</div>
             <ol>
-                
+                <?php if($this->poems) : foreach ($this->poems as $poem) : ?>
+                <li>
+                    <a href="<?php echo $poem['link']; ?>">
+                    <?php echo $poem['title']; ?>
+                    <img src="/public/img/flags/blank.gif"
+                         class="flag flag-<?php echo $poem['language']; ?>"
+                         alt="<?php echo $poem['language']; ?>"/>
+                    </a>
+                </li>
+                <?php endforeach; else: ?>
+                <div class="no-translation">
+                    This user did not translate any poems, yet.
+                <?php endif; ?>
             </ol>
         </div>
     </div>
-    </main>
+</main>
 
 <script src="/public/js/main.js" type="text/javascript"></script>
 

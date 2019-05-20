@@ -34,8 +34,6 @@ class AuthorController extends Controller
 
     public function loadAuthor($URL)
     {
-
-
         $authorIN = str_replace('-', ' ', $URL);
 
         $this->view->author_info = $this->model->loadAuthorInfo($authorIN);

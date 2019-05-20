@@ -8,12 +8,14 @@ main .container {
   display: grid;
   grid-template-areas: "avatar info trans";
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+  padding-bottom: 50px;
 }
 main .container > .photo {
   grid-area: avatar;
   text-align: center;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 main .container > .photo form > div {
   padding: 10px 0;
@@ -45,22 +47,19 @@ main .container > .photo input[type=submit]:hover {
 main .container > .about-info {
   grid-area: info;
 }
-main .container > .about-password {
-  grid-area: pass;
-}
-main .container > .about-info form > div, main .container > .about-password form > div {
+main .container > .about-info > div {
   display: flex;
   flex-direction: column;
   margin-top: 18px;
   position: relative;
 }
-main .container > .about-info form > div label, main .container > .about-password form > div label {
+main .container > .about-info > div label {
   text-transform: uppercase;
   margin-bottom: 10px;
   font-weight: 300;
   font-size: 1em;
 }
-main .container > .about-info form > div input, main .container > .about-password form > div input {
+main .container > .about-info > div input {
   height: 40px;
   padding: 0 38px;
   border: 1px solid #E0E0E0;
@@ -69,26 +68,10 @@ main .container > .about-info form > div input, main .container > .about-passwor
   font-weight: 400;
   transition: border-color 300ms ease-in-out;
 }
-main .container > .about-info form > div input:hover, main .container > .about-info form > div input:focus, main .container > .about-password form > div input:hover, main .container > .about-password form > div input:focus {
+main .container > .about-info > div input:hover, main .container > .about-info > div input:focus {
   border-color: #212121;
 }
-main .container > .about-info form > div button, main .container > .about-password form > div button {
-  cursor: pointer;
-  width: 100px;
-  height: 40px;
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  font-size: 1em;
-  font-weight: 400;
-  color: #212121;
-  background-color: #BDBDBD;
-  border: 1px solid #E0E0E0;
-  transition: border-color 300ms ease-in-out;
-}
-main .container > .about-info form > div button:hover, main .container > .about-password form > div button:hover {
-  border-color: #212121;
-}
-main .container > .about-info form > div span, main .container > .about-password form > div span {
+main .container > .about-info > div span {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -101,13 +84,25 @@ main .container > .about-info form > div span, main .container > .about-password
   height: 38px;
   background-color: #BDBDBD;
 }
-main .container > .about-info form > div.submit, main .container > .about-password form > div.submit {
-  display: flex;
-  align-items: flex-end;
-  margin-top: 40px;
+main .container > .translate {
+  padding-left: 10px;
 }
-main .container > .about-info form > div.submit .fas, main .container > .about-password form > div.submit .fas {
-  margin-right: 5px;
+main .container > .translate .intro {
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+main .container > .translate ol li {
+  margin: 5px 0 0 17px;
+}
+main .container > .translate ol li a {
+  color: #212121;
+}
+main .container > .translate ol li a:hover {
+  text-decoration: underline;
+}
+main .container > .translate ol .no-translation {
+  padding-top: 5px;
 }
 
 @media screen and (max-width: 1000px) {

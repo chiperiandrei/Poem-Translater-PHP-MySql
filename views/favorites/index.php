@@ -3,15 +3,7 @@
 <link rel="stylesheet" href="/public/css/main.css">
 <link rel="stylesheet" href="/public/css/flags.min.css">
 
-<?php
-
-if (Session::exists('user_id')) {
-    require_once('views/components/header.php');
-} else {
-    require_once('views/components/header-generic.php');
-}
-
-?>
+<?php require_once('views/components/header.php'); ?>
 
 <main>
     <div class="container">
@@ -36,8 +28,8 @@ if (Session::exists('user_id')) {
                     <article>
                         <div class="poem">
                             <?php if (Session::exists('user_id')) : ?>
-                            <span class="poem-bookmark" id="poem-bookmark-<?php echo $i; ?>">
-                                <i class="far fa-bookmark"></i>
+                                <span class="poem-bookmark" id="poem-bookmark-<?php echo $i; ?>">
+                                <i class="fas fa-bookmark"></i>
                             </span>
                             <?php endif; ?>
                             <h1 class="poem-title">
@@ -69,7 +61,7 @@ if (Session::exists('user_id')) {
                         <div class="poem">
                             <?php if (Session::exists('user_id')) : ?>
                                 <span class="poem-bookmark" id="poem-bookmark-<?php echo $i; ?>">
-                                <i class="far fa-bookmark"></i>
+                                <i class="fas fa-bookmark"></i>
                             </span>
                             <?php endif; ?>
                             <h1 class="poem-title">

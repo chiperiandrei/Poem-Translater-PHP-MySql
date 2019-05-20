@@ -12,12 +12,14 @@ main {
     display: grid;
     grid-template-areas: "avatar info trans";
     grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+    padding-bottom: 50px;
 
     & > .photo {
       grid-area: avatar;
       text-align: center;
       width: 100%;
-      margin-top: 50px;
+      margin-top: 30px;
 
       & form > div {
         padding: 10px 0;
@@ -52,14 +54,8 @@ main {
 
     & > .about-info {
       grid-area: info;
-    }
 
-    & > .about-password {
-      grid-area: pass;
-    }
-
-    & > .about-info, & > .about-password {
-      & form > div {
+      & > div {
         display: flex;
         flex-direction: column;
         margin-top: 18px;
@@ -87,24 +83,6 @@ main {
 
         }
 
-        button {
-          cursor: pointer;
-          width: 100px;
-          height: 40px;
-          text-align: center;
-          font-family: 'Roboto', sans-serif;
-          font-size: 1em;
-          font-weight: 400;
-          color: #212121;
-          background-color: #BDBDBD;
-          border: 1px solid #E0E0E0;
-          transition: border-color 300ms ease-in-out;
-
-          &:hover {
-            border-color: #212121;
-          }
-        }
-
         span {
           position: absolute;
           display: flex;
@@ -118,15 +96,33 @@ main {
           height: 38px;
           background-color: #BDBDBD;
         }
+      }
+    }
 
-        &.submit {
-          display: flex;
-          align-items: flex-end;
-          margin-top: 40px;
+    & > .translate {
+      padding-left: 10px;
 
-          .fas {
-            margin-right: 5px;
+      .intro {
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-top: 18px;
+      }
+
+      ol {
+        li {
+          margin: 5px 0 0 17px;
+
+          a {
+            color: #212121;
+
+            &:hover {
+              text-decoration: underline;
+            }
           }
+        }
+
+        .no-translation {
+          padding-top: 5px;
         }
       }
     }
