@@ -21,42 +21,54 @@ class SettingsController extends Controller
         $this->view->render('settings/index');
     }
 
-    public function editinfo()
+    public function settings($URL)
     {
-        $new_firstname = $_POST['first-name'];
-        $new_lastname = $_POST['last-name'];
-        $new_email = $_POST['email'];
-        $new_username = $_POST['username'];
-        $new_password1 = $_POST['password'];
-        $new_password2 = $_POST['repeat-password'];
-        if ($this->model->verifyEmail($new_email)) {
-            if ($this->model->verifyUsername($new_username)) {
-                if ($new_password1 == $new_password2) {
-                    if ($this->model->updateInfo($new_firstname, $new_lastname, $new_email, $new_password1, $new_username)) {
-                        Session::set('update-info-complete', 'CONGRATS !!!!!!!!!!!');
-                        $pentru = $new_email;
-                        $subject = 'PoTr ADMIN PANEL';
-                        $mesaj = "Hello ".$_POST["first-name"]." ".$_POST["last-name"]."! You're just changed some informations. Your password is  " . $new_password1. " .\n Tip! Your new nickname is ".$new_username."
-                         
-                         All notifications from website will be sent to your new email adress ".$new_email."\nHave fun!";
-                        $header = 'From: PoTr TEAM' . "\r\n" .
-                            'No replay: potrTEAM@poem-translator.tw' . "\r\n" .
-                            'X-Mailer: PHP/';
+        if ($URL[1] == 'edit-photo') {
+            $file = basename($_FILES["file"]["name"]);
+            $target_file = 'storage/users/' . Session::get('username') . '/' . $file;
 
-                        mail($pentru, $subject, $mesaj, $header);
-                        return true;
-                    } else {
-                        Session::set('something-went-wrong-try-again-later', ':((((( NOOOO');
-                        return false;
-                    }
+            if(isset($_POST["submit"])) {
+                if (Session::get('avatar') == '/storage/users/default/avatar.png') {
+                    mkdir('storage/users/' . Session::get('username'));
                 } else {
-                    Session::set('password-dont-match', 'oh nonono');
-                    return false;
+                    unlink('./' . Session::get('avatar'));
                 }
-            } else return false;
-        } else
-            return false;
+                move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                Session::print('avatar');
+                Session::set('avatar', $target_file);
 
+                $this->model->updatePhoto($file, Session::get('user_id'));
+            }
+        } else if ($URL[1] == 'edit-info') {
+            $new_username = $_POST['username'];
+            $new_firstName = $_POST['first-name'];
+            $new_lastName = $_POST['last-name'];
+            $new_password = $_POST['password'];
+
+            if ($this->model->verifyPassword($new_password)) {
+                if (!$this->model->verifyUsername($new_username)) {
+                    $this->model->updateUsername($new_username);
+                } else {
+                    // Username exists
+                }
+                $this->model->updateFirstname($new_firstName);
+                $this->model->updateLastname($new_lastName);
+            } else {
+                // Wrong password
+            }
+        } else if ($URL[1] == 'edit-password') {
+            $new_oldPassword = $_POST['old-password'];
+            $new_password = $_POST['password'];
+            $new_repeatPassword = $_POST['repeat-password'];
+
+            if ($this->model->verifyPassword($new_oldPassword)) {
+                if ($new_password == $new_repeatPassword) {
+                    $this->model->updatePassword($new_password);
+                }
+            } else {
+                // Wrong password
+            }
+        }
     }
 
     public function editphoto()

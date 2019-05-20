@@ -1,0 +1,149 @@
+$main-background-color: #FAFAFA;
+$main-color: #212121;
+$main-max-width: 1600px;
+
+main {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .container {
+        display: grid;
+        grid-template-areas: "avatar info"
+                             "avatar pass";
+        grid-template-columns: 1fr 2fr;
+
+        & > .photo {
+            grid-area: avatar;
+            text-align: center;
+            width: 100%;
+            margin-top: 50px;
+
+            & form > div {
+                padding: 10px 0;
+                margin-right: 20px;
+            }
+
+            img {
+                width: 100%; height: auto;
+                max-width: 300px;
+                border-radius: 100%;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+            }
+
+            input[type=submit] {
+                cursor: pointer;
+                height: 40px;
+                padding: 0 10px;
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+                font-size: 1em;
+                font-weight: 400;
+                color: #212121;
+                background-color: #BDBDBD;
+                border: 1px solid #E0E0E0;
+                transition: border-color 300ms ease-in-out;
+
+                &:hover {
+                    border-color: #212121;
+                }
+            }
+        }
+
+        & > .about-info {
+            grid-area: info;
+        }
+
+        & > .about-password {
+            grid-area: pass;
+        }
+
+        & > .about-info, & > .about-password {
+            & form > div {
+                display: flex;
+                flex-direction: column;
+                margin-top: 18px;
+                position: relative;
+
+                label {
+                    text-transform: uppercase;
+                    margin-bottom: 10px;
+                    font-weight: 300;
+                    font-size: 1em;
+                }
+
+                input {
+                    height: 40px;
+                    padding: 0 38px;
+                    border: 1px solid #E0E0E0;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1em;
+                    font-weight: 400;
+                    transition: border-color 300ms ease-in-out;
+
+                    &:hover, &:focus {
+                        border-color: #212121;
+                    }
+
+                }
+
+                button {
+                    cursor: pointer;
+                    width: 100px;
+                    height: 40px;
+                    text-align: center;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1em;
+                    font-weight: 400;
+                    color: #212121;
+                    background-color: #BDBDBD;
+                    border: 1px solid #E0E0E0;
+                    transition: border-color 300ms ease-in-out;
+
+                    &:hover {
+                        border-color: #212121;
+                    }
+                }
+
+                span {
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    font-size: 0.9em;
+                    text-align: center;
+                    left: 1px;
+                    bottom: 1px;
+                    width: 29px;
+                    height: 38px;
+                    background-color: #BDBDBD;
+                }
+
+                &.submit {
+                    display: flex;
+                    align-items: flex-end;
+                    margin-top: 40px;
+
+                    .fas {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    main {
+        margin-top: 160px;
+
+        .container {
+            display: grid;
+            grid-template-areas: "avatar"
+                                 "info"
+                                 "pass";
+            grid-template-columns: 1fr;
+        }
+    }
+}

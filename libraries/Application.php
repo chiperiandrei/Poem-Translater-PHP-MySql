@@ -177,28 +177,8 @@ class Application
 
     private function useSettingsController($URL)
     {
-        if ($URL[1] == 'edit-info') {
-            if ($this->current_controller->editinfo()) {
-                Session::unset('update-info-email-already-exists');
-                Session::unset('update-info-username-already-exists');
-                Session::unset('something-went-wrong-try-again-later');
-                Session::unset('password-dont-match');
-                header('Location: /settings');
-            } else {
-                Session::unset('update-info-complete');
-                header('Location: /settings');
-            }
-        } else if ($URL[1] == 'edit-photo') {
-            if ($this->current_controller->editphoto()) {
-                Session::unset('error-upload');
-                Session::unset('not-valid');
-                Session::unset('not-image');
-                header('Location: /settings');
-            } else {
-                Session::unset('upload-complete');
-                header('Location: /settings');
-            }
-        }
+        $this->current_controller->settings($URL);
+        header('Location: /settings');
     }
 
     private function useUserController($URL)
