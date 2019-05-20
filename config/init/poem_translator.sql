@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: mai 20, 2019 la 09:07 PM
+-- Timp de generare: mai 20, 2019 la 11:08 PM
 -- Versiune server: 10.1.38-MariaDB
 -- Versiune PHP: 7.3.2
 
@@ -87,10 +87,30 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`ID`, `ID_POEM`, `ID_USER`, `TEXT`) VALUES
 (1, 2, 3, 'Nu îmi place această poezie!'),
-(2, 2, 2, 'Această poezie mi-a marcat profund existența...'),
 (3, 2, 1, 'Tema poeziei este dedusă din tristețea poetului, regretul anilor sumbri petrecuți în liceu, formarea lui ca adult în \"vâltorile grele\". Motivele literare sunt liceul și \r\ncimitirul.\r\n'),
 (4, 1, 2, 'Am adaugat aici un comentariu.'),
 (19, 5, 1, 'E se talor de gli occhi miei mostrate/ Aver qualche pietate, Altro che pianto.');
+
+-- --------------------------------------------------------
+
+--
+-- Structură tabel pentru tabel `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `ID_USER` int(11) NOT NULL,
+  `ID_POEM` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
+
+--
+-- Eliminarea datelor din tabel `favorites`
+--
+
+INSERT INTO `favorites` (`ID_USER`, `ID_POEM`) VALUES
+(1, 3),
+(2, 1),
+(2, 2),
+(2, 6);
 
 -- --------------------------------------------------------
 
@@ -306,6 +326,13 @@ ALTER TABLE `comments`
   ADD KEY `fk__comments__users` (`ID_USER`);
 
 --
+-- Indexuri pentru tabele `favorites`
+--
+ALTER TABLE `favorites`
+  ADD UNIQUE KEY `ID_USER` (`ID_USER`,`ID_POEM`),
+  ADD KEY `fk__favorites__poems` (`ID_POEM`);
+
+--
 -- Indexuri pentru tabele `poems`
 --
 ALTER TABLE `poems`
@@ -367,7 +394,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT pentru tabele `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pentru tabele `poems`
@@ -403,6 +430,13 @@ ALTER TABLE `author_images`
 ALTER TABLE `comments`
   ADD CONSTRAINT `fk__comments__poems` FOREIGN KEY (`ID_POEM`) REFERENCES `poems` (`ID`),
   ADD CONSTRAINT `fk__comments__users` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`);
+
+--
+-- Constrângeri pentru tabele `favorites`
+--
+ALTER TABLE `favorites`
+  ADD CONSTRAINT `fk__favorites__poems` FOREIGN KEY (`ID_POEM`) REFERENCES `poems` (`ID`),
+  ADD CONSTRAINT `fk__favorites__users` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`);
 
 --
 -- Constrângeri pentru tabele `poems`
