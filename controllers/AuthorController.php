@@ -26,14 +26,16 @@ class AuthorController extends Controller
 
     public function getLink($limba, $nume)
     {
-        $line = '../poem/' . $limba . '/' .
-            str_replace(' ', '-', $nume);
+        $line = '../poem/' . strtolower($limba) . '/' .
+            str_replace(' ', '+', $nume);
         return $line;
     }
 
 
     public function loadAuthor($URL)
     {
+
+
         $authorIN = str_replace('-', ' ', $URL);
 
         $this->view->author_info = $this->model->loadAuthorInfo($authorIN);

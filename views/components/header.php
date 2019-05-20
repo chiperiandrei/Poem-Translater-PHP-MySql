@@ -3,7 +3,7 @@
 <header>
     <div class="container">
         <div class="title">
-            <a href="<?php Session::print('current_page'); ?>">Poem Translator</a>
+            <a href="<?php echo 'http://' . PT_DB_SERVER; ?>">Poem Translator</a>
         </div>
         <nav class="navigation">
             <a class="navigation-link" href="http://poem-translator.tw/contact">Contact<i class="fas fa-comments"></i></a>

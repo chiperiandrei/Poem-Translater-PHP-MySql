@@ -11,42 +11,32 @@ if (Session::exists('user_id')) {
 }
 ?>
 
-    <main>
+<main>
+    <div class="container">
+        <section class="poem">
+            <div class="poem-title">
+                <?php echo $this->author_info['NUME']; ?>
+            </div>
+            <div class="poem-author">
+                <?php echo $this->author_info['DATA_NASTERE']; ?> - <?php echo $this->author_info['DATA_DECEDARE']; ?>
+            </div>
+            <?php if ($this->photo['IMAGINE']) : ?>
+            <div class="author-picture">
+                <img src="/storage/authors/<?php echo $this->photo['IMAGINE']; ?>"
+                     alt="<?php echo $this->author_info['NUME']; ?>";
+            </div>
+            <?php endif; ?>
+            <div class="author-poems">
+                <div class="intro">List of poems:</div>
+                <ol>
+                    <?php foreach ($this->poems_by_author as $poem) :
+                        echo '<li><a href="' . $poem['link'] . '">' . $poem['title'] . '</a></li>';
+                    endforeach; ?>
+                </ol>
+            </div>
+        </section>
+    </div>
+</main>
 
-        <div class="container">
-            <section class="poem" id="poem">
-                <div class="poem-title">
-                    <?php echo $this->author_info['NUME']; ?>
-                </div>
-                <div class="poem-author">
-                    <?php echo $this->author_info['DATA_NASTERE']; ?>
-                    - <?php echo $this->author_info['DATA_DECEDARE']; ?>
-                </div>
-                <?php
-                if ($this->photo['IMAGINE'])
-
-                    echo "<img src=../storage/authors/vasilealecsandri" . $this->photo['IMAGINE'] . " height=70%
-                     width=40%>";
-                else
-                    echo "<br/>";
-
-                ?>
-                <div class="poem-strophes">
-                    <ol>
-
-                        <?php
-                        foreach ($this->poems_by_author as $poem) {
-                            echo "<li><a href=" . $poem['link'] . ">" . $poem['title'] . "</a> </li>";
-                        }
-                        ?>
-                    </ol>
-                </div>
-            </section>
-        </div>
-        <div id="add-comment-menu" hidden>
-            <textarea></textarea>
-            <input type="submit" value="Add comment">
-        </div>
-    </main>
-
+<script src="../../public/js/poem.js"></script>
 <?php require_once('views/components/footer.php'); ?>

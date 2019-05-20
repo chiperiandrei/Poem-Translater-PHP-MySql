@@ -104,6 +104,36 @@ main .container .poem .poem-strophes pre {
   margin-bottom: 20px;
   font-size: 1em;
 }
+main .container .poem .author-picture {
+  text-align: center;
+}
+main .container .poem .author-picture > img {
+  width: 200px;
+  height: auto;
+  border: 15px solid #212121;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+main .container .poem .author-poems {
+  display: block;
+  padding: 10px 30px;
+  text-align: center;
+}
+main .container .poem .author-poems .intro {
+  text-transform: uppercase;
+  font-weight: 300;
+  padding-bottom: 5px;
+}
+main .container .poem .author-poems ol {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
+main .container .poem .author-poems ol > li a {
+  color: #212121;
+}
+main .container .poem .author-poems ol > li a:hover {
+  text-decoration: underline;
+}
 main .no-comment {
   background-color: rgba(0, 0, 0, 0.05);
   border: 1px solid #cdcdcd;
