@@ -102,7 +102,7 @@ main .container > .translations > .translation > div.first-name, main .container
   margin-right: 3px;
 }
 main .container > .translations > .translation > div.username, main .container > .translations > .translation > a.username {
-  margin-left: 10px;
+  margin-left: 5px;
   font-weight: 300;
   font-size: 0.8em;
 }

@@ -28,7 +28,6 @@ class Application
 
             require_once('controllers/' . $URL[0] . '.php');
 
-            // TODO: try to remove these lines from here
             $controller = new $URL[0]();
             $this->current_controller = $controller;
 
@@ -66,6 +65,7 @@ class Application
                     if ($URL[0] === 'PoemController') {
                         $this->usePoemController($URL);
                     }
+                    break;
 
                 default:
                     header('Location: /login');
@@ -135,18 +135,23 @@ class Application
 
     private function usePoemController($URL)
     {
-
         switch (count($URL)) {
             case 3:
                 $this->current_controller->loadPoemOrTranslations($URL[2], $URL[1]);
                 break;
 
             case 4:
-                $this->current_controller->loadTranslation($URL[2], $URL[1], $URL[3]);
+                if ($URL[4] == 'add-comment') {
+                    // echo '<script>console.log("' . var_dump($URL) . '")</script>';
+                } else {
+                    $this->current_controller->loadTranslation($URL[2], $URL[1], $URL[3]);
+                }
                 break;
+
             case 5:
-                if ($URL[4] == 'wordpress')
+                if ($URL[4] == 'wordpress') {
                     $this->current_controller->shareWordpress($URL[1], $URL[2]);
+                }
                 break;
         }
     }

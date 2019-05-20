@@ -26,7 +26,8 @@ class PoemController extends Controller
 
     public function loadPoemOrTranslations($poem_title, $poem_language)
     {
-        $poem_title = str_replace('-+', ' ', $poem_title);
+        $poem_title = str_replace('-', ' ', $poem_title);
+        $poem_title = str_replace('+', ' ', $poem_title);
         $poem_language = strtoupper($poem_language);
 
         if ($this->model->loadPoemHeader($poem_title, $poem_language)) {
@@ -42,6 +43,11 @@ class PoemController extends Controller
 
             $this->view->poem_languages = $this->packAvailableTranslations(
                 $this->model->loadAvailableTranslations()
+            );
+
+
+            $this->view->poem_comments = $this->packComments(
+                $this->model->loadComments($this->view->poem_header['id'])
             );
 
         } else if ($translations = $this->model->loadTranslations($poem_title, $poem_language)) {
@@ -127,6 +133,7 @@ class PoemController extends Controller
 
     private function packHeader($header)
     {
+        $poem['id'] = $header['POEM_ID'];
         $poem['title'] = $header['POEM_TITLE'];
         $poem['author_name'] = $header['AUTHOR_NAME'];
         $poem['language'] = strtolower($header['LANGUAGE'] === 'EN' ? 'gb' : $header['LANGUAGE']);
@@ -176,6 +183,31 @@ class PoemController extends Controller
 
         return $result;
     }
+
+    private function packComments($comments) {
+
+        if ($comments) {
+            $result = [];
+            $i = 0;
+            foreach ($comments as $comment) {
+                $result[$i]['id'] = $comment['ID'];
+                $result[$i]['user']['name'] = $comment['FIRST_NAME'] . ' ' . $comment['LAST_NAME'];
+                $result[$i]['user']['username'] = $comment['USERNAME'];
+                $result[$i]['user']['link'] = '/user/' . $comment['USERNAME'];
+                if ($comment['PATH'] == null) {
+                    $result[$i]['user']['avatar'] = '/storage/users/default/avatar.png';
+                } else {
+                    $result[$i]['user']['avatar'] = '/storage/users/' . $comment['USERNAME'] . '/' . $comment['PATH'];
+                }
+                $result[$i]['text'] = $comment['TEXT'];
+                $i++;
+            }
+            return $result;
+        }
+
+        return null;
+    }
+
 
     // #cleanCodeBelow
     private function packPoemTranslation($header, $count)

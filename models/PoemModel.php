@@ -213,4 +213,24 @@ class PoemModel extends Model
 
         return $result;
     }
+
+    public function loadComments($poem_id) {
+        $SQL = 'SELECT c.ID, c.TEXT, u.FIRST_NAME, u.LAST_NAME, u.EMAIL, u.USERNAME, ui.PATH FROM comments c
+                JOIN users u ON c.ID_USER = u.ID
+                LEFT JOIN user_images ui ON c.ID_USER = ui.ID_USER
+                WHERE c.ID_POEM = ' . $poem_id . '
+                ORDER BY c.ID';
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($statement->rowCount() < 1) {
+            return;
+        }
+
+        return $result;
+    }
 }

@@ -29,6 +29,8 @@ class LoginModel extends Model
             Session::set('last_name', $row['last_name']);
             Session::set('email', $row['email']);
             Session::set('username', $row['username']);
+            Session::set('complete_name', $row['first_name'] . ' ' . $row['last_name']);
+            Session::set('user_link', '/user/' . $row['username']);
 
             return true;
         }

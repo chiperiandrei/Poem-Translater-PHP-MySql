@@ -15,11 +15,11 @@
                     </span>
                     <span class="user-avatar">
                         <img src="<?php Session::print('avatar'); ?>"
-                             alt="<?php echo Session::get('first_name') . ' ' . Session::get('last_name'); ?>">
+                             alt="<?php Session::print('complete_name'); ?>">
                     </span>
                 </div>
                 <div id="user-menu" class="hidden">
-                    <a href="http://poem-translator.tw/user/<?php Session::print('username'); ?>"><i class="fas fa-user"></i>Profile</a>
+                    <a href="http://poem-translator.tw/<?php Session::print('user_link'); ?>"><i class="fas fa-user"></i>Profile</a>
                     <a href="http://poem-translator.tw/settings"><i class="fas fa-cog"></i>Settings</a>
                     <a href="http://poem-translator.tw/login/disconnect"><i class="fas fa-sign-out-alt"></i>Log out</a>
                 </div>

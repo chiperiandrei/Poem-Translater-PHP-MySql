@@ -1,8 +1,3 @@
-main {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 main #add-comment-menu {
   flex-direction: column;
   display: none;
@@ -35,7 +30,7 @@ main #add-comment-menu input {
 }
 main .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   background-color: transparent;
   width: 100%;
@@ -51,10 +46,39 @@ main .container .poem {
   display: block;
   width: 100%;
   max-width: 1600px;
-  padding: 100px 0 40px 0;
+  padding: 100px 0 30px 0;
+  margin: 0 auto;
   border: 1px solid #BDBDBD;
   background-color: #FAFAFA;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
+main .container .poem > .control {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+main .container .poem > .control > a {
+  display: flex;
+  cursor: pointer;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 13px;
+  margin-right: 15px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+}
+main .container .poem > .control > a:hover {
+  border-color: #212121;
+}
+main .container .poem > .control > a .fas, main .container .poem > .control > a .fab {
+  margin-left: 5px;
+  font-size: 1em;
 }
 main .container .poem .poem-title, main .container .poem .poem-author {
   text-align: center;
@@ -80,6 +104,143 @@ main .container .poem .poem-strophes pre {
   margin-bottom: 20px;
   font-size: 1em;
 }
+main .no-comment {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid #cdcdcd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 1em;
+  margin-top: 15px;
+}
+main .comments {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  justify-items: center;
+  max-width: 1300px;
+  margin: 40px auto 0 auto;
+  font-size: 1em;
+}
+main .comments::before {
+  position: absolute;
+  content: "Comments";
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: 300;
+  margin-top: -15px;
+}
+main .comments section {
+  width: 100%;
+}
+main .comments section .comment {
+  width: 100%;
+  display: grid;
+  grid-template-areas: "avatar name username delete" "avatar text text text";
+  grid-template-columns: auto auto 1fr auto;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid #cdcdcd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 1em;
+  margin-top: 15px;
+}
+main .comments section .comment a {
+  color: #212121;
+}
+main .comments section .comment > .avatar {
+  grid-area: avatar;
+  text-align: center;
+  margin-right: 10px;
+}
+main .comments section .comment > .avatar > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+main .comments section .comment > .name {
+  grid-area: name;
+  padding-right: 5px;
+}
+main .comments section .comment > .username {
+  padding-top: 2px;
+  font-size: 0.8em;
+}
+main .comments section .comment > .delete {
+  grid-area: delete;
+  margin-left: auto;
+}
+main .comments section .comment > .text {
+  margin-top: 10px;
+  grid-area: text;
+  font-weight: 300;
+}
+main .comments section .add-comment {
+  width: 100%;
+  max-width: 700px;
+  display: grid;
+  grid-template-areas: "avatar name username username" "avatar input input submit";
+  grid-template-columns: auto auto 2fr auto;
+  background-color: #FAFAFA;
+  border: 1px solid #cdcdcd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  font-size: 1em;
+  margin-top: 15px;
+}
+main .comments section .add-comment a {
+  color: #212121;
+}
+main .comments section .add-comment > .avatar {
+  grid-area: avatar;
+  text-align: center;
+  margin-right: 10px;
+}
+main .comments section .add-comment > .avatar > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+main .comments section .add-comment > .name {
+  grid-area: name;
+  padding-right: 5px;
+}
+main .comments section .add-comment > .username {
+  padding-top: 2px;
+  font-size: 0.8em;
+}
+main .comments section .add-comment > .input {
+  padding: 5px 10px 0 0;
+  grid-area: input;
+}
+main .comments section .add-comment > .input > textarea {
+  width: 100%;
+  border: 1px solid #BDBDBD;
+  background-color: transparent;
+  min-height: 70px;
+  padding: 5px;
+  resize: vertical;
+}
+main .comments section .add-comment > .submit {
+  grid-area: submit;
+  text-align: right;
+  padding-top: 4px;
+}
+main .comments section .add-comment > .submit > input {
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+}
+main .comments section .add-comment > .submit > input:hover {
+  border-color: #212121;
+}
 main .menu-languages {
   display: flex;
   flex-direction: row;
@@ -90,7 +251,9 @@ main .menu-languages {
   min-height: 50px;
   bottom: 0;
   padding-right: 50px;
-  margin: 0 auto;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 3;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   background-color: rgba(255, 255, 255, 0.95);
 }
@@ -118,6 +281,10 @@ main .menu-languages a.arrow {
 }
 main .menu-languages a.arrow::after {
   right: 100%;
+}
+
+footer {
+  padding-bottom: 80px;
 }
 
 @media screen and (max-width: 1000px) {
