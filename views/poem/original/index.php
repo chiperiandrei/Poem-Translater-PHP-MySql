@@ -15,7 +15,7 @@ if (Session::exists('user_id')) {
     <div class="container">
         <section class="poem">
             <div class="control">
-                <a href="<?php echo $this->poem_header['title']; ?>/share/wordpress">Share <i class="fab fa-wordpress"></i></i></a>
+                <button id="sharewordpress">Share <i class="fab fa-wordpress"></i></i></button>
                 <a href="">Translate <i class="fas fa-language"></i></a>
             </div>
             <h1 class="poem-title">
@@ -126,5 +126,7 @@ if (Session::exists('user_id')) {
 </main>
 
 <script src="../../../public/js/poem.js"></script>
-
+<script>
+    var poemTitle = '<?php echo $this->poem_header['title']; ?>';
+</script>
 <?php require_once('views/components/footer.php'); ?>

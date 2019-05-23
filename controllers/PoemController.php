@@ -350,6 +350,8 @@ class PoemController extends Controller
         curl_exec($process);
         curl_close($process);
 
+
+/*
         $options = array(
             'http' =>
                 array(
@@ -378,7 +380,7 @@ class PoemController extends Controller
             false,
             $context
         );
-        $response = json_decode($response);
+        $response = json_decode($response);*/
 
     }
 }
