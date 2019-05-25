@@ -7,56 +7,71 @@ require_once('models/UserModel.php');
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
 
         $this->model = new UserModel();
     }
 
-    public function index()
-    {
+    public function index() {
         Session::set('current_page', 'contact');
 
         $this->view->render('user/index');
     }
 
-    /**
-     * @param $user
-     */
-    public function userInfo($user)
-    {
-        $this->view->avatar = [];
-        $this->view->userInformation = [];
-        if ($this->model->verifyUsername($user)) {
+    public function loadUserData($username) {
+        $check = $this->model->loadUserData($username);
 
-            $this->view->userInformation = $this->model->selectAllUserInfo($user);
-
-            $this->view->avatar = $this->model->getAvatar();
-
-            $this->view->poems = $this->packPoems(
-                $this->model->loadPoems(),
-                $this->view->userInformation['USERNAME']
-            );
-
-        } else {
-            http_response_code(404);
-            require_once('views/errors/404.php');
-            exit();
+        if ($check == null) {
+            return false;
         }
+
+        $this->view->user = $this->packUser($check);
+
+        $this->view->poems = $this->packPoems($check);
+
+        return true;
     }
 
-    private function packPoems($header, $username)
-    {
+    private function packUser($data) {
+        $result = [];
+
+        $result['id'] = $data['ID'];
+        $result['username'] = $data['USERNAME'];
+        $result['first_name'] = $data['FIRST_NAME'];
+        $result['last_name'] = $data['LAST_NAME'];
+        $result['complete_name'] = $data['FIRST_NAME'] . ' ' . $data['LAST_NAME'];
+        $result['email'] = $data['EMAIL'];
+
+        $avatar_path = $this->model->loadAvatar($result['id']);
+
+        ($avatar_path === null
+            ? $avatar_path = 'storage/users/default/avatar.png'
+            : $avatar_path = 'storage/users/' . $result['username'] . '/' . $avatar_path
+        );
+
+        $avatar_type = pathinfo($avatar_path, PATHINFO_EXTENSION);
+        $avatar_data = file_get_contents($avatar_path);
+        $avatar_image = 'data:image/' . $avatar_type . ';base64,' . base64_encode($avatar_data);
+
+        $result['avatar_path'] = $avatar_path;
+        $result['avatar'] = $avatar_image;
+
+        return $result;
+    }
+
+    private function packPoems($data) {
         $result = [];
         $i = 0;
 
-        if ($header != null) {
-            foreach ($header as $poem) {
-                $result[$i]['title'] = $poem['TITLE'];
-                $title = str_replace(' ', '+', $poem['TITLE']);
-                $result[$i]['link'] = '/poem/' . strtolower($poem['LANGUAGE']) . '/' . $title . '/' . $username;
-                $result[$i]['language'] = ($poem['LANGUAGE'] === 'EN' ? 'gb' : strtolower($poem['LANGUAGE']));
+        $translations = $this->model->loadUserTranslations($data['ID']);
+
+        if ($translations != null) {
+            foreach ($translations as $translation) {
+                $result[$i]['title'] = $translation['TITLE'];
+                $title = str_replace(' ', '+', $translation['TITLE']);
+                $result[$i]['link'] = '/poem/' . strtolower($translation['LANGUAGE']) . '/' . $title . '/' . $data['USERNAME'];
+                $result[$i]['language'] = ($translation['LANGUAGE'] === 'EN' ? 'gb' : strtolower($translation['LANGUAGE']));
                 $i++;
             }
         } else {

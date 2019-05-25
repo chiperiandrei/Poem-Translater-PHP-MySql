@@ -15,6 +15,7 @@ main .container > .photo {
   grid-area: avatar;
   text-align: center;
   width: 100%;
+  height: auto;
   margin-top: 30px;
 }
 main .container > .photo form > div {
@@ -101,8 +102,8 @@ main .container > .translate ol li a {
 main .container > .translate ol li a:hover {
   text-decoration: underline;
 }
-main .container > .translate ol .no-translation {
-  padding-top: 5px;
+main .container > .translate .no-translation {
+  padding-top: 10px;
 }
 
 @media screen and (max-width: 1000px) {

@@ -1,5 +1,3 @@
-<?php if (Session::exists('user_id')) : ?>
-
 <?php require_once('views/components/meta.php'); ?>
 
 <link rel="stylesheet" href="/public/css/main.css">
@@ -77,12 +75,5 @@
 </main>
 
 <script src="/public/js/settings.js" type="text/javascript"></script>
+
 <?php require_once('views/components/footer.php'); ?>
-
-<?php else:
-    http_response_code(404);
-    require_once('views/errors/404.php');
-    exit();
-?>
-
-<?php endif; ?>

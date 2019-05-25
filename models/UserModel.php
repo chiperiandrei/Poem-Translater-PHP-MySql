@@ -5,26 +5,26 @@ require_once('libraries/Model.php');
 
 class UserModel extends Model
 {
-    public $id;
-
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function selectAllUserInfo($username)
+    public function loadUserData($username)
     {
-        $SQL = 'SELECT ID,FIRST_NAME, LAST_NAME, USERNAME FROM USERS WHERE USERNAME="' . $username . '"';
+        $SQL = 'SELECT ID, EMAIL, FIRST_NAME, LAST_NAME, USERNAME FROM users WHERE USERNAME = "' . $username . '"';
         $statement = $this->db->prepare($SQL);
         $statement->execute();
-        $result = $statement->fetch();
-        $this->id = $result['ID'];
-        return $result;
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            return $result;
+        }
+        return null;
     }
 
-    public function getAvatar()
+    public function loadAvatar($user_id)
     {
-        $SQL = 'SELECT PATH FROM user_images JOIN users ON ID_USER =' . $this->id;
+        $SQL = 'SELECT PATH FROM user_images JOIN users ON ID_USER = ' . $user_id;
 
         $result = $this->db->query($SQL);
 
@@ -33,25 +33,15 @@ class UserModel extends Model
             return $result['PATH'];
         }
 
-        return;
+        return null;
     }
 
-    public function verifyUsername($username)
-    {
-        $SQL = 'SELECT * FROM USERS WHERE USERNAME="' . $username . '"';
-
-        $statement = $this->db->prepare($SQL);
-
-        $statement->execute();
-
-        return $statement->rowCount() == 0 ? false : true;
-    }
-
-    public function loadPoems()
+    public function loadUserTranslations($user_id)
     {
         $SQL = 'SELECT p.TITLE, t.LANGUAGE FROM translations t 
                 JOIN poems p ON p.ID = t.ID_POEM
-                WHERE t.ID_USER = ' . $this->id;
+                WHERE t.ID_USER = ' . $user_id . '
+                ORDER BY t.LANGUAGE, p.TITLE';
 
         $statement = $this->db->prepare($SQL);
 

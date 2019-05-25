@@ -84,7 +84,8 @@ class PoemModel extends Model
         $statement->execute();
 
         if ($statement->rowCount() < 1) {
-            return;
+            // return;
+            return null;
         }
 
         $this->poem_title = $poem_title;

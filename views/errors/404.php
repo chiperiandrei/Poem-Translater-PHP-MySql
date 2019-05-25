@@ -1,10 +1,10 @@
-<?php require_once('views/components/meta.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/config/constants.php'); ?>
 
-<?php $URL = "http://$_SERVER[HTTP_HOST]"; ?>
+<?php require_once(PT_ROOT . '/views/components/meta.php'); ?>
 
-<link rel="stylesheet" href="/public/css/error.css">
+<link rel="stylesheet" href="<?php echo PT_DOMAIN; ?>/public/css/error.css">
 
-<?php require_once('views/errors/components/header.php'); ?>
+<?php require_once(PT_ROOT . '/views/errors/components/header.php'); ?>
 
 <main>
     <div class="container">
@@ -13,4 +13,4 @@
     </div>
 </main>
 
-<?php require_once('views/components/footer.php'); ?>
+<?php require_once(PT_ROOT . '/views/components/footer.php'); ?>

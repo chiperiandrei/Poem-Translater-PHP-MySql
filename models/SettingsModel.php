@@ -51,6 +51,16 @@ class SettingsModel extends Model
         }
     }
 
+    public function deletePhoto($user_id)
+    {
+        $SQL = 'DELETE FROM user_images WHERE ID_USER = ' . $user_id;
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+    }
+
+
     public function verifyUsername($new_username)
     {
         $SQL = 'SELECT * FROM users WHERE username="' . $new_username . '"';

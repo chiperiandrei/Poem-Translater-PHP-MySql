@@ -28,16 +28,32 @@ class SettingsController extends Controller
             $target_file = 'storage/users/' . Session::get('username') . '/' . $file;
 
             if(isset($_POST["submit"])) {
-                if (Session::get('avatar') == '/storage/users/default/avatar.png') {
-                    mkdir('storage/users/' . Session::get('username'));
-                } else {
-                    unlink('./' . Session::get('avatar'));
-                }
-                move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-                Session::print('avatar');
-                Session::set('avatar', $target_file);
+                if ($file) {
+                    // if chosen file exists
+                    if (Session::get('avatar_path') == 'storage/users/default/avatar.png') {
+                        // if old avatar file was the default one
+                        mkdir('storage/users/' . Session::get('username'));
+                    } else {
+                        // if old avatar was custom
+                        unlink(Session::get('avatar_path'));
+                    }
+                    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+                    $avatar_path = $target_file;
 
-                $this->model->updatePhoto($file, Session::get('user_id'));
+                    $this->model->updatePhoto($file, Session::get('user_id'));
+                } else {
+                    unlink(Session::get('avatar_path'));
+                    rmdir('storage/users/' . Session::get('username'));
+                    $avatar_path = 'storage/users/default/avatar.png';
+                    $this->model->deletePhoto(2);
+                }
+
+                $avatar_type = pathinfo($avatar_path, PATHINFO_EXTENSION);
+                $avatar_data = file_get_contents($avatar_path);
+                $avatar_image = 'data:image/' . $avatar_type . ';base64,' . base64_encode($avatar_data);
+
+                Session::set('avatar_path', $avatar_path);
+                Session::set('avatar', $avatar_image);
             }
         } else if ($URL[1] == 'edit-info') {
             $new_username = $_POST['username'];

@@ -11,16 +11,18 @@ class IndexModel extends Model
 
     public function loadAvatar()
     {
-        $SQL = 'SELECT PATH FROM user_images JOIN users ON ID_USER = ' . Session::get('user_id');
+        $SQL = 'SELECT PATH FROM user_images WHERE ID_USER = ' . Session::get('user_id');
 
-        $result = $this->db->query($SQL);
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            $result = $result->fetch();
             return $result['PATH'];
         }
 
-        return;
+        return null;
     }
 
     public function loadPoemsHeader()

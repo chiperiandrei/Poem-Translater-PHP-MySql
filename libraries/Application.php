@@ -5,7 +5,7 @@ require_once('models/ApplicationModel.php');
 
 class Application
 {
-    private $current_controller;
+    private $controller;
     private $model;
 
     public function __construct()
@@ -16,109 +16,105 @@ class Application
         $this->model = new ApplicationModel();
         $this->model->generateRSS();
 
-        if (isset($_GET['url'])) {
-            $URL = explode('/', $_GET['url']);
+        if (isset($_GET['URL'])) {
+            $URLs = explode('/', $_GET['URL']);
         } else {
-            $URL[0] = 'index';
+            $URLs[0] = 'index';
         }
 
-        $URL[0] = ucwords(strtolower($URL[0])) . 'Controller';
+        $CustomController = ucwords(strtolower($URLs[0])) . 'Controller';
 
-        if (file_exists('controllers/' . $URL[0] . '.php')) {
+        if (file_exists("controllers/$CustomController.php")) {
+            require_once("controllers/$CustomController.php");
+            $this->controller = new $CustomController();
+            $count = count($URLs);
 
-            require_once('controllers/' . $URL[0] . '.php');
+            switch ($CustomController) {
+                // Public pages
+                case 'LoginController':
+                    if ($count >= 2) {
+                        $this->useLoginController($URLs);
+                        break;
+                    } else if ($count == 1) {
+                        break;
+                    }
 
-            $controller = new $URL[0]();
-            $this->current_controller = $controller;
+                case 'IndexController':
+                    break;
 
-            $count = count($URL);
-            // var_dump($URL);
-            // exit();
+                case 'PoemController':
+                    if ($count >= 3) {
+                        $this->usePoemController($URLs);
+                        break;
+                    } else {
+                        $this->returnError(404);
+                    }
 
-            switch ($count) {
-                case 1:
-                    if ($URL[0] === 'FavoritesController') {
-                        if (!Session::exists('user_id')) {
-                            http_response_code(404);
-                            require_once('views/errors/404.php');
-                            exit();
+                case 'AuthorController':
+                    if ($count == 2) {
+                        $this->useAuthorController($URLs);
+                        break;
+                    } else {
+                        $this->returnError(404);
+                    }
+
+                case 'UserController':
+                    if ($count >= 2) {
+                        $this->useUserController($URLs);
+                        break;
+                    } else if ($count == 1) {
+                        break;
+                    }
+
+                case 'ContactController':
+                    if ($count == 2) {
+                        $this->useContactController($URLs);
+                        break;
+                    } else if ($count == 1) {
+                        break;
+                    } else {
+                        $this->returnError(404);
+                    }
+
+                // Authorized pages
+                case 'SettingsController':
+                    if (Session::exists('user_id')) {
+                        if ($count >= 2) {
+                            $this->useSettingsController($URLs);
+                            break;
+                        } else if ($count == 1) {
+                            break;
                         }
-                    } else if ($URL[0] === 'AuthorController' || $URL[0] === 'UserController' || $URL[0] === 'PoemController')  {
-                        http_response_code(404);
-                        require_once('views/errors/404.php');
-                        exit();
+                    } else {
+                        $this->returnError(404);
                     }
-                    break;
 
-                case 2:
-                    if ($URL[0] === 'LoginController') {
-                        $this->useLoginController($URL);
-                    } else if ($URL[0] === 'AuthorController') {
-                        $this->useAuthorController($URL);
-                    } else if ($URL[0] === 'ContactController') {
-                        $this->useContactController($URL);
-                    } else if ($URL[0] === 'SettingsController') {
-                        $this->useSettingsController($URL);
-                    } else if ($URL[0] === 'UserController') {
-                        $this->useUserController($URL);
+                case 'FavoritesController':
+                    if (Session::exists('user_id')) {
+                        break;
                     } else {
-                        http_response_code(404);
-                        require_once('views/errors/404.php');
-                        exit();
+                        $this->returnError(404);
                     }
-                    break;
-
-                case 3:
-                    if ($URL[0] === 'PoemController') {
-                        $this->usePoemController($URL);
-                    } else {
-                        http_response_code(404);
-                        require_once('views/errors/404.php');
-                        exit();
-                    }
-                    break;
-                case 4:
-                    if ($URL[0] === 'PoemController') {
-                        $this->usePoemController($URL);
-                    } else {
-                        http_response_code(404);
-                        require_once('views/errors/404.php');
-                        exit();
-                    }
-                    break;
-                case 5:
-                    if ($URL[0] === 'PoemController') {
-                        $this->usePoemController($URL);
-                    } else {
-                        http_response_code(404);
-                        require_once('views/errors/404.php');
-                        exit();
-                    }
-                    break;
-
-                default:
-                    http_response_code(404);
-                    require_once('views/errors/404.php');
-                    exit();
             }
 
-            $controller->index();
+            $this->controller->index();
 
         } else {
-            http_response_code(404);
-            require_once('views/errors/404.php');
-            exit();
+            $this->returnError(404);
         }
     }
 
-    private function useLoginController($URL)
-    {
-        $controller = new $URL[0]();
+    private function returnError($code) {
+        http_response_code($code);
+        require_once("views/errors/$code.php");
+        exit();
+    }
 
+    private function useLoginController($URLs) {
         // user arrived at login page
-        if ($URL[1] == 'connect') {
+        if ($URLs[1] == 'connect') {
             // user tries to login / connect
-            if ($controller->connect()) {
+            if ($this->controller->connect()) {
                 Session::unset('error-login');
                 header('Location: /');
             } else {
@@ -126,15 +122,14 @@ class Application
                 Session::set('error-login', 'Your email or password was incorrect. Please try again.');
                 header('Location: /login');
             }
-        } else if ($URL[1] == 'disconnect') {
-
+        } else if ($URLs[1] == 'disconnect') {
             // user wants to disconnect
-            $controller->disconnect();
+            $this->controller->disconnect();
             header('Location: /login');
 
-        } else if ($URL[1] == 'create-account') {
+        } else if ($URLs[1] == 'create-account') {
             // user want to create an account
-            if ($controller->sign_up()) {
+            if ($this->controller->sign_up()) {
                 Session::unset('error-register');
                 Session::unset('email-is-used');
                 Session::unset('password-not-same');
@@ -147,9 +142,9 @@ class Application
                 Session::set('email-is-used', 'Sorry! The email or the username is unavailable');
                 header('Location: /login');
             }
-        } else if ($URL[1] == 'forgot-password') {
+        } else if ($URLs[1] == 'forgot-password') {
             // user wants to discover his password
-            if ($controller->forgot()) {
+            if ($this->controller->forgot()) {
                 Session::unset('error-forgot');
                 header('Location: /login');
             } else {
@@ -163,72 +158,64 @@ class Application
         }
     }
 
-    private function usePoemController($URL)
-    {
-        switch (count($URL)) {
-            case 3:
-                $this->current_controller->loadPoemOrTranslations($URL[2], $URL[1]);
-                break;
-
-            case 4:
-                if ($URL[3] == 'add-comment') {
-                    $this->current_controller->addComment($URL[2], $URL[1]);
-                    $poem_title = str_replace(' ', '+', $URL[2]);
-                    header('Location: /poem/'. $URL[1] . '/' . $poem_title);
-                } else if (!empty($URL[3])) {
-                    $this->current_controller->loadTranslation($URL[2], $URL[1], $URL[3]);
-                } else {
-                    http_response_code(404);
-                    require_once('views/errors/404.php');
-                    exit();
-                }
-                break;
-
-            case 5:
-                if ($URL[3] == 'delete-comment') {
-                    $this->current_controller->deleteComment($URL[2], $URL[1], $URL[4]);
-                    $poem_title = str_replace(' ', '+', $URL[2]);
-                    header('Location: /poem/'. $URL[1] . '/' . $poem_title);
-                } else if ($URL[4] == 'wordpress') {
-                    $this->current_controller->shareWordpress($URL[1], $URL[2]);
-                }
-                break;
+    private function usePoemController($URLs) {
+        $count = count($URLs);
+        if ($count == 3) {
+            $this->controller->loadPoemOrTranslations($URLs[2], $URLs[1]);
+        } else if ($count == 4) {
+            if ($URLs[3] == 'add-comment') {
+                $this->controller->addComment($URLs[2], $URLs[1]);
+                header("Location: /poem/$URLs[1]$URLs[2]");
+            } else if ($this->controller->loadTranslation($URLs[2], $URLs[1], $URLs[3]) == false) {
+                $this->returnError(404);
+            }
+        } else if ($count == 5) {
+            if ($URLs[3] == 'delete-comment') {
+                $this->controller->deleteComment($URLs[2], $URLs[1], $URLs[4]);
+                header("Location: /poem/$URLs[1]/$URLs[2]");
+            } else if ($URLs[4] == 'wordpress') {
+                $this->controller->shareWordpress($URLs[1], $URLs[2]);
+            } else {
+                header("Location: /poem/$URLs[1]/$URLs[2]/$URLs[3]");
+            }
+        } else {
+            header("Location: /poem/$URLs[1]/$URLs[2]/$URLs[3]");
         }
     }
 
-    private function useContactController($URL)
-    {
-        if ($URL[1] == 'contact' && count($URL) == 2) {
-            $this->current_controller->contact();
+    private function useAuthorController($URLs) {
+        if (!empty($URLs[1])) {
+            if ($this->controller->loadAuthorData($URLs[1]) == false) {
+                $this->returnError(404);
+            }
+        } else {
+            $this->returnError(404);
+        }
+    }
+
+    private function useUserController($URLs) {
+        if (count($URLs) == 2) {
+            if ($this->controller->loadUserData($URLs[1]) == false) {
+                $this->returnError(404);
+            }
+        } else {
+            header("Location: /$URLs[0]/$URLs[1]");
+        }
+    }
+
+    private function useContactController($URLs) {
+        if ($URLs[1] == 'contact') {
+            $this->controller->contact();
             header('Location: /contact');
         } else {
-            http_response_code(404);
-            require_once('views/errors/404.php');
-            exit();
+            $this->returnError(404);
         }
     }
 
-    private function useAuthorController($URL)
-    {
-        if (!empty($URL[1])) {
-            $this->current_controller->loadAuthor($URL[1]);
-        } else {
-            http_response_code(404);
-            require_once('views/errors/404.php');
-            exit();
+    private function useSettingsController($URLs) {
+        if (count($URLs) == 2) {
+            $this->controller->settings($URLs);
         }
-    }
-
-    private function useSettingsController($URL)
-    {
-        $this->current_controller->settings($URL);
         header('Location: /settings');
     }
-
-    private function useUserController($URL)
-    {
-        $this->current_controller->userInfo($URL[1]);
-    }
-
-
 }

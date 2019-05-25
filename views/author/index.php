@@ -15,21 +15,23 @@ if (Session::exists('user_id')) {
     <div class="container">
         <section class="poem">
             <div class="poem-title">
-                <?php echo $this->author_info['NUME']; ?>
+                <a href="<?php echo $this->author['link']; ?>">
+                    <?php echo $this->author['name']; ?>
+                </a>
             </div>
             <div class="poem-author">
-                <?php echo $this->author_info['DATA_NASTERE']; ?> - <?php echo $this->author_info['DATA_DECEDARE']; ?>
+                <?php echo $this->author['birth_date']; ?> - <?php echo $this->author['death_date']; ?>
             </div>
-            <?php if ($this->photo['IMAGINE']) : ?>
+            <?php if ($this->author['avatar_path'] != null) : ?>
             <div class="author-picture">
-                <img src="/storage/authors/<?php echo $this->photo['IMAGINE']; ?>"
-                     alt="<?php echo $this->author_info['NUME']; ?>";
+                <img src="<?php echo $this->author['avatar']; ?>"
+                     alt="<?php echo $this->author['name']; ?>";
             </div>
             <?php endif; ?>
             <div class="author-poems">
                 <div class="intro">List of poems:</div>
                 <ol>
-                    <?php foreach ($this->poems_by_author as $poem) :
+                    <?php foreach ($this->poems as $poem) :
                         echo '<li><a href="' . $poem['link'] . '">' . $poem['title'] . '</a></li>';
                     endforeach; ?>
                 </ol>

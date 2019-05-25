@@ -10,41 +10,39 @@ class AuthorModel extends Model
         parent::__construct();
     }
 
-    public function showAllPoems($author)
+    public function loadAuthorData($author_name)
     {
-        $author = str_replace('-', ' ', $author);
-        $SQL = 'SELECT p.title,p.LANGUAGE as LIMBA FROM poems p join authors a on p.ID_AUTHOR = a.ID where a.NAME="'.$author .'"';
+        $SQL = 'SELECT ID, NAME, BIRTH_DATE, DEATH_DATE FROM authors WHERE NAME = "' . $author_name . '"';
         $statement = $this->db->prepare($SQL);
-
         $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result == false) {
+            return null;
+        }
+        return $result;
+    }
 
+    public function loadAuthorPhoto($author_id){
+        $SQL = 'SELECT PATH FROM author_images WHERE ID_AUTHOR = ' . $author_id;
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result == false) {
+            return null;
+        }
+        return $result['PATH'];
+    }
+
+    public function loadPoems($author_id) {
+        $SQL = 'SELECT ID, TITLE, LANGUAGE FROM poems WHERE ID_AUTHOR = ' . $author_id;
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if ($result == false) {
+            return null;
+        }
         return $result;
 
-    }
-
-    public function loadAuthorInfo($author)
-    {
-
-        $SQL = 'SELECT NAME AS NUME,BIRTH_DATE AS DATA_NASTERE, DEATH_DATE as DATA_DECEDARE FROM authors WHERE NAME="' .$author.'"';
-
-
-        $statement = $this->db->prepare($SQL);
-
-        $statement->execute();
-
-        $result = $statement->fetch();
-        return $result;
-    }
-    public function loadAuthorPhoto($author){
-        $SQL = 'SELECT PATH AS IMAGINE FROM author_images JOIN authors WHERE ID=ID_AUTHOR AND authors.NAME="'.$author.'"';
-
-        $statement = $this->db->prepare($SQL);
-
-        $statement->execute();
-
-        $result = $statement->fetch();
-        return $result;
     }
 
 }

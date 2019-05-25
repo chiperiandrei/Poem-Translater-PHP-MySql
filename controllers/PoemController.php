@@ -98,6 +98,10 @@ class PoemController extends Controller
             $this->model->countPoemStrophes()
         );
 
+        if ($this->view->poem['id'] == null) {
+            return false;
+        }
+
         /**
          * @var user
          * Stores data about the person how wrote the translation
@@ -107,8 +111,6 @@ class PoemController extends Controller
             $this->model->selectUser($username),
             $username
         );
-
-        // var_dump($this->view->user);
 
         /**
          * @var translation
@@ -129,6 +131,8 @@ class PoemController extends Controller
             $this->model->loadTranslationBody($this->view->translation['id']),
             $this->view->poem['size']
         );
+
+        return true;
     }
 
     private function packHeader($header)
@@ -185,7 +189,6 @@ class PoemController extends Controller
     }
 
     private function packComments($comments) {
-
         if ($comments) {
             $result = [];
             $i = 0;
@@ -195,10 +198,15 @@ class PoemController extends Controller
                 $result[$i]['user']['username'] = $comment['USERNAME'];
                 $result[$i]['user']['link'] = '/user/' . $comment['USERNAME'];
                 if ($comment['PATH'] == null) {
-                    $result[$i]['user']['avatar'] = '/storage/users/default/avatar.png';
+                    $result[$i]['user']['avatar_path'] = 'storage/users/default/avatar.png';
                 } else {
-                    $result[$i]['user']['avatar'] = '/storage/users/' . $comment['USERNAME'] . '/' . $comment['PATH'];
+                    $result[$i]['user']['avatar_path'] = 'storage/users/' . $comment['USERNAME'] . '/' . $comment['PATH'];
                 }
+                $avatar_path = $result[$i]['user']['avatar_path'];
+                $avatar_type = pathinfo($avatar_path, PATHINFO_EXTENSION);
+                $avatar_data = file_get_contents($avatar_path);
+                $avatar_image = 'data:image/' . $avatar_type . ';base64,' . base64_encode($avatar_data);
+                $result[$i]['user']['avatar'] = $avatar_image;
                 $result[$i]['text'] = $comment['TEXT'];
                 $i++;
             }

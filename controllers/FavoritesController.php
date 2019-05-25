@@ -18,7 +18,6 @@ class FavoritesController extends Controller
         $this->model = new FavoritesModel();
 
         if (Session::exists('user_id')) {
-            Session::set('avatar', $this->constructAvatarPath());
 
             $this->view->poems = $this->packPoem(
                 $this->model->loadPoemsHeader(),
@@ -34,17 +33,6 @@ class FavoritesController extends Controller
         Session::set('current_page', 'favorites');
 
         $this->view->render('favorites/index');
-    }
-
-    private function constructAvatarPath()
-    {
-        $avatar_path = $this->model->loadAvatar();
-
-        if ($avatar_path) {
-            return '/storage/users/' . Session::get('username') . '/' . $avatar_path;
-        }
-
-        return '/storage/users/default/avatar.png';
     }
 
     private function packPoem($headers, $bodies)
