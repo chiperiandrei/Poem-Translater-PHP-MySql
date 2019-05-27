@@ -45,10 +45,20 @@ class PoemController extends Controller
                 $this->model->loadAvailableTranslations()
             );
 
-
             $this->view->poem_comments = $this->packComments(
                 $this->model->loadComments($this->view->poem_header['id'])
             );
+
+            if (Session::exists('user_id')) {
+                $this->view->translation = $this->packCustom(
+                    $this->model->loadUserTranslation($this->view->poem_header['id'], Session::get('user_id'))
+                );
+
+                $this->view->languages = $this->packLanguages(
+                    $this->model->loadLanguages(),
+                    $this->view->translation
+                );
+            }
 
         } else if ($translations = $this->model->loadTranslations($poem_title, $poem_language)) {
             $this->view_path = 'translations';
@@ -80,6 +90,7 @@ class PoemController extends Controller
      * @param $username = $USERNAME
      *
      * This function store all the data needed for a page with a translation
+     * @return true/false;
      */
     public function loadTranslation($poem_title, $poem_language, $username)
     {
@@ -153,8 +164,11 @@ class PoemController extends Controller
     {
         $poem = [];
 
+        $i = 0;
         foreach ($header as $strophe) {
-            array_push($poem, $strophe[0]);
+            $poem[$i]['text'] = $strophe[0];
+            $poem[$i]['count'] = substr_count($strophe[0], "\n") + 1;
+            $i++;
         }
 
         return $poem;
@@ -237,6 +251,99 @@ class PoemController extends Controller
                 $this->model->removeComment($poem_id, $user_id, $comment_id);
             }
         }
+    }
+
+    private function fountInTranslations($found, $translations) {
+        foreach ($translations as $translation) {
+            if ($translation == $found) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function packLanguages($languages, $translations) {
+        preg_match("/^enum\(\'(.*)\'\)$/", $languages['Type'], $matches);
+        $enum = explode("','", $matches[1]);
+
+        $result = [];
+
+        $curl_handle = curl_init();
+        curl_setopt($curl_handle, CURLOPT_URL,"https://restcountries.eu/rest/v2/alpha/ro");
+        curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT,3);
+        curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER,1);
+
+        $i = 0;
+
+        foreach ($enum as $language) {
+            $iso_code = ($language == 'EN' ? 'gb' : strtolower($language));
+
+            if ($this->fountInTranslations(strtolower($language), $translations) == false) {
+                curl_setopt($curl_handle, CURLOPT_URL, "https://restcountries.eu/rest/v2/alpha/$iso_code");
+
+                $answer = curl_exec($curl_handle);
+                $array = json_decode($answer, true);
+
+                if (isset($array['languages'])) {
+                    $array = $array['languages'][0];
+                    $result[$i]['en_name'] = $array['name'];
+                    $result[$i]['native_name'] = $array['nativeName'];
+                } else {
+                    $result[$i]['en_name'] = $iso_code;
+                    $result[$i]['native_name'] = '';
+                }
+
+                $result[$i]['name'] = $iso_code;
+                $result[$i]['flag'] = 'flag flag-' . $iso_code;
+                $i++;
+            }
+        }
+
+        curl_close($curl_handle);
+
+        return $result;
+    }
+
+    private function packCustom($languages) {
+        $result = [];
+
+        if ($languages != null) {
+            foreach ($languages as $language) {
+                array_push($result, strtolower($language['LANGUAGE']));
+            }
+        }
+
+        return $result;
+    }
+
+    public function addTranslation() {
+        $user_id = Session::get('user_id');
+        $poem = Session::get('poem_data');
+        $count = Session::get('poem_strophes_count');
+        $strophes = [];
+
+        $toggle = false;
+        for ($i = 0; $i < $count; $i++) {
+            if (!empty($_POST["strophe-$i"])) {
+                $toggle = true;
+            }
+        }
+
+        if ($toggle == true) {
+            for ($i = 0; $i < $count; $i++) {
+                array_push($strophes, $_POST["strophe-$i"]);
+            }
+
+            $poem['translation']['count'] = $count;
+            $poem['translation']['language'] = ($_POST['language'] == 'gb' ? 'EN' : strtoupper($_POST['language']));
+            $poem['translation']['strophes'] = $strophes;
+
+            $this->model->addTransition($poem, $user_id);
+        }
+
+        Session::unset('poem_data');
+        Session::unset('poem_strophes_count');
     }
 
     // #cleanCodeBelow

@@ -166,6 +166,9 @@ class Application
             if ($URLs[3] == 'add-comment') {
                 $this->controller->addComment($URLs[2], $URLs[1]);
                 header("Location: /poem/$URLs[1]/$URLs[2]");
+            } else if ($URLs[3] == 'add-translation') {
+                $this->controller->addTranslation();
+                header("Location: /poem/$URLs[1]/$URLs[2]");
             } else if ($this->controller->loadTranslation($URLs[2], $URLs[1], $URLs[3]) == false) {
                 $this->returnError(404);
             }

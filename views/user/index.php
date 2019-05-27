@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/public/css/main.css">
 <link rel="stylesheet" href="/public/css/user.css">
 
-<?php require_once('views/components/header-generic.php'); ?>
+<?php require_once('views/components/header.php'); ?>
 
 <main>
     <div class="container">

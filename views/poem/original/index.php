@@ -14,10 +14,12 @@ if (Session::exists('user_id')) {
 <main>
     <div class="container">
         <section class="poem">
+            <?php if(Session::exists('user_id')) : ?>
             <div class="control">
-                <button id="sharewordpress">Share <i class="fab fa-wordpress"></i></i></button>
-                <a href="">Translate <i class="fas fa-language"></i></a>
+                <button onclick="shareWordpress()" id="sharewordpress">Share <i class="fab fa-wordpress"></i></i></button>
+                <button onclick="showAddTranslation()">Translate <i class="fas fa-language"></i></button>
             </div>
+            <?php endif; ?>
             <h1 class="poem-title">
                 <a href="<?php echo $this->poem_header['link']; ?>">
                     <?php echo $this->poem_header['title']; ?>
@@ -29,78 +31,13 @@ if (Session::exists('user_id')) {
                 </a>
             </div>
             <div class="poem-strophes">
-                <?php foreach($this->poem_body as $poem_strophe) :
-                    echo "<pre>$poem_strophe</pre>";
-                endforeach; ?>
+                <?php foreach($this->poem_body as $poem_strophe) : ?>
+                    <pre><?php echo $poem_strophe['text']; ?></pre>
+                <?php endforeach; ?>
             </div>
         </section>
     </div>
-    <div class="comments">
-        <section>
-            <?php if ($this->poem_comments) : ?>
-                <?php foreach ($this->poem_comments as $comment) : ?>
-                <div class="comment">
-                    <div class="avatar">
-                        <img src="<?php echo $comment['user']['avatar']; ?>" alt="<?php echo $comment['user']['name']; ?>">
-                    </div>
-                    <div class="name">
-                        <a href="<?php echo $comment['user']['link']; ?>">
-                            <?php echo $comment['user']['name']; ?>
-                        </a>
-                    </div>
-                    <div class="username">
-                        <a href="<?php echo $comment['user']['link']; ?>">
-                            (<?php echo $comment['user']['username']; ?>)
-                        </a>
-                    </div>
-                    <?php if (Session::exists('username')) : ?>
-                        <?php if ($comment['user']['username'] == Session::get('username')) : ?>
-                            <div class="delete">
-                                <a href="<?php echo $this->poem_header['link']; ?>/delete-comment/<?php echo $comment['id'] ?>">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                    <div class="text">
-                        <?php echo $comment['text']; ?>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="no-comment">
-                    There is no comment yet.
-                </div>
-            <?php endif; ?>
-        </section>
-        <section>
-            <?php if (Session::exists('user_id')) : ?>
-                <form action="<?php echo $this->poem_header['link']; ?>/add-comment" method="post">
-                    <div class="add-comment">
-                        <div class="avatar">
-                            <img src="<?php Session::print('avatar'); ?>" alt="<?php Session::print('complete_name'); ?>">
-                        </div>
-                        <div class="name">
-                            <a href="<?php Session::print('user_link'); ?>">
-                                <?php Session::print('complete_name'); ?>
-                            </a>
-                        </div>
-                        <div class="username">
-                            <a href="<?php Session::print('user_link'); ?>">
-                                (<?php Session::print('username'); ?>)
-                            </a>
-                        </div>
-                        <div class="input">
-                            <textarea name="add-comment" id="add-comment"></textarea>
-                        </div>
-                        <div class="submit">
-                            <input type="submit" value="Add">
-                        </div>
-                    </div>
-                </form>
-            <?php endif; ?>
-        </section>
-    </div>
+    <?php require_once('views/poem/components/comments.php'); ?>
     <nav class="menu-languages">
         <a class="active"
            href="<?php echo $this->poem_header['link']; ?>">
@@ -125,8 +62,15 @@ if (Session::exists('user_id')) {
     </div>
 </main>
 
+<?php require_once('views/poem/components/translation.php'); ?>
+
 <script src="../../../public/js/poem.js"></script>
+
+<?php if (Session::exists('user_id')) : ?>
 <script>
-    var poemTitle = '<?php echo $this->poem_header['title']; ?>';
+    let poemTitle = '<?php echo str_replace("'", "\'", $this->poem_header['title']); ?>';
 </script>
+<?php endif; ?>
+
+
 <?php require_once('views/components/footer.php'); ?>

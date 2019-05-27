@@ -138,6 +138,52 @@ class PoemModel extends Model
         return $result;
     }
 
+    public function loadLanguages() {
+        $SQL = "SHOW COLUMNS FROM poems LIKE 'LANGUAGE'";
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function loadUserTranslation($poem_id, $user_id) {
+        $SQL = 'SELECT LANGUAGE FROM translations WHERE ID_POEM = ' . $poem_id . ' AND ID_USER = ' . $user_id;
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($result)) {
+            return null;
+        }
+        return $result;
+    }
+
+    public function addTransition($poem_data, $user_id) {
+        $SQL = 'INSERT INTO translations (ID_POEM, ID_USER, RATING, LANGUAGE) ' .
+               'VALUES ("' . $poem_data['id'] . '", "' . $user_id . '", "0", "' . $poem_data['translation']['language'] . '")';
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        $SQL = 'SELECT ID FROM translations WHERE ID_POEM = ' . $poem_data['id'] . ' AND ID_USER = ' . $user_id . ' AND ' .
+               'LANGUAGE = "' . $poem_data['translation']['language'] . '"';
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+        $translation_id = $statement->fetch(PDO::FETCH_ASSOC);
+        $translation_id = $translation_id['ID'];
+        $nth = 1;
+
+        foreach ($poem_data['translation']['strophes'] as $strophe) {
+            if (!empty($strophe)) {
+                $SQL = 'INSERT INTO translation_strophes (ID_TRANSLATION, NTH, TEXT) ' .
+                    'VALUES (' . $translation_id . ', ' . $nth . ', "' . $strophe . '")';
+                $statement = $this->db->prepare($SQL);
+                $statement->execute();
+            }
+            $nth++;
+        }
+    }
+
     /**
      * use countPoemStrophes() always after loadTranslationHeader($poem_title)
      */

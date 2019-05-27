@@ -9,17 +9,17 @@ function showCreateAccount() {
     firstNameElement.focus();
 
     setTimeout(() => {
-        createAccountView.style.opacity = 1;
+        createAccountView.style.opacity = '1';
     }, 200);
 }
 
 function hideCreateAccount() {
     const createAccountView = document.getElementById('create-account');
 
-    createAccountView.style.opacity = 0;
+    createAccountView.style.opacity = '0';
 
     setTimeout(() => {
-        document.body.style.overflowY = 'overflow';
+        document.body.style.overflowY = 'scroll';
         createAccountView.style.display = 'none';
     }, 200);
 }
@@ -35,17 +35,17 @@ function showForgotPassword() {
     emailElement.focus();
 
     setTimeout(() => {
-        forgotPasswordView.style.opacity = 1;
+        forgotPasswordView.style.opacity = '1';
     }, 200);
 }
 
 function hideForgotPassword() {
     const forgotPasswordView = document.getElementById('forgot-password');
 
-    forgotPasswordView.style.opacity = 0;
+    forgotPasswordView.style.opacity = '0';
 
     setTimeout(() => {
-        document.body.style.overflowY = 'overflow';
+        document.body.style.overflowY = 'scroll';
         forgotPasswordView.style.display = 'none';
     }, 200);
 }
