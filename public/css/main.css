@@ -269,13 +269,18 @@ main .container .main-poems article:hover {
   font-size: 0.9em;
 }
 .add-poem .container > form #submit {
-  display: block;
-  text-align: center;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: flex-end;
+  grid-gap: 10px;
   padding-top: 15px;
 }
-.add-poem .container > form #submit > button {
+.add-poem .container > form #submit > button, .add-poem .container > form #submit > .button {
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  padding: 15px;
+  padding: 0 10px;
+  height: 40px;
   text-align: center;
   font-family: "Roboto", sans-serif;
   font-size: 1em;
@@ -284,12 +289,11 @@ main .container .main-poems article:hover {
   background-color: #BDBDBD;
   border: 1px solid #E0E0E0;
   transition: border-color 300ms ease-in-out;
-  margin: 0 5px;
 }
-.add-poem .container > form #submit > button .fas {
+.add-poem .container > form #submit > button .fas, .add-poem .container > form #submit > .button .fas {
   padding-left: 5px;
 }
-.add-poem .container > form #submit > button:hover {
+.add-poem .container > form #submit > button:hover, .add-poem .container > form #submit > .button:hover {
   border-color: #212121;
 }
 
@@ -311,7 +315,7 @@ main .container .main-poems article:hover {
 .delete-poem .container {
   display: grid;
   width: 100%;
-  max-width: 1000px;
+  max-width: 800px;
   margin: 30px auto 0 auto;
   padding: 30px;
   background-color: #FAFAFA;
@@ -378,6 +382,205 @@ main .container .main-poems article:hover {
   padding-left: 5px;
 }
 .delete-poem .container > form .poem-name > button:hover {
+  border-color: #212121;
+}
+
+.add-author {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 30px;
+  background-color: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  overflow-y: scroll;
+  z-index: 4;
+}
+.add-author .container {
+  display: grid;
+  width: 100%;
+  max-width: 800px;
+  margin: 30px auto 0 auto;
+  padding: 30px;
+  background-color: #FAFAFA;
+}
+.add-author .container > .close-area {
+  text-align: right;
+}
+.add-author .container > .close-area > button {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+}
+.add-author .container > .close-area > button .fas {
+  padding-left: 5px;
+}
+.add-author .container > .close-area > button:hover {
+  border-color: #212121;
+}
+.add-author .container > form {
+  padding-top: 20px;
+}
+.add-author .container > form .author-name {
+  padding-bottom: 10px;
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  grid-gap: 20px;
+  align-items: center;
+}
+.add-author .container > form .author-name label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: right;
+}
+.add-author .container > form .author-name input {
+  height: 35px;
+  padding: 0 7px;
+}
+.add-author .container > form .author-dates {
+  display: grid;
+  grid-template-columns: 210px 1fr 1fr auto;
+  grid-gap: 20px;
+  align-items: center;
+}
+.add-author .container > form .author-dates label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-align: right;
+}
+.add-author .container > form .author-dates input {
+  max-width: 150px;
+  height: 35px;
+  padding: 0 7px;
+}
+.add-author .container > form .submit {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: flex-end;
+  grid-gap: 10px;
+  padding-top: 15px;
+}
+.add-author .container > form .submit > button, .add-author .container > form .submit > .button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 10px;
+  height: 40px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+}
+.add-author .container > form .submit > button .fas, .add-author .container > form .submit > .button .fas {
+  padding-left: 5px;
+}
+.add-author .container > form .submit > button:hover, .add-author .container > form .submit > .button:hover {
+  border-color: #212121;
+}
+
+.delete-author {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 30px;
+  background-color: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  overflow-y: scroll;
+  z-index: 4;
+}
+.delete-author .container {
+  display: grid;
+  width: 100%;
+  max-width: 800px;
+  margin: 30px auto 0 auto;
+  padding: 30px;
+  background-color: #FAFAFA;
+}
+.delete-author .container > .close-area {
+  text-align: right;
+}
+.delete-author .container > .close-area > button {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+}
+.delete-author .container > .close-area > button .fas {
+  padding-left: 5px;
+}
+.delete-author .container > .close-area > button:hover {
+  border-color: #212121;
+}
+.delete-author .container > form {
+  padding-top: 20px;
+}
+.delete-author .container > form .author-name {
+  display: grid;
+  grid-template-columns: auto 2fr auto;
+  padding-bottom: 20px;
+  align-items: center;
+}
+.delete-author .container > form .author-name > label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding-right: 10px;
+}
+.delete-author .container > form .author-name > select, .delete-author .container > form .author-name > select option {
+  height: 35px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  padding: 5px;
+  border: 1px solid #cdcdcd;
+}
+.delete-author .container > form .author-name > button {
+  cursor: pointer;
+  height: 35px;
+  padding: 0 10px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+  margin-left: 10px;
+}
+.delete-author .container > form .author-name > button .fas {
+  padding-left: 5px;
+}
+.delete-author .container > form .author-name > button:hover {
   border-color: #212121;
 }
 

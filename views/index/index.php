@@ -34,8 +34,10 @@ if (Session::exists('user_id')) {
         <section class="main-admin">
             <div class="panel">
                 <span class="info">Admin zone:</span>
-                <button onclick="showAddPoem()">Add poem <i class="fas fa-plus"></i></button>
-                <button onclick="showDeletePoem()">Delete poem <i class="fas fa-minus"></i></button>
+                <button onclick="showAddAuthor()">Add an author <i class="fas fa-user-plus"></i></button>
+                <button onclick="showDeleteAuthor()">Remove an author <i class="fas fa-user-minus"></i></button>
+                <button onclick="showAddPoem()">Add a poem <i class="fas fa-plus"></i></button>
+                <button onclick="showDeletePoem()">Delete a poem <i class="fas fa-minus"></i></button>
             </div>
         </section>
         <?php endif; ?>
@@ -111,6 +113,9 @@ if (Session::exists('user_id')) {
 
 <?php require_once('views/index/components/add-poem.php'); ?>
 <?php require_once('views/index/components/delete-poem.php'); ?>
+<?php require_once('views/index/components/add-author.php'); ?>
+<?php require_once('views/index/components/delete-author.php'); ?>
+
 
 <script src="/public/js/main.js" type="text/javascript"></script>
 

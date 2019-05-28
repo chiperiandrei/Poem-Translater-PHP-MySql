@@ -193,4 +193,16 @@ class IndexController extends Controller
     public function deletePoem() {
         $this->model->deletePoem($_POST['poem']);
     }
+
+    public function addAuthor() {
+        $author = $_POST['author-name'];
+        $b_date = (!empty($_POST['birth']) ? $_POST['birth'] : 'NULL');
+        $d_date = (!empty($_POST['death']) ? $_POST['death'] : 'NULL');
+
+        $this->model->insertAuthor($author, $b_date, $d_date);
+    }
+
+    public function deleteAuthor() {
+        $this->model->deleteAuthor($_POST['selected-author']);
+    }
 }

@@ -18,7 +18,7 @@
                     <input type="file" name="file" id="file" accept="image/*" onchange="previewFile()">
                 </div>
                 <div>
-                    <input type="submit" value="Upload Image" name="submit">
+                    <input type="submit" value="Upload / Delete avatar" name="submit">
                 </div>
             </form>
         </div>

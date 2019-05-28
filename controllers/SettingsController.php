@@ -27,7 +27,7 @@ class SettingsController extends Controller
             $file = basename($_FILES["file"]["name"]);
             $target_file = 'storage/users/' . Session::get('username') . '/' . $file;
 
-            if(isset($_POST["submit"])) {
+            if (isset($_POST["submit"])) {
                 if ($file) {
                     // if chosen file exists
                     if (Session::get('avatar_path') == 'storage/users/default/avatar.png') {
@@ -45,7 +45,7 @@ class SettingsController extends Controller
                     unlink(Session::get('avatar_path'));
                     rmdir('storage/users/' . Session::get('username'));
                     $avatar_path = 'storage/users/default/avatar.png';
-                    $this->model->deletePhoto(2);
+                    $this->model->deletePhoto(Session::get('user_id'));
                 }
 
                 $avatar_type = pathinfo($avatar_path, PATHINFO_EXTENSION);

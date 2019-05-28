@@ -280,6 +280,7 @@ main {
 
             form {
                 padding-top: 20px;
+
                 .poem-name, .poem-author, .poem-language, .strophes-count, #strophes > .strophe {
                     display: grid;
                     grid-template-columns: 1fr 2fr;
@@ -318,13 +319,18 @@ main {
                 }
 
                 #submit {
-                    display: block;
-                    text-align: center;
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    justify-content: flex-end;
+                    grid-gap: 10px;
                     padding-top: 15px;
 
-                    & > button {
+                    & > button, & > .button {
+                        display: flex;
+                        align-items: center;
                         cursor: pointer;
-                        padding: 15px;
+                        padding: 0 10px;
+                        height: 40px;
                         text-align: center;
                         font-family: 'Roboto', sans-serif;
                         font-size: 1em;
@@ -333,7 +339,6 @@ main {
                         background-color: #BDBDBD;
                         border: 1px solid #E0E0E0;
                         transition: border-color 300ms ease-in-out;
-                        margin: 0 5px;
 
                         & .fas {
                             padding-left: 5px;
@@ -364,7 +369,7 @@ main {
     .container {
         display: grid;
         width: 100%;
-        max-width: 1000px;
+        max-width: 800px;
         margin: 30px auto 0 auto;
         padding: 30px;
         background-color: #FAFAFA;
@@ -400,6 +405,231 @@ main {
                 padding-top: 20px;
 
                 .poem-name {
+                    display: grid;
+                    grid-template-columns: auto 2fr auto;
+                    padding-bottom: 20px;
+                    align-items: center;
+
+                    & > label {
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 300;
+                        text-transform: uppercase;
+                        padding-right: 10px;
+                    }
+
+                    & > select, & > select option {
+                        height: 35px;
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 400;
+                        padding: 5px;
+                        border: 1px solid #cdcdcd;
+                    }
+
+                    & > button {
+                        cursor: pointer;
+                        height: 35px;
+                        padding: 0 10px;
+                        text-align: center;
+                        font-family: 'Roboto', sans-serif;
+                        font-size: 1em;
+                        font-weight: 400;
+                        color: #212121;
+                        background-color: #BDBDBD;
+                        border: 1px solid #E0E0E0;
+                        transition: border-color 300ms ease-in-out;
+                        margin-left: 10px;
+
+                        & .fas {
+                            padding-left: 5px;
+                        }
+
+                        &:hover {
+                            border-color: #212121;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.add-author {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 80px; left: 0; right: 0; bottom: 0;
+    padding-bottom: 30px;
+    background-color: rgba(0, 0, 0, .75);
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    overflow-y: scroll;
+    z-index: 4;
+
+    .container {
+        display: grid;
+        width: 100%;
+        max-width: 800px;
+        margin: 30px auto 0 auto;
+        padding: 30px;
+        background-color: #FAFAFA;
+
+        & > {
+            .close-area {
+                text-align: right;
+
+                & > button {
+                    cursor: pointer;
+                    width: 100px;
+                    height: 40px;
+                    text-align: center;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1em;
+                    font-weight: 400;
+                    color: #212121;
+                    background-color: #BDBDBD;
+                    border: 1px solid #E0E0E0;
+                    transition: border-color 300ms ease-in-out;
+
+                    & .fas {
+                        padding-left: 5px;
+                    }
+
+                    &:hover {
+                        border-color: #212121;
+                    }
+                }
+            }
+
+            form {
+                padding-top: 20px;
+
+                .author-name {
+                    padding-bottom: 10px;
+                    display: grid;
+                    grid-template-columns: 210px 1fr;
+                    grid-gap: 20px;
+                    align-items: center;
+
+                    label {
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 300;
+                        text-transform: uppercase;
+                        text-align: right;
+                    }
+
+                    input {
+                        height: 35px;
+                        padding: 0 7px;
+                    }
+                }
+
+                .author-dates {
+                    display: grid;
+                    grid-template-columns: 210px 1fr 1fr auto;
+                    grid-gap: 20px;
+                    align-items: center;
+
+                    label {
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 300;
+                        text-transform: uppercase;
+                        text-align: right;
+                    }
+
+                    input {
+                        max-width: 150px;
+                        height: 35px;
+                        padding: 0 7px;
+                    }
+                }
+
+                .submit {
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    justify-content: flex-end;
+                    grid-gap: 10px;
+                    padding-top: 15px;
+
+                    & > button, & > .button {
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        padding: 0 10px;
+                        height: 40px;
+                        text-align: center;
+                        font-family: 'Roboto', sans-serif;
+                        font-size: 1em;
+                        font-weight: 400;
+                        color: #212121;
+                        background-color: #BDBDBD;
+                        border: 1px solid #E0E0E0;
+                        transition: border-color 300ms ease-in-out;
+
+                        & .fas {
+                            padding-left: 5px;
+                        }
+
+                        &:hover {
+                            border-color: #212121;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.delete-author {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 80px; left: 0; right: 0; bottom: 0;
+    padding-bottom: 30px;
+    background-color: rgba(0, 0, 0, .75);
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    overflow-y: scroll;
+    z-index: 4;
+
+    .container {
+        display: grid;
+        width: 100%;
+        max-width: 800px;
+        margin: 30px auto 0 auto;
+        padding: 30px;
+        background-color: #FAFAFA;
+
+        & > {
+            .close-area {
+                text-align: right;
+
+                & > button {
+                    cursor: pointer;
+                    width: 100px;
+                    height: 40px;
+                    text-align: center;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1em;
+                    font-weight: 400;
+                    color: #212121;
+                    background-color: #BDBDBD;
+                    border: 1px solid #E0E0E0;
+                    transition: border-color 300ms ease-in-out;
+
+                    & .fas {
+                        padding-left: 5px;
+                    }
+
+                    &:hover {
+                        border-color: #212121;
+                    }
+                }
+            }
+
+            form {
+                padding-top: 20px;
+
+                .author-name {
                     display: grid;
                     grid-template-columns: auto 2fr auto;
                     padding-bottom: 20px;

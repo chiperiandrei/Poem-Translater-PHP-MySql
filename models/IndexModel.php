@@ -129,4 +129,23 @@ class IndexModel extends Model
         $statement = $this->db->prepare($SQL);
         $statement->execute();
     }
+
+    public function insertAuthor($author, $b_date, $d_date) {
+        $SQL = 'INSERT INTO authors (NAME, BIRTH_DATE, DEATH_DATE) ' .
+               'VALUES ("'. $author .'", '. $b_date .', '. $d_date .')';
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+    }
+
+    public function deleteAuthor($author_id) {
+        $SQL = 'DELETE FROM authors WHERE ID = ' . $author_id;
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        $SQL = 'DELETE FROM author_images WHERE ID_AUTHOR = ' . $author_id;
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+    }
 }

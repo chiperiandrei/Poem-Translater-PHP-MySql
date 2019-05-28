@@ -121,6 +121,12 @@ class Application
         } else if ($URLs[1] == 'delete-poem') {
             $this->controller->deletePoem();
             header('Location: /');
+        } else if ($URLs[1] == 'add-author') {
+            $this->controller->addAuthor();
+            header('Location: /');
+        } else if ($URLs[1] == 'delete-author') {
+            $this->controller->deleteAuthor();
+            header('Location: /');
         } else {
             $this->returnError(404);
         }
