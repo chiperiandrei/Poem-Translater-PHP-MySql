@@ -9,6 +9,10 @@ class PoemController extends Controller
 {
     private $model;
     private $view_path;
+    private $wordpresstitle;
+    private $wordpressautor;
+    private $wordpresslanguage;
+    private $wordpresscontent;
 
     public function __construct()
     {
@@ -49,6 +53,13 @@ class PoemController extends Controller
                 $this->model->loadComments($this->view->poem_header['id'])
             );
 
+            $this->wordpressautor = $this->view->poem_header['author_name'];
+            $this->wordpresscontent = $this->packBody(
+                $this->model->loadPoemBody()
+            );
+            $this->wordpresslanguage = $poem_language;
+            $this->wordpresstitle = $poem_title;
+
             if (Session::exists('user_id')) {
                 $this->view->translation = $this->packCustom(
                     $this->model->loadUserTranslation($this->view->poem_header['id'], Session::get('user_id'))
@@ -59,6 +70,7 @@ class PoemController extends Controller
                     $this->view->translation
                 );
             }
+
 
         } else if ($translations = $this->model->loadTranslations($poem_title, $poem_language)) {
             $this->view_path = 'translations';
@@ -204,7 +216,8 @@ class PoemController extends Controller
         return $result;
     }
 
-    private function packComments($comments) {
+    private function packComments($comments)
+    {
         if ($comments) {
             $result = [];
             $i = 0;
@@ -232,7 +245,8 @@ class PoemController extends Controller
         return null;
     }
 
-    public function addComment($poem_title, $poem_language) {
+    public function addComment($poem_title, $poem_language)
+    {
         if (isset($_POST)) {
             $poem_id = $this->model->loadPoemHeader($poem_title, $poem_language)['POEM_ID'];
 
@@ -246,7 +260,8 @@ class PoemController extends Controller
         }
     }
 
-    public function deleteComment($poem_title, $poem_language, $comment_id) {
+    public function deleteComment($poem_title, $poem_language, $comment_id)
+    {
         if (isset($_POST)) {
             $poem_id = $this->model->loadPoemHeader($poem_title, $poem_language)['POEM_ID'];
 
@@ -259,7 +274,8 @@ class PoemController extends Controller
         }
     }
 
-    private function fountInTranslations($found, $translations) {
+    private function fountInTranslations($found, $translations)
+    {
         foreach ($translations as $translation) {
             if ($translation == $found) {
                 return true;
@@ -268,17 +284,18 @@ class PoemController extends Controller
         return false;
     }
 
-    private function packLanguages($languages, $translations) {
+    private function packLanguages($languages, $translations)
+    {
         preg_match("/^enum\(\'(.*)\'\)$/", $languages['Type'], $matches);
         $enum = explode("','", $matches[1]);
 
         $result = [];
 
         $curl_handle = curl_init();
-        curl_setopt($curl_handle, CURLOPT_URL,"https://restcountries.eu/rest/v2/alpha/ro");
-        curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT,3);
+        curl_setopt($curl_handle, CURLOPT_URL, "https://restcountries.eu/rest/v2/alpha/ro");
+        curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 
         $i = 0;
 
@@ -311,7 +328,8 @@ class PoemController extends Controller
         return $result;
     }
 
-    private function packCustom($languages) {
+    private function packCustom($languages)
+    {
         $result = [];
 
         if ($languages != null) {
@@ -323,7 +341,8 @@ class PoemController extends Controller
         return $result;
     }
 
-    public function addTranslation() {
+    public function addTranslation()
+    {
         $user_id = Session::get('user_id');
         $poem = Session::get('poem_data');
         $count = Session::get('poem_strophes_count');
@@ -354,7 +373,8 @@ class PoemController extends Controller
         return str_replace(' ', '+', $poem['title']);
     }
 
-    public function deleteTranslation() {
+    public function deleteTranslation()
+    {
         $this->model->removeTranslation(Session::get('translation_id'));
         $poem_link = Session::get('poem_link');
         Session::unset('translation_id');
@@ -373,7 +393,7 @@ class PoemController extends Controller
 
         $poem['language']['name'] = $language;
         $poem['language']['flag'] = 'flag flag-' . ($language == 'en' ? 'gb' : $language);
-        $poem['language']['link'] = '/poem/' . $language . '/' .  str_replace(' ', '+', $poem['title']);
+        $poem['language']['link'] = '/poem/' . $language . '/' . str_replace(' ', '+', $poem['title']);
 
         $poem['author']['id'] = $header['AUTHOR_ID'];
         $poem['author']['name'] = $header['AUTHOR_NAME'];
@@ -448,25 +468,20 @@ class PoemController extends Controller
      * @param $poem_title
      * @return bool
      */
-    public function shareWordpress($poem_language, $poem_title)
+    public function shareWordpress()
     {
-        $poem_title = str_replace('-+', ' ', $poem_title);
-        $poem_language = strtoupper($poem_language);
-        $this->view_path = 'original';
-        $header = $this->packHeader(
-            $this->model->loadPoemHeader($poem_title, $poem_language)
-        );
 
-        $body = $this->packBody(
-            $this->model->loadPoemBody()
-        );
-        $new_body = '';
-        foreach ($body as $poem_strophe)
-            $new_body = $new_body . " " . $poem_strophe;
         $username = 'admin';
         $password = 'admin';
+        $new_body = '';
+        foreach ($this->wordpresscontent as $poem_strophe)
+            $new_body = $new_body . " " . $poem_strophe['text'];
         $process = curl_init('http://localhost/wordpress/wp-json/wp/v2/posts');
-        $data = array('slug' => $header['title'].'-'.$header['author_name'].'-'.$header['language'], 'title' => $header['title'].' - '.$header['author_name'], 'content' => $new_body, 'status' => 'publish');
+        $data = array(
+            'slug' => $this->wordpresstitle . '-' . $this->wordpressautor . '-' . $this->wordpresslanguage,
+            'title' => $this->wordpresstitle . ' - ' . $this->wordpressautor,
+            'content' => $new_body,
+            'status' => 'publish');
         $data_string = json_encode($data);
         curl_setopt($process, CURLOPT_USERPWD, $username . ":" . $password);
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
@@ -482,36 +497,36 @@ class PoemController extends Controller
         curl_close($process);
 
 
-/*
-        $options = array(
-            'http' =>
-                array(
-                    'ignore_errors' => true,
-                    'method' => 'POST',
-                    'header' =>
+        /*
+                $options = array(
+                    'http' =>
                         array(
-                            0 => 'authorization: Bearer uJJ0CaGiST8nrO9G3G8)NWErbv7NL#FZBNfMGvU1g1P@^mqAh3#fJQVv&74hmw$s',
-                            1 => 'Content-Type: application/x-www-form-urlencoded',
+                            'ignore_errors' => true,
+                            'method' => 'POST',
+                            'header' =>
+                                array(
+                                    0 => 'authorization: Bearer uJJ0CaGiST8nrO9G3G8)NWErbv7NL#FZBNfMGvU1g1P@^mqAh3#fJQVv&74hmw$s',
+                                    1 => 'Content-Type: application/x-www-form-urlencoded',
+                                ),
+                            'content' =>
+                                http_build_query(array(
+                                    'slug' => $header['title'].'-'.$header['author_name'].'-'.$header['language'],
+                                    'title' => $header['title'],
+                                    'content' => $new_body,
+                                    'tags' => 'POTR',
+                                    'categories' => 'API-WORDPRESS-POTR',
+                                    'status' => 'publish'
+                                )),
                         ),
-                    'content' =>
-                        http_build_query(array(
-                            'slug' => $header['title'].'-'.$header['author_name'].'-'.$header['language'],
-                            'title' => $header['title'],
-                            'content' => $new_body,
-                            'tags' => 'POTR',
-                            'categories' => 'API-WORDPRESS-POTR',
-                            'status' => 'publish'
-                        )),
-                ),
-        );
+                );
 
-        $context = stream_context_create($options);
-        $response = file_get_contents(
-            'https://public-api.wordpress.com/rest/v1.2/sites/162188338/posts/new/',
-            false,
-            $context
-        );
-        $response = json_decode($response);*/
+                $context = stream_context_create($options);
+                $response = file_get_contents(
+                    'https://public-api.wordpress.com/rest/v1.2/sites/162188338/posts/new/',
+                    false,
+                    $context
+                );
+                $response = json_decode($response);*/
 
     }
 }

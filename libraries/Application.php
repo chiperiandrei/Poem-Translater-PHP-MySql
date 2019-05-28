@@ -183,7 +183,8 @@ class Application
                 header("Location: $poem_link");
                 exit();
             } else if ($URLs[4] == 'wordpress') {
-                $this->controller->shareWordpress($URLs[1], $URLs[2]);
+                $this->controller->loadPoemOrTranslations($URLs[2], $URLs[1]);
+                $this->controller->shareWordpress();
             } else {
                 // header("Location: /poem/$URLs[1]/$URLs[2]/$URLs[3]");
             }
