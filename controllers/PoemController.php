@@ -266,8 +266,7 @@ class PoemController extends Controller
             $poem_id = $this->model->loadPoemHeader($poem_title, $poem_language)['POEM_ID'];
 
             if ($poem_id && Session::exists('user_id')) {
-                $user_id = Session::get('user_id');
-                $this->model->removeComment($poem_id, $user_id, $comment_id);
+                $this->model->removeComment($poem_id, $comment_id);
             }
 
             return str_replace(' ', '+', $poem_title);

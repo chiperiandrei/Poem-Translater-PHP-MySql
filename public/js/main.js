@@ -167,5 +167,42 @@ hideDeleteAuthor = () => {
     }, 200);
 };
 
+setFavorites = (element, poemId, action) => {
+    console.log(element);
 
+    let elemOnClick = element.getAttribute('onclick');
+    let elemInnerHTML = '';
+
+    if (action === 'delete') {
+        elemOnClick = elemOnClick.replace('delete', 'add');
+        elemInnerHTML = '<i class="far fa-bookmark"></i>';
+    } else if (action === 'add') {
+        elemOnClick = elemOnClick.replace('add', 'delete');
+        elemInnerHTML = '<i class="fas fa-bookmark"></i>';
+    }
+
+    element.setAttribute('onclick', elemOnClick);
+    element.innerHTML = elemInnerHTML
+
+    let XMLHttp;
+    const URL = '/index/' + action + '-favorites';
+    const params = 'poem_id=' + poemId;
+
+    if (window.XMLHttpRequest) {
+        XMLHttp = new XMLHttpRequest();
+    } else {
+        XMLHttp = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+
+    XMLHttp.open('POST', URL,true);
+    XMLHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    XMLHttp.onreadystatechange = () => {
+        if (this.readyState === 4 && this.status === 200) {
+            console.log(XMLHttp.responseText);
+        }
+    };
+
+    XMLHttp.send(params);
+};
 

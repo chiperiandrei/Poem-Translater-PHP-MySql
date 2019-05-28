@@ -127,6 +127,10 @@ class Application
         } else if ($URLs[1] == 'delete-author') {
             $this->controller->deleteAuthor();
             header('Location: /');
+        } else if ($URLs[1] == 'add-favorites') {
+            $this->controller->addFavorites();
+        } else if ($URLs[1] == 'delete-favorites') {
+            $this->controller->deleteFavorites();
         } else {
             $this->returnError(404);
         }

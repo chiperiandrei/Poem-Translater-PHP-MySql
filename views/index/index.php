@@ -46,11 +46,19 @@ if (Session::exists('user_id')) {
                 <?php for($i = 0; $i < $this->count; $i += 2) : ?>
                     <article>
                         <div class="poem">
-                            <?php if (Session::exists('user_id')) : ?>
-                            <span class="poem-bookmark" id="poem-bookmark-<?php echo $i; ?>">
-                                <i class="far fa-bookmark"></i>
-                            </span>
-                            <?php endif; ?>
+                            <?php if (Session::exists('user_id')) :
+                                if ($this->poems[$i]['favorite'] == true) : ?>
+                                    <span class="poem-bookmark"
+                                          onclick="setFavorites(this, <?php echo $this->poems[$i]['id']; ?>, 'delete')">
+                                    <i class="fas fa-bookmark"></i>
+                                </span>
+                                <?php else : ?>
+                                    <span class="poem-bookmark"
+                                          onclick="setFavorites(this, <?php echo $this->poems[$i]['id']; ?>, 'add')">
+                                    <i class="far fa-bookmark"></i>
+                                </span>
+                                <?php endif;
+                            endif; ?>
                             <h1 class="poem-title">
                                 <a href="<?php echo $this->poems[$i]['link']; ?>">
                                     <?php echo $this->poems[$i]['title']; ?>
@@ -78,11 +86,19 @@ if (Session::exists('user_id')) {
                 <?php for($i = 1; $i < $this->count; $i += 2) : ?>
                     <article>
                         <div class="poem">
-                            <?php if (Session::exists('user_id')) : ?>
-                                <span class="poem-bookmark" id="poem-bookmark-<?php echo $i; ?>">
-                                <i class="far fa-bookmark"></i>
-                            </span>
-                            <?php endif; ?>
+                            <?php if (Session::exists('user_id')) :
+                                if ($this->poems[$i]['favorite'] == true) : ?>
+                                    <span class="poem-bookmark"
+                                          onclick="setFavorites(this, <?php echo $this->poems[$i]['id']; ?>, 'delete')">
+                                    <i class="fas fa-bookmark"></i>
+                                </span>
+                                <?php else : ?>
+                                    <span class="poem-bookmark"
+                                          onclick="setFavorites(this, <?php echo $this->poems[$i]['id']; ?>, 'add')">
+                                    <i class="far fa-bookmark"></i>
+                                </span>
+                                <?php endif;
+                            endif; ?>
                             <h1 class="poem-title">
                                 <a href="<?php echo $this->poems[$i]['link']; ?>">
                                     <?php echo $this->poems[$i]['title']; ?>

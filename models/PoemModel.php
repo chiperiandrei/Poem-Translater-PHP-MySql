@@ -290,10 +290,9 @@ class PoemModel extends Model
         $statement->execute();
     }
 
-    public function removeComment($poem_id, $user_id, $comment_id) {
+    public function removeComment($poem_id, $comment_id) {
         $SQL = 'DELETE FROM comments WHERE comments.ID = ' . $comment_id .
-               ' AND comments.ID_POEM = ' . $poem_id .
-               ' AND comments.ID_USER = ' . $user_id;
+               ' AND comments.ID_POEM = ' . $poem_id;
 
         $statement = $this->db->prepare($SQL);
 

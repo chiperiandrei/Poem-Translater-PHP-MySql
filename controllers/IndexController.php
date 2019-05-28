@@ -15,16 +15,6 @@ class IndexController extends Controller
 
         $this->model = new IndexModel();
 
-        if (Session::exists('user_id')) {
-            $avatar_path = $this->getAvatarPath();
-            $avatar_type = pathinfo($avatar_path, PATHINFO_EXTENSION);
-            $avatar_data = file_get_contents($avatar_path);
-            $avatar_image = 'data:image/' . $avatar_type . ';base64,' . base64_encode($avatar_data);
-
-            Session::set('avatar_path', $avatar_path);
-            Session::set('avatar', $avatar_image);
-        }
-
         $this->view->poems = $this->packPoem(
             $this->model->loadPoemsHeader(),
             $this->model->loadPoemsBody()
@@ -36,24 +26,39 @@ class IndexController extends Controller
             $this->model->loadAuthors()
         );
 
-        /*
-        * this stuff is used in add-poem
-        */
-        $this->view->languages = $this->packLanguages(
-            $this->model->loadLanguages()
-        );
+        if (Session::exists('user_id')) {
+            $avatar_path = $this->getAvatarPath();
+            $avatar_type = pathinfo($avatar_path, PATHINFO_EXTENSION);
+            $avatar_data = file_get_contents($avatar_path);
+            $avatar_image = 'data:image/' . $avatar_type . ';base64,' . base64_encode($avatar_data);
 
-        /*
-         * this stuff is used in delete-poem
-         */
-        $this->view->poemAndAuthor = [];
-        $this->view->poemLanguages = [];
+            Session::set('avatar_path', $avatar_path);
+            Session::set('avatar', $avatar_image);
 
-        $this->packPoemAndAuthor(
-            $this->model->loadPoemAndAuthor(),
-            $this->view->poemAndAuthor,
-            $this->view->poemLanguages
-        );
+            $this->manageFavorites(
+                $this->view->poems,
+                $this->view->favorites
+            );
+
+            /*
+            * this stuff is used in add-poem
+            */
+            $this->view->languages = $this->packLanguages(
+                $this->model->loadLanguages()
+            );
+
+            /*
+             * this stuff is used in delete-poem
+             */
+            $this->view->poemAndAuthor = [];
+            $this->view->poemLanguages = [];
+
+            $this->packPoemAndAuthor(
+                $this->model->loadPoemAndAuthor(),
+                $this->view->poemAndAuthor,
+                $this->view->poemLanguages
+            );
+        }
     }
 
     public function index() {
@@ -78,6 +83,7 @@ class IndexController extends Controller
         $i = 0;
 
         foreach ($headers as $header) {
+            $poems[$i]['id'] = $header['POEM_ID'];
             $poems[$i]['title'] = $header['POEM_TITLE'];
             $poems[$i]['language'] = ($header['LANGUAGE'] === 'en' ? 'gb' : $header['LANGUAGE']);
             $poems[$i]['link'] = 'poem/' . $header['LANGUAGE'] . '/' .
@@ -204,5 +210,33 @@ class IndexController extends Controller
 
     public function deleteAuthor() {
         $this->model->deleteAuthor($_POST['selected-author']);
+    }
+
+    public function addFavorites() {
+        $poem_id = $_POST['poem_id'];
+        $user_id = Session::get('user_id');
+
+        $this->model->insertFavorites($user_id, $poem_id);
+    }
+
+    private function manageFavorites(&$poems, &$favorites) {
+        $user_id = Session::get('user_id');
+
+        $favorites = $this->model->loadFavorites($user_id);
+
+        foreach ($poems as &$poem) {
+            if (in_array($poem['id'], $favorites)) {
+                $poem['favorite'] = true;
+            } else {
+                $poem['favorite'] = false;
+            }
+        }
+    }
+
+    public function deleteFavorites() {
+        $poem_id = $_POST['poem_id'];
+        $user_id = Session::get('user_id');
+
+        $this->model->deleteFavorites($user_id, $poem_id);
     }
 }

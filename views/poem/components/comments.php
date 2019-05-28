@@ -17,7 +17,7 @@
                         </a>
                     </div>
                     <?php if (Session::exists('username')) : ?>
-                        <?php if ($comment['user']['username'] == Session::get('username')) : ?>
+                        <?php if ($comment['user']['username'] == Session::get('username') or Session::exists('admin')) : ?>
                             <div class="delete">
                                 <a href="<?php echo $this->poem_header['link']; ?>/delete-comment/<?php echo $comment['id'] ?>">
                                     <i class="fas fa-times"></i>
