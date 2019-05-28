@@ -51,7 +51,20 @@ if (Session::exists('user_id')) {
                 <div class="last-name"><?php echo $translation['user_ln']; ?></div>
                 <div class="username">(<?php echo $translation['username']; ?>)</div>
                 <div class="rating">
-                    <?php
+                    <?php if(Session::exists('user_id')) :
+                    if ($translation['user_id'] == Session::get('user_id')) : ?>
+                    <div class="delete">
+                        <form action="./<?php echo str_replace(' ', '+', $this->poem_title) . '/' . $translation['username']; ?>/delete-translation"
+                              method="POST">
+                            <?php
+                            Session::set('translation_id' , $translation['translation_id']);
+                            Session::set('poem_link', $this->poem_link);
+                            ?>
+                            <button type="submit"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                    <?php endif;
+                    endif;
                     for ($i = 0; $i < $translation['rating']; $i++) :
                         echo '<i class="fas fa-star"></i>';
                     endfor;
@@ -67,7 +80,7 @@ if (Session::exists('user_id')) {
     <nav class="menu-languages">
         <a href="<?php echo '/poem/' . $this->poem_language . '/' . str_replace(' ', '+', $this->poem_title); ?>">
             <img src="../../../public/img/flags/blank.gif"
-                 class="flag flag-<?php echo $this->poem_language; ?>"
+                 class="flag flag-<?php echo $this->poem_language == 'en' ? 'gb' : $this->poem_language; ?>"
                  alt="<?php echo $this->poem_language; ?>"/>
             <?php echo $this->poem_language; ?>
         </a>

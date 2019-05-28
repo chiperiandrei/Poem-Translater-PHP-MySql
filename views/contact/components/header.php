@@ -7,7 +7,7 @@
         <nav class="navigation">
             <a class="navigation-link" href="/">Poems<i class="fas fa-feather-alt"></i></a>
             <a class="navigation-link" href="<?php echo PT_DOMAIN; ?>/favorites">Favorites<i class="fas fa-star"></i></a>
-            <div id="navigation-user">
+            <div id="navigation-user" onclick="toggleHeaderMenu()">
                 <div class="user-label">
                     <span class="user-name">
                         <?php Session::print('first_name'); ?>

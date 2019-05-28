@@ -32,6 +32,18 @@ class LoginModel extends Model
             Session::set('complete_name', $row['first_name'] . ' ' . $row['last_name']);
             Session::set('user_link', '/user/' . $row['username']);
 
+            $SQL = 'SELECT * FROM admins WHERE ID_USER = ' . $row['id'];
+
+            $statement = $this->db->prepare($SQL);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                Session::set('admin', true);
+            } else {
+                Session::unset('admin');
+            }
+
             return true;
         }
 
@@ -59,7 +71,7 @@ class LoginModel extends Model
             ':lname' => $_POST['last-name'],
             ':email' => $_POST['email'],
             ':username' => $_POST['username'],
-            ':password' => md5($_POST['password'])
+            ':password' => strtoupper(md5($_POST['password']))
         ]);
         if ($ok) {
             if (!file_exists('storage/users/' . $_POST['username'])) {

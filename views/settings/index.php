@@ -71,6 +71,11 @@
                 </div>
             </form>
         </div>
+        <div class="error">
+            <?php if (Session::exists('settings-error')) : ?>
+                <div><?php Session::print('settings-error'); ?></div>
+            <?php endif; ?>
+        </div>
     </div>
 </main>
 

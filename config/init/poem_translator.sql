@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gazdă: 127.0.0.1
--- Timp de generare: mai 20, 2019 la 11:08 PM
+-- Timp de generare: mai 28, 2019 la 12:21 PM
 -- Versiune server: 10.1.38-MariaDB
 -- Versiune PHP: 7.3.2
 
@@ -21,6 +21,23 @@ SET time_zone = "+00:00";
 --
 -- Bază de date: `poem_translator`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structură tabel pentru tabel `admins`
+--
+
+CREATE TABLE `admins` (
+  `ID_USER` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_romanian_ci;
+
+--
+-- Eliminarea datelor din tabel `admins`
+--
+
+INSERT INTO `admins` (`ID_USER`) VALUES
+(1);
 
 -- --------------------------------------------------------
 
@@ -306,6 +323,12 @@ INSERT INTO `user_images` (`ID_USER`, `PATH`) VALUES
 --
 
 --
+-- Indexuri pentru tabele `admins`
+--
+ALTER TABLE `admins`
+  ADD KEY `fk__admins__users` (`ID_USER`);
+
+--
 -- Indexuri pentru tabele `authors`
 --
 ALTER TABLE `authors`
@@ -394,7 +417,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT pentru tabele `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT pentru tabele `poems`
@@ -406,7 +429,7 @@ ALTER TABLE `poems`
 -- AUTO_INCREMENT pentru tabele `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pentru tabele `users`
@@ -417,6 +440,12 @@ ALTER TABLE `users`
 --
 -- Constrângeri pentru tabele eliminate
 --
+
+--
+-- Constrângeri pentru tabele `admins`
+--
+ALTER TABLE `admins`
+  ADD CONSTRAINT `fk__admins__users` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`);
 
 --
 -- Constrângeri pentru tabele `author_images`
@@ -474,7 +503,7 @@ ALTER TABLE `translation_strophes`
 -- Constrângeri pentru tabele `user_images`
 --
 ALTER TABLE `user_images`
-  ADD CONSTRAINT `fk_user_images__users` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_user_images__users` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

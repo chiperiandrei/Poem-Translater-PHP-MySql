@@ -25,7 +25,6 @@ class ApplicationModel extends Model
         $OUTPUT = $this->db->prepare($sQuery);
         $OUTPUT->execute();
         $result = $OUTPUT->fetchAll();
-       // var_dump($result);
         return $result;
     }
     private function numberOfOriginalStrophes($id){

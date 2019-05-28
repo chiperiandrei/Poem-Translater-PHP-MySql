@@ -6,7 +6,7 @@ main {
 }
 main .container {
   display: grid;
-  grid-template-areas: "avatar info" "avatar pass";
+  grid-template-areas: "avatar info" "avatar pass" "avatar error";
   grid-template-columns: 1fr 2fr;
 }
 main .container > .photo {
@@ -109,6 +109,16 @@ main .container > .about-info form > div.submit, main .container > .about-passwo
 main .container > .about-info form > div.submit .fas, main .container > .about-password form > div.submit .fas {
   margin-right: 5px;
 }
+main .container > .error {
+  grid-area: error;
+}
+main .container > .error > div {
+  border: 1px solid #C62828;
+  font-weight: 500;
+  color: #C62828;
+  width: 70%;
+  padding: 10px;
+}
 
 @media screen and (max-width: 1000px) {
   main {
@@ -116,7 +126,7 @@ main .container > .about-info form > div.submit .fas, main .container > .about-p
   }
   main .container {
     display: grid;
-    grid-template-areas: "avatar" "info" "pass";
+    grid-template-areas: "avatar" "info" "pass" "error";
     grid-template-columns: 1fr;
   }
 }

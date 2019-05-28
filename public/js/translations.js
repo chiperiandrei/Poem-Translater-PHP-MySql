@@ -4,14 +4,14 @@ toggleHeaderMenu = () => {
 }
 
 window.onload = function() {
-    const navigationToggleElement = document.getElementById('navigation-user');
-    navigationToggleElement.addEventListener('click', toggleHeaderMenu);
-
     const translationElements = document.getElementsByClassName('translation');
 
     for (let i = 0; i < translationElements.length; i++) {
         const translation = document.getElementById(translationElements[i].id);
         const href = translation.getElementsByClassName('language')[0].getAttribute("href");
+
+        console.log(i + ' ' + translation);
+        console.log(i + ' ' + href)
 
         translation.addEventListener('click', () => {
             window.location = href;

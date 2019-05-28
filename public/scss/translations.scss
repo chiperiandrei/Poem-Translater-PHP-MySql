@@ -95,7 +95,7 @@ main {
         background-color: rgba(0, 0, 0, 0.1);
 
         & > div, & > a {
-          padding: 15px 0;
+          min-height: 60px;
           font-size: 1em;
 
           &.language, &.avatar, &.first-name, &.last-name, &.username, &.rating{
@@ -132,6 +132,33 @@ main {
           &.rating {
             margin-left: auto;
             padding: 15px;
+
+            & > .delete {
+              margin-right: 10px;
+              background: red;
+
+              input {
+                display: none;
+                opacity: 0;
+              }
+
+              button {
+                cursor: pointer;
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+                font-size: 1em;
+                font-weight: 400;
+                color: #212121;
+                background-color: #BDBDBD;
+                border: 1px solid #E0E0E0;
+                transition: border-color 300ms ease-in-out;
+                padding: 5px 10px;
+
+                &:hover {
+                  border-color: #212121;
+                }
+              }
+            }
           }
         }
       }
