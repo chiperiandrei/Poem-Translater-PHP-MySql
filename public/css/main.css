@@ -90,9 +90,11 @@ main .container .main-admin > .panel button {
   justify-content: center;
   align-items: center;
   padding: 7px 13px;
+  margin-left: 10px;
   font-family: "Roboto", sans-serif;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 400;
+  text-transform: uppercase;
   color: #212121;
   background-color: #BDBDBD;
   border: 1px solid #E0E0E0;
@@ -191,6 +193,7 @@ main .container .main-poems article:hover {
 }
 
 .add-poem {
+  display: none;
   position: absolute;
   width: 100%;
   top: 80px;
@@ -199,6 +202,7 @@ main .container .main-poems article:hover {
   bottom: 0;
   padding-bottom: 30px;
   background-color: rgba(0, 0, 0, 0.75);
+  opacity: 0;
   transition: opacity 300ms ease-in-out;
   overflow-y: scroll;
   z-index: 4;
@@ -259,6 +263,10 @@ main .container .main-poems article:hover {
 }
 .add-poem .container > form #strophes > .strophe > textarea {
   min-height: 130px;
+  padding: 8px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 0.9em;
 }
 .add-poem .container > form #submit {
   display: block;
@@ -282,6 +290,94 @@ main .container .main-poems article:hover {
   padding-left: 5px;
 }
 .add-poem .container > form #submit > button:hover {
+  border-color: #212121;
+}
+
+.delete-poem {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 30px;
+  background-color: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  overflow-y: scroll;
+  z-index: 4;
+}
+.delete-poem .container {
+  display: grid;
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto 0 auto;
+  padding: 30px;
+  background-color: #FAFAFA;
+}
+.delete-poem .container > .close-area {
+  text-align: right;
+}
+.delete-poem .container > .close-area > button {
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+}
+.delete-poem .container > .close-area > button .fas {
+  padding-left: 5px;
+}
+.delete-poem .container > .close-area > button:hover {
+  border-color: #212121;
+}
+.delete-poem .container > form {
+  padding-top: 20px;
+}
+.delete-poem .container > form .poem-name {
+  display: grid;
+  grid-template-columns: auto 2fr auto;
+  padding-bottom: 20px;
+  align-items: center;
+}
+.delete-poem .container > form .poem-name > label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding-right: 10px;
+}
+.delete-poem .container > form .poem-name > select, .delete-poem .container > form .poem-name > select option {
+  height: 35px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  padding: 5px;
+  border: 1px solid #cdcdcd;
+}
+.delete-poem .container > form .poem-name > button {
+  cursor: pointer;
+  height: 35px;
+  padding: 0 10px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+  margin-left: 10px;
+}
+.delete-poem .container > form .poem-name > button .fas {
+  padding-left: 5px;
+}
+.delete-poem .container > form .poem-name > button:hover {
   border-color: #212121;
 }
 

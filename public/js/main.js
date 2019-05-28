@@ -28,10 +28,37 @@ hideAddPoem = () => {
     }, 200);
 };
 
+showDeletePoem = () => {
+    const translation = document.getElementById('delete-poem');
+
+    document.body.style.overflowY = 'hidden';
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+
+    translation.style.display = 'block';
+
+    setTimeout(() => {
+        translation.style.opacity = '1';
+    }, 200);
+};
+
+hideDeletePoem = () => {
+    const translation = document.getElementById('delete-poem');
+
+    translation.style.opacity = '0';
+
+    setTimeout(() => {
+        document.body.style.overflowY = 'scroll';
+        translation.style.display = 'none';
+    }, 200);
+};
+
 generateTextAreas = (count) => {
     let strophes = document.getElementById('strophes');
-
     strophes.innerHTML = '';
+
+    let control = document.getElementById('submit');
+    control.innerHTML = '';
 
     for (let i = 0; i < count; i++) {
         const index = i + 1;
@@ -53,11 +80,9 @@ generateTextAreas = (count) => {
         strophes.appendChild(strophe);
     }
 
-    let control = document.getElementById('submit');
-
     let submit = document.createElement('button');
     submit.setAttribute('type', 'submit');
-    submit.innerHTML = 'Add translation <i class="fas fa-plus"></i>';
+    submit.innerHTML = 'Add poem <i class="fas fa-plus"></i>';
 
     let reset = document.createElement('button');
     reset.setAttribute('onclick', '');
@@ -65,7 +90,6 @@ generateTextAreas = (count) => {
 
     control.appendChild(reset);
     control.appendChild(submit);
-
 };
 
 triggerTextAreas = () => {

@@ -36,8 +36,23 @@ class IndexController extends Controller
             $this->model->loadAuthors()
         );
 
+        /*
+        * this stuff is used in add-poem
+        */
         $this->view->languages = $this->packLanguages(
             $this->model->loadLanguages()
+        );
+
+        /*
+         * this stuff is used in delete-poem
+         */
+        $this->view->poemAndAuthor = [];
+        $this->view->poemLanguages = [];
+
+        $this->packPoemAndAuthor(
+            $this->model->loadPoemAndAuthor(),
+            $this->view->poemAndAuthor,
+            $this->view->poemLanguages
         );
     }
 
@@ -152,5 +167,30 @@ class IndexController extends Controller
         $this->model->insertPoem($title, $author_id, $language, $staff_id, $strophes);
     }
 
+    private function packPoemAndAuthor($headers, &$poems, &$index) {
+        $i = 0;
 
+        foreach ($headers as $header) {
+            $language = strtoupper($header['LANGUAGE']);
+
+            if (isset($poems[$language])) {
+                $index[$language]++;
+            } else {
+                $index[$language] = 0;
+            }
+
+            $poems[$language][$index[$language]]['id'] = $header['POEM_ID'];
+            $poems[$language][$index[$language]]['full_info'] = $header['POEM_TITLE'] .' ('. $header['AUTHOR_NAME'] .')';
+
+            $i++;
+        }
+
+        $index = array_keys($index);
+
+        return $poems;
+    }
+
+    public function deletePoem() {
+        $this->model->deletePoem($_POST['poem']);
+    }
 }

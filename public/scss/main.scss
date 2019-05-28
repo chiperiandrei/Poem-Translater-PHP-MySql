@@ -107,9 +107,11 @@ main {
                         justify-content: center;
                         align-items: center;
                         padding: 7px 13px;
+                        margin-left: 10px;
                         font-family: 'Roboto', sans-serif;
-                        font-size: 1em;
+                        font-size: 0.9em;
                         font-weight: 400;
+                        text-transform: uppercase;
                         color: #212121;
                         background-color: #BDBDBD;
                         border: 1px solid #E0E0E0;
@@ -230,13 +232,13 @@ main {
 }
 
 .add-poem {
-    // display: none;
+    display: none;
     position: absolute;
     width: 100%;
     top: 80px; left: 0; right: 0; bottom: 0;
     padding-bottom: 30px;
     background-color: rgba(0, 0, 0, .75);
-    // opacity: 0;
+    opacity: 0;
     transition: opacity 300ms ease-in-out;
     overflow-y: scroll;
     z-index: 4;
@@ -308,6 +310,10 @@ main {
                 #strophes > .strophe {
                     & > textarea {
                         min-height: 130px;
+                        padding: 8px;
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 400;
+                        font-size: 0.9em;
                     }
                 }
 
@@ -328,6 +334,105 @@ main {
                         border: 1px solid #E0E0E0;
                         transition: border-color 300ms ease-in-out;
                         margin: 0 5px;
+
+                        & .fas {
+                            padding-left: 5px;
+                        }
+
+                        &:hover {
+                            border-color: #212121;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.delete-poem {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 80px; left: 0; right: 0; bottom: 0;
+    padding-bottom: 30px;
+    background-color: rgba(0, 0, 0, .75);
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    overflow-y: scroll;
+    z-index: 4;
+
+    .container {
+        display: grid;
+        width: 100%;
+        max-width: 1000px;
+        margin: 30px auto 0 auto;
+        padding: 30px;
+        background-color: #FAFAFA;
+
+        & > {
+            .close-area {
+                text-align: right;
+
+                & > button {
+                    cursor: pointer;
+                    width: 100px;
+                    height: 40px;
+                    text-align: center;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1em;
+                    font-weight: 400;
+                    color: #212121;
+                    background-color: #BDBDBD;
+                    border: 1px solid #E0E0E0;
+                    transition: border-color 300ms ease-in-out;
+
+                    & .fas {
+                        padding-left: 5px;
+                    }
+
+                    &:hover {
+                        border-color: #212121;
+                    }
+                }
+            }
+
+            form {
+                padding-top: 20px;
+
+                .poem-name {
+                    display: grid;
+                    grid-template-columns: auto 2fr auto;
+                    padding-bottom: 20px;
+                    align-items: center;
+
+                    & > label {
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 300;
+                        text-transform: uppercase;
+                        padding-right: 10px;
+                    }
+
+                    & > select, & > select option {
+                        height: 35px;
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 400;
+                        padding: 5px;
+                        border: 1px solid #cdcdcd;
+                    }
+
+                    & > button {
+                        cursor: pointer;
+                        height: 35px;
+                        padding: 0 10px;
+                        text-align: center;
+                        font-family: 'Roboto', sans-serif;
+                        font-size: 1em;
+                        font-weight: 400;
+                        color: #212121;
+                        background-color: #BDBDBD;
+                        border: 1px solid #E0E0E0;
+                        transition: border-color 300ms ease-in-out;
+                        margin-left: 10px;
 
                         & .fas {
                             padding-left: 5px;

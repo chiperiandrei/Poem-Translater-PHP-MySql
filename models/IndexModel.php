@@ -77,19 +77,56 @@ class IndexModel extends Model
 
     public function insertPoem($title, $author_id, $language, $staff_id, $strophes) {
         $SQL = 'INSERT INTO poems (TITLE, ID_AUTHOR, LANGUAGE, ID_STAFF) ' .
-               'VALUES ("' . $title . '", ' . $author_id . ', "' . $language . '", ' . $staff_id . ')';
+               'VALUES ("'. $title .'", '. $author_id .', "'. $language .'", '. $staff_id .')';
 
         $statement = $this->db->prepare($SQL);
         $statement->execute();
 
-        /*
+        $SQL = 'SELECT ID FROM poems WHERE TITLE = "'. $title .'" AND ID_AUTHOR = '. $author_id .' '.
+               'AND LANGUAGE = "'. $language .'" AND ID_STAFF = '. $staff_id;
 
-        $SQL = 'SELECT ID FROM users WHERE TITLE = ' . $ti . '
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $poem_id = $result['ID'];
+        $nth = 1;
 
         foreach ($strophes as $strophe) {
-            $SQL = 'INSERT INTO strophes '
+            $SQL = 'INSERT INTO strophes (ID_POEM, NTH, TEXT) ' .
+                   'VALUES ('. $poem_id .', '. $nth .', "'. $strophe .'")';
+
+            $statement = $this->db->prepare($SQL);
+            $statement->execute();
+            $nth++;
+        }
+    }
+
+    public function loadPoemAndAuthor() {
+        $SQL = 'SELECT p.ID AS POEM_ID, p.TITLE AS POEM_TITLE, a.NAME AS AUTHOR_NAME, 
+                LOWER(p.LANGUAGE) AS LANGUAGE
+                FROM poems p
+                JOIN authors a ON p.ID_AUTHOR = a.ID
+                ORDER BY LANGUAGE, POEM_TITLE';
+
+        $result = [];
+
+        foreach ($this->db->query($SQL) as $row) {
+            array_push($result, $row);
         }
 
-        */
+        return $result;
+    }
+
+    public function deletePoem($poem_id) {
+        $SQL = 'DELETE FROM strophes WHERE ID_POEM = ' . $poem_id;
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        $SQL = 'DELETE FROM poems WHERE ID = ' . $poem_id;
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
     }
 }

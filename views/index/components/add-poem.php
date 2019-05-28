@@ -12,6 +12,7 @@
                 <div class="poem-author">
                     <label for="author">Select author for poem</label>
                     <select name="author" id="author">
+                        <option selected disabled>Choose author</option>
                         <?php foreach ($this->authors as $author) : ?>
                             <option value="<?php echo $author['id']; ?>"><?php echo $author['full_info']; ?></option>
                         <?php endforeach; ?>
@@ -20,6 +21,7 @@
                 <div class="poem-language">
                     <label for="language">Select the language of the poem</label>
                     <select name="language" id="language">
+                        <option selected disabled>Choose language</option>
                         <?php foreach ($this->languages as $language) : ?>
                             <option value="<?php echo $language['name']; ?>"><?php echo $language['en_name'] . ' - ' . $language['native_name']; ?></option>
                         <?php endforeach; ?>
@@ -37,15 +39,3 @@
         </div>
     </section>
 <?php endif; ?>
-
-<!--
-
-<div class="strophe">
-    <label for="strophe-1">Strophe 1</label>
-    <textarea name="strophe-1" id="strophe-1"></textarea>
-</div>
-<div class="strophe">
-    <label for="strophe-2">Strophe 2</label>
-    <textarea name="strophe-2" id="strophe-2"></textarea>
-</div>
--->
