@@ -32,6 +32,18 @@ class LoginModel extends Model
             Session::set('complete_name', $row['first_name'] . ' ' . $row['last_name']);
             Session::set('user_link', '/user/' . $row['username']);
 
+            $SQL = 'SELECT * FROM admins WHERE ID_USER = ' . $row['id'];
+
+            $statement = $this->db->prepare($SQL);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                Session::set('admin', true);
+            } else {
+                Session::unset('admin');
+            }
+
             return true;
         }
 

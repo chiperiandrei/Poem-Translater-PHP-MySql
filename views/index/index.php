@@ -30,6 +30,14 @@ if (Session::exists('user_id')) {
             </select>
             <button class="sort"><i class="fas fa-sort-alpha-down"></i></button>
         </section>
+        <?php if (Session::exists('admin')) : ?>
+        <section class="main-admin">
+            <div class="panel">
+                <span class="info">Admin zone:</span>
+                <button onclick="showAddPoem()">Add poem</button>
+            </div>
+        </section>
+        <?php endif; ?>
         <section class="main-poems">
             <section>
                 <?php for($i = 0; $i < $this->count; $i += 2) : ?>
@@ -99,6 +107,8 @@ if (Session::exists('user_id')) {
         </section>
     </div>
 </main>
+
+<?php require_once('views/index/components/poem.php'); ?>
 
 <script src="/public/js/main.js" type="text/javascript"></script>
 
