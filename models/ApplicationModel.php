@@ -27,8 +27,10 @@ class ApplicationModel extends Model
         $result = $OUTPUT->fetchAll();
         return $result;
     }
-    private function numberOfOriginalStrophes($id){
-        $sQuery='SELECT COUNT(*) FROM strophes WHERE id_poem="'.$id.'"';
+
+    private function numberOfOriginalStrophes($id)
+    {
+        $sQuery = 'SELECT COUNT(*) FROM strophes WHERE id_poem="' . $id . '"';
         $OUTPUT = $this->db->prepare($sQuery);
         $OUTPUT->execute();
         $result = $OUTPUT->fetchAll();
@@ -37,7 +39,7 @@ class ApplicationModel extends Model
 
     private function getIdBestTranslate($id)
     {
-        $query = 'SELECT t1.id,t1.id_poem,u.FIRST_NAME,u.LAST_NAME FROM translations t1 join users u ON u.ID=t1.ID_USER where rating=( SELECT MAX(rating) FROM translations WHERE id_poem=' . $id . ')';
+        $query = 'SELECT t1.id,t1.id_poem,u.FIRST_NAME,u.LAST_NAME,p.TITLE,p.LANGUAGE,a.name FROM translations t1 join users u ON u.ID=t1.ID_USER join poems p ON p.ID=t1.ID_POEM JOIN AUTHORS a ON a.id=p.id_author where rating=( SELECT MAX(rating) FROM translations WHERE id_poem=' . $id . ')';
         $OUTPUT = $this->db->prepare($query);
         $OUTPUT->execute();
         $result = $OUTPUT->fetch();
@@ -55,7 +57,8 @@ class ApplicationModel extends Model
 
     public function generateRSS()
     {
-        $xml = "<libraray>\n\t\t";
+        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
+<rss version=\"2.0\">\n";
         $poeme = $this->loadAllPoems();
         $vector = [];
         // luam numarul de strofe originale pentru fiecare traducere
@@ -63,30 +66,34 @@ class ApplicationModel extends Model
             $vector[$i] = $this->numberOfOriginalStrophes($poeme[$i - 1][0]);
         }
 
-        var_dump($poeme);
-        var_dump($vector);
         for ($i = 1; $i <= $this->numberOfPoems(); $i++) {
             $traduceri[$i] = $this->getIdBestTranslate($poeme[$i - 1][0]);
         }
-        var_dump($traduceri);
         for ($i = 1; $i <= $this->numberOfPoems(); $i++) {
             $info[$i] = $this->getNoTranslated(intval($traduceri[$i]));
         }
         for ($i = 1; $i <= count($info); $i++) {
             if ($info[$i] == $vector[$i]) {
 
-                $xml .= "<mail_address>\n\t\t";
-                $xml .= $traduceri[$i]['FIRST_NAME'];
-                $xml .= "<email> sss </email>\n\t\t";
-                $xml .= "<verify_code> ssss </verify_code>\n\t\t";
-                $xml .= "<status>asda</status>\n\t\t";
-                $xml .= "<status1>dadada</status1>\n\t\t";
-                $xml .= "</mail_address>\n";
+                $xml .= "<poem>\n\t";
+                $xml .= "<traducator>\n";
+                $xml .= "\t\t".$traduceri[$i]['FIRST_NAME'] . " ".$traduceri[$i]['LAST_NAME']  ;
+                $xml .= "\n\t</traducator>\n";
+                $xml .= "\t<numepoem>\n";
+                $xml .= "\t\t".$traduceri[$i]['TITLE'];
+                $xml .= "\n\t</numepoem>\n";
+                $xml .= "\t<limba>\n";
+                $xml .= "\t\t".$traduceri[$i]['LANGUAGE'] ;
+                $xml .= "\n\t</limba>\n";
+                $xml .= "\t<autor>\n";
+                $xml .= "\t\t".$traduceri[$i]['name'];
+                $xml .= "\n\t</autor>\n";
+                $xml .= "</poem>\n";
             }
         }
 
 
-        $xml .= "</libraray>\n\r";
+        $xml .= "</rss>\n\r";
         $xmlobj = new SimpleXMLElement($xml);
         $xmlobj->asXML("storage/test.rss");
     }
