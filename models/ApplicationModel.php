@@ -114,7 +114,7 @@ class ApplicationModel extends Model
                 $translatedPoem = $this->loadTranslationBody($idTraduceriRatingMax[$i][0]);
                 $new_body = '';
                 foreach ($translatedPoem as $poem_strophe)
-                    $new_body = $new_body . $poem_strophe['TEXT'];
+                    $new_body = $new_body ."\n". $poem_strophe['TEXT'];
                 $xml .= "\t<item>\n\t";
                 $xml .= "\t<traducator>\n";
                 $xml .= "\t\t\t" . $informatiePoezie['FIRST_NAME'] . " " . $informatiePoezie['LAST_NAME'];
