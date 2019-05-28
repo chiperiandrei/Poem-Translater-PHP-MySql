@@ -116,21 +116,21 @@ class ApplicationModel extends Model
                 foreach ($translatedPoem as $poem_strophe)
                     $new_body = $new_body ."\n". $poem_strophe['TEXT'];
                 $xml .= "\t<item>\n\t";
-                $xml .= "\t<traducator>\n";
-                $xml .= "\t\t\t" . $informatiePoezie['FIRST_NAME'] . " " . $informatiePoezie['LAST_NAME'];
-                $xml .= "\n\t\t</traducator>\n";
-                $xml .= "\t\t<numepoem>\n";
-                $xml .= "\t\t\t" . $informatiePoezie['TITLE'];
-                $xml .= "\n\t\t</numepoem>\n";
-                $xml .= "\t\t<limba>\n";
-                $xml .= "\t\t\t" . $idTraduceriRatingMax[$i][4];
-                $xml .= "\n\t\t</limba>\n";
-                $xml .= "\t\t<autor>\n";
-                $xml .= "\t\t\t" . $informatiePoezie['NAME'];
-                $xml .= "\n\t\t</autor>\n";
-                $xml .= "\t\t<text>\n";
-                $xml .= "\t\t\t" . $new_body;
-                $xml .= "\n\t\t</text>\n";
+                $xml .= "\t<traducator>";
+                $xml .= $informatiePoezie['FIRST_NAME'] . " " . $informatiePoezie['LAST_NAME'];
+                $xml .= "</traducator>";
+                $xml .= "\n\t\t<numepoem>";
+                $xml .= $informatiePoezie['TITLE'];
+                $xml .= "</numepoem>\n";
+                $xml .= "\t\t<limba>";
+                $xml .= $idTraduceriRatingMax[$i][4];
+                $xml .= "</limba>\n";
+                $xml .= "\t\t<autor>";
+                $xml .= $informatiePoezie['NAME'];
+                $xml .= "</autor>\n";
+                $xml .= "\t\t<text>";
+                $xml .= $new_body;
+                $xml .= "\t</text>\n";
                 $xml .= "\t</item>\n";
             }
         }
