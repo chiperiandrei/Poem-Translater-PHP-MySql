@@ -9,6 +9,18 @@ class SettingsModel extends Model
         parent::__construct();
     }
 
+    private function verifyUser($user_id)
+    {
+        $SQL = 'SELECT * FROM user_images WHERE id_user="' . $user_id . '"';
+        $result = $this->db->prepare($SQL);
+        $result->execute();
+        if ($result->rowCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function updatePhoto($new_path, $user_id)
     {
         if ($this->verifyUser($user_id)) {
