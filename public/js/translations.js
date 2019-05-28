@@ -4,9 +4,6 @@ toggleHeaderMenu = () => {
 }
 
 window.onload = function() {
-    const navigationToggleElement = document.getElementById('navigation-user');
-    navigationToggleElement.addEventListener('click', toggleHeaderMenu);
-
     const translationElements = document.getElementsByClassName('translation');
 
     for (let i = 0; i < translationElements.length; i++) {

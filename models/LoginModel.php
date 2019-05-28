@@ -59,7 +59,7 @@ class LoginModel extends Model
             ':lname' => $_POST['last-name'],
             ':email' => $_POST['email'],
             ':username' => $_POST['username'],
-            ':password' => md5($_POST['password'])
+            ':password' => strtoupper(md5($_POST['password']))
         ]);
         if ($ok) {
             if (!file_exists('storage/users/' . $_POST['username'])) {

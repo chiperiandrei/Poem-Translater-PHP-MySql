@@ -40,9 +40,3 @@ hideAddTranslation = () => {
         translation.style.display = 'none';
     }, 200);
 };
-
-window.onload = function () {
-    const navigation = document.getElementById('navigation-user');
-    navigation.addEventListener('click', toggleHeaderMenu);
-};
-

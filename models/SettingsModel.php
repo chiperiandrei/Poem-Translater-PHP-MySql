@@ -9,26 +9,6 @@ class SettingsModel extends Model
         parent::__construct();
     }
 
-    /**
-     * @param $user_id
-     * @return bool
-     */
-    private function verifyUser($user_id)
-    {
-        $SQL = 'SELECT * FROM user_images WHERE id_user="' . $user_id . '"';
-        $result = $this->db->prepare($SQL);
-        $result->execute();
-        if ($result->rowCount() == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    /**
-     * @param $new_path
-     * @param $user_id
-     * @return bool
-     */
     public function updatePhoto($new_path, $user_id)
     {
         if ($this->verifyUser($user_id)) {
@@ -60,10 +40,9 @@ class SettingsModel extends Model
         $statement->execute();
     }
 
-
-    public function verifyUsername($new_username)
+    public function verifyUsername($username)
     {
-        $SQL = 'SELECT * FROM users WHERE username="' . $new_username . '"';
+        $SQL = 'SELECT * FROM users WHERE username="' . $username . '" AND username <> "' . Session::get('username') . '"';
 
         $statement = $this->db->prepare($SQL);
 
@@ -72,7 +51,6 @@ class SettingsModel extends Model
         if ($statement->rowCount() == 0)
             return false;
         else {
-            Session::set('update-info-username-already-exists', 'Username exist!');
             return true;
         }
     }
@@ -95,7 +73,7 @@ class SettingsModel extends Model
         $stmt->execute();
     }
 
-    public function updateFirstname($new_firstname)
+    public function updateFirstName($new_firstname)
     {
         $current_user = Session::get('username');
         $SQL1 = 'SELECT * FROM users WHERE USERNAME="' . $current_user . '"';
@@ -113,7 +91,7 @@ class SettingsModel extends Model
         $stmt->execute();
     }
 
-    public function updateLastname($new_lastname)
+    public function updateLastName($new_lastname)
     {
         $current_user = Session::get('username');
         $SQL1 = 'SELECT * FROM users WHERE USERNAME="' . $current_user . '"';
@@ -131,10 +109,9 @@ class SettingsModel extends Model
         $stmt->execute();
     }
 
-    public function verifyPassword($old_password)
+    public function verifyPassword($password)
     {
-        $current_user = Session::get('username');
-        $SQL = 'SELECT * FROM users WHERE USERNAME="' . $current_user . '"';
+        $SQL = 'SELECT PASSWORD FROM users WHERE USERNAME = "' . Session::get('username') . '" AND ID = ' . Session::get('user_id');
 
         $statement = $this->db->prepare($SQL);
 
@@ -142,22 +119,20 @@ class SettingsModel extends Model
 
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        if ($result['PASSWORD'] == md5($old_password)) {
+        if ($result['PASSWORD'] == strtoupper(md5($password))) {
             return true;
         }
 
         return false;
     }
 
-    public function updatePassword($new_password)
-    {
-        $current_user = Session::get('username');
-        $password = md5($new_password);
+    public function updatePassword($password) {
+        $password = strtoupper(md5($password));
 
-        $SQL = 'UPDATE users SET PASSWORD="' . $password . '" WHERE USERNAME="' . $current_user . '"';
-        Session::set('password', $password);
+        $SQL = 'UPDATE users SET PASSWORD = "' . $password . '" WHERE USERNAME="' . Session::get('username') . '"';
 
         $stmt = $this->db->prepare($SQL);
+
         $stmt->execute();
     }
 

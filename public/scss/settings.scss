@@ -11,7 +11,8 @@ main {
     .container {
         display: grid;
         grid-template-areas: "avatar info"
-                             "avatar pass";
+                             "avatar pass"
+                             "avatar error";
         grid-template-columns: 1fr 2fr;
 
         & > .photo {
@@ -131,6 +132,18 @@ main {
                 }
             }
         }
+
+        & > .error {
+            grid-area: error;
+
+            & > div {
+                border: 1px solid #C62828;
+                font-weight: 500;
+                color: #C62828;
+                width: 70%;
+                padding: 10px;
+            }
+        }
     }
 }
 
@@ -142,7 +155,8 @@ main {
             display: grid;
             grid-template-areas: "avatar"
                                  "info"
-                                 "pass";
+                                 "pass"
+                                 "error";
             grid-template-columns: 1fr;
         }
     }
