@@ -1,10 +1,17 @@
-<?xml version="1.0"?>
-<libraray>
-		<mail_address>
-		<id> sss </id>
-		<email> sss </email>
-		<verify_code> ssss </verify_code>
-		<status>asda</status>
-		<status1>dadada</status1>
-		</mail_address>
-	</libraray>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<poem>
+	<traducator>
+		Deny-Constantin Pătrașcu
+	</traducator>
+	<numepoem>
+		Liceu
+	</numepoem>
+	<limba>
+		RO
+	</limba>
+	<autor>
+		George Bacovia
+	</autor>
+</poem>
+</rss>

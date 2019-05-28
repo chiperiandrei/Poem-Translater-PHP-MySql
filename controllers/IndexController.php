@@ -31,6 +31,14 @@ class IndexController extends Controller
         );
 
         $this->view->count = count($this->view->poems);
+
+        $this->view->authors = $this->packAuthors(
+            $this->model->loadAuthors()
+        );
+
+        $this->view->languages = $this->packLanguages(
+            $this->model->loadLanguages()
+        );
     }
 
     public function index() {
@@ -68,4 +76,81 @@ class IndexController extends Controller
 
         return $poems;
     }
+
+    private function packAuthors($authors) {
+        $result = [];
+
+        $i = 0;
+
+        foreach ($authors as $author) {
+            $result[$i]['id'] = $author['ID'];
+            $result[$i]['name'] = $author['NAME'];
+            $result[$i]['birth_date'] = $author['BIRTH_DATE'];
+            $result[$i]['death_date'] = $author['DEATH_DATE'];
+            $result[$i]['full_info'] = $author['NAME'] . ' (' . $author['BIRTH_DATE'] . ' - ' . $author['DEATH_DATE'] . ')';
+            $i++;
+        }
+
+        return $result;
+    }
+
+    private function packLanguages($languages)
+    {
+        preg_match("/^enum\(\'(.*)\'\)$/", $languages['Type'], $matches);
+        $enum = explode("','", $matches[1]);
+
+        $result = [];
+
+        $curl_handle = curl_init();
+        curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+
+        $i = 0;
+
+        foreach ($enum as $language) {
+            $iso_code = ($language == 'EN' ? 'gb' : strtolower($language));
+
+            curl_setopt($curl_handle, CURLOPT_URL, "https://restcountries.eu/rest/v2/alpha/$iso_code");
+
+            $answer = curl_exec($curl_handle);
+            $array = json_decode($answer, true);
+
+            if (isset($array['languages'])) {
+                $array = $array['languages'][0];
+                $result[$i]['en_name'] = $array['name'];
+                $result[$i]['native_name'] = $array['nativeName'];
+            } else {
+                $result[$i]['en_name'] = $iso_code;
+                $result[$i]['native_name'] = '';
+            }
+
+            $result[$i]['name'] = ($iso_code == 'gb' ? 'EN' : strtoupper($iso_code));
+            $result[$i]['flag'] = 'flag flag-' . $iso_code;
+            $i++;
+        }
+
+        curl_close($curl_handle);
+
+        return $result;
+    }
+
+    public function addPoem() {
+        $title = $_POST['name'];
+        $author_id = $_POST['author'];
+        $language = $_POST['language'];
+        $staff_id = Session::get('user_id');
+        $count = $_POST['count'];
+
+        $strophes = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $index = $i + 1;
+            $strophes[$i] = $_POST['strophe-' . $index];
+        }
+
+        $this->model->insertPoem($title, $author_id, $language, $staff_id, $strophes);
+    }
+
+
 }

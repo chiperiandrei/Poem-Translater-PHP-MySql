@@ -56,4 +56,40 @@ class IndexModel extends Model
 
         return $result;
     }
+
+    public function loadAuthors() {
+        $SQL = 'SELECT * FROM authors ORDER BY NAME';
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function loadLanguages() {
+        $SQL = "SHOW COLUMNS FROM poems LIKE 'LANGUAGE'";
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function insertPoem($title, $author_id, $language, $staff_id, $strophes) {
+        $SQL = 'INSERT INTO poems (TITLE, ID_AUTHOR, LANGUAGE, ID_STAFF) ' .
+               'VALUES ("' . $title . '", ' . $author_id . ', "' . $language . '", ' . $staff_id . ')';
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        /*
+
+        $SQL = 'SELECT ID FROM users WHERE TITLE = ' . $ti . '
+
+        foreach ($strophes as $strophe) {
+            $SQL = 'INSERT INTO strophes '
+        }
+
+        */
+    }
 }

@@ -292,7 +292,6 @@ class PoemController extends Controller
         $result = [];
 
         $curl_handle = curl_init();
-        curl_setopt($curl_handle, CURLOPT_URL, "https://restcountries.eu/rest/v2/alpha/ro");
         curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);

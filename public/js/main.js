@@ -33,7 +33,7 @@ generateTextAreas = (count) => {
 
     strophes.innerHTML = '';
 
-    for (i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
         const index = i + 1;
 
         let strophe = document.createElement('div');
@@ -52,6 +52,20 @@ generateTextAreas = (count) => {
 
         strophes.appendChild(strophe);
     }
+
+    let control = document.getElementById('submit');
+
+    let submit = document.createElement('button');
+    submit.setAttribute('type', 'submit');
+    submit.innerHTML = 'Add translation <i class="fas fa-plus"></i>';
+
+    let reset = document.createElement('button');
+    reset.setAttribute('onclick', '');
+    reset.innerHTML = 'Reset <i class="fas fa-bomb"></i>';
+
+    control.appendChild(reset);
+    control.appendChild(submit);
+
 };
 
 triggerTextAreas = () => {

@@ -40,6 +40,10 @@ class Application
                     }
 
                 case 'IndexController':
+                    if ($count == 2) {
+                        $this->useIndexController($URLs);
+                        break;
+                    }
                     break;
 
                 case 'PoemController':
@@ -108,6 +112,13 @@ class Application
         http_response_code($code);
         require_once("views/errors/$code.php");
         exit();
+    }
+
+    private function useIndexController($URLs) {
+        if ($URLs[1] == 'add-poem') {
+            $this->controller->addPoem();
+            exit();
+        }
     }
 
     private function useLoginController($URLs) {
