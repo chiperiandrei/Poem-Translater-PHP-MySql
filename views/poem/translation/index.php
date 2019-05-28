@@ -13,6 +13,22 @@ if (Session::exists('user_id')) {
 
 <main>
     <div class="container">
+        <section class="control">
+            <?php if(Session::exists('user_id')) :
+                if ($this->user['id'] == Session::get('user_id')) : ?>
+                    <div class="delete">
+                        <form action="<?php echo $this->translation['language']['link']; ?>/delete-translation"
+                              method="POST">
+                            <?php
+                            Session::set('translation_id' , $this->translation['id']);
+                            Session::set('poem_link', $this->poem['language']['link']);
+                            ?>
+                            <button type="submit">Delete <i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        </section>
         <section class="info">
             Translation for:
         </section>

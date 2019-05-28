@@ -13,6 +13,9 @@ window.onload = function() {
         const translation = document.getElementById(translationElements[i].id);
         const href = translation.getElementsByClassName('language')[0].getAttribute("href");
 
+        console.log(i + ' ' + translation);
+        console.log(i + ' ' + href)
+
         translation.addEventListener('click', () => {
             window.location = href;
             return false;

@@ -164,22 +164,28 @@ class Application
             $this->controller->loadPoemOrTranslations($URLs[2], $URLs[1]);
         } else if ($count == 4) {
             if ($URLs[3] == 'add-comment') {
-                $this->controller->addComment($URLs[2], $URLs[1]);
+                $URLs[2] = $this->controller->addComment($URLs[2], $URLs[1]);
                 header("Location: /poem/$URLs[1]/$URLs[2]");
             } else if ($URLs[3] == 'add-translation') {
-                $this->controller->addTranslation();
+                $URLs[2] = $this->controller->addTranslation();
                 header("Location: /poem/$URLs[1]/$URLs[2]");
             } else if ($this->controller->loadTranslation($URLs[2], $URLs[1], $URLs[3]) == false) {
                 $this->returnError(404);
             }
         } else if ($count == 5) {
             if ($URLs[3] == 'delete-comment') {
-                $this->controller->deleteComment($URLs[2], $URLs[1], $URLs[4]);
+                $URLs[2] = $this->controller->deleteComment($URLs[2], $URLs[1], $URLs[4]);
                 header("Location: /poem/$URLs[1]/$URLs[2]");
+                exit();
+
+            } else if ($URLs[4] == 'delete-translation') {
+                $poem_link = $this->controller->deleteTranslation();
+                header("Location: $poem_link");
+                exit();
             } else if ($URLs[4] == 'wordpress') {
                 $this->controller->shareWordpress($URLs[1], $URLs[2]);
             } else {
-                header("Location: /poem/$URLs[1]/$URLs[2]/$URLs[3]");
+                // header("Location: /poem/$URLs[1]/$URLs[2]/$URLs[3]");
             }
         } else {
             header("Location: /poem/$URLs[1]/$URLs[2]/$URLs[3]");

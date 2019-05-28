@@ -10,6 +10,34 @@ main .container {
   max-width: 1600px;
   padding: 20px;
 }
+main .container > .control {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+main .container > .control a, main .container > .control button {
+  display: flex;
+  cursor: pointer;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 13px;
+  margin-right: 15px;
+  font-family: "Roboto", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #212121;
+  background-color: #BDBDBD;
+  border: 1px solid #E0E0E0;
+  transition: border-color 300ms ease-in-out;
+}
+main .container > .control a:hover, main .container > .control button:hover {
+  border-color: #212121;
+}
+main .container > .control a .fas, main .container > .control a .fab, main .container > .control button .fas, main .container > .control button .fab {
+  margin-left: 5px;
+  font-size: 1em;
+}
 main .container > .info {
   font-size: 1.2em;
   font-weight: 300;

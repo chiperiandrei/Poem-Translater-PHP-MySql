@@ -299,4 +299,18 @@ class PoemModel extends Model
 
         $statement->execute();
     }
+
+    public function removeTranslation($translation_id) {
+        $SQL = 'DELETE FROM translation_strophes WHERE ID_TRANSLATION = ' . $translation_id;
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+
+        $SQL = 'DELETE FROM translations WHERE ID = ' . $translation_id;
+
+        $statement = $this->db->prepare($SQL);
+
+        $statement->execute();
+    }
 }

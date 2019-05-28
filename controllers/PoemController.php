@@ -192,10 +192,12 @@ class PoemController extends Controller
         $result = [];
 
         foreach ($translations as $translation) {
+            $result[$i]['user_id'] = $translation['USER_ID'];
             $result[$i]['user_fn'] = $translation['USER_FN'];
             $result[$i]['user_ln'] = $translation['USER_LN'];
             $result[$i]['username'] = $translation['USERNAME'];
             $result[$i]['rating'] = $translation['TRANSLATION_RATING'];
+            $result[$i]['translation_id'] = $translation['TRANSLATION_ID'];
             $i++;
         }
 
@@ -239,6 +241,8 @@ class PoemController extends Controller
                 $user_id = Session::get('user_id');
                 $this->model->insertComment($poem_id, $user_id, $comment);
             }
+
+            return str_replace(' ', '+', $poem_title);
         }
     }
 
@@ -250,6 +254,8 @@ class PoemController extends Controller
                 $user_id = Session::get('user_id');
                 $this->model->removeComment($poem_id, $user_id, $comment_id);
             }
+
+            return str_replace(' ', '+', $poem_title);
         }
     }
 
@@ -344,6 +350,16 @@ class PoemController extends Controller
 
         Session::unset('poem_data');
         Session::unset('poem_strophes_count');
+
+        return str_replace(' ', '+', $poem['title']);
+    }
+
+    public function deleteTranslation() {
+        $this->model->removeTranslation(Session::get('translation_id'));
+        $poem_link = Session::get('poem_link');
+        Session::unset('translation_id');
+        Session::unset('poem_link');
+        return $poem_link;
     }
 
     // #cleanCodeBelow
@@ -357,7 +373,7 @@ class PoemController extends Controller
 
         $poem['language']['name'] = $language;
         $poem['language']['flag'] = 'flag flag-' . ($language == 'en' ? 'gb' : $language);
-        $poem['language']['link'] = '/poem/' . $language . '/' . $poem['title'];
+        $poem['language']['link'] = '/poem/' . $language . '/' .  str_replace(' ', '+', $poem['title']);
 
         $poem['author']['id'] = $header['AUTHOR_ID'];
         $poem['author']['name'] = $header['AUTHOR_NAME'];
