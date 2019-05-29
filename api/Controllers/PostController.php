@@ -23,4 +23,17 @@ class PostController
             echo json_encode($array);
         }
     }
+
+    public function addAuthor($data)
+    {
+        if ($this->model->addAuthorIntoDb($data)) {
+            $array['data'] = "Author added succesfully";
+            header('Content-Type: application/json');
+            echo json_encode($array);
+        } else {
+            $array['data'] = "Error during adding the authr ";
+            header('Content-Type: application/json');
+            echo json_encode($array);
+        }
+    }
 }

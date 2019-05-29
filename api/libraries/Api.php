@@ -50,9 +50,11 @@ class Api
             case 'POST':
                 $this->controller = new PostController();
                 $data = json_decode(file_get_contents('php://input'), true);
-                var_dump($data);
                 if ($URLs[0]=='poems'){
                     $this->controller->addPoem($data);
+                }
+                if ($URLs[0]=='authors'){
+                    $this->controller->addAuthor($data);
                 }
             default:
                 // Invalid Request Method
