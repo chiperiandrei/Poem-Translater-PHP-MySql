@@ -105,7 +105,7 @@ class LoginModel extends Model
     {
         $ok = false;
         $pass = $this->generateRandomString(10);
-        $new_pass = md5($pass);
+        $new_pass = strtoupper(md5($pass));
         $sql = "UPDATE users SET PASSWORD='$new_pass' WHERE EMAIL='$email'";
         $count = $this->db->exec($sql);
         if ($count == 1)
