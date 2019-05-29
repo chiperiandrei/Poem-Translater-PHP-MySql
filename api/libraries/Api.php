@@ -2,6 +2,7 @@
 
 require_once("libraries/Database.php");
 require_once("Controllers/GetController.php");
+require_once("Controllers/PostController.php");
 
 class Api
 {
@@ -15,7 +16,6 @@ class Api
             $URLs[0] = 'index';
         }
         $request_method = $_SERVER["REQUEST_METHOD"];
-        var_dump(count($URLs));
         switch ($request_method) {
             case 'GET':
                 $this->controller = new GetController();
@@ -47,7 +47,13 @@ class Api
                         break;
                     }
                 }
-
+            case 'POST':
+                $this->controller = new PostController();
+                $data = json_decode(file_get_contents('php://input'), true);
+                var_dump($data);
+                if ($URLs[0]=='poems'){
+                    $this->controller->addPoem($data);
+                }
             default:
                 // Invalid Request Method
                 header("HTTP/1.0 405 Method Not Allowed");
