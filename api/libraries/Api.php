@@ -3,6 +3,7 @@
 require_once("libraries/Database.php");
 require_once("Controllers/GetController.php");
 require_once("Controllers/PostController.php");
+require_once("Controllers/DeleteController.php");
 
 class Api
 {
@@ -55,6 +56,23 @@ class Api
                 }
                 if ($URLs[0]=='authors'){
                     $this->controller->addAuthor($data);
+                }
+            case 'DELETE':
+                $this->controller = new DeleteController();
+                if ($URLs[0]=='poems'){
+                    if (count($URLs)==2){
+                        $this->controller->deletePoem($URLs[1]);
+                    }
+                }
+                if ($URLs[0]=='authors'){
+                    if (count($URLs)==2){
+                        $this->controller->deleteAuthor($URLs[1]);
+                    }
+                }
+                if ($URLs[0]=='users'){
+                    if (count($URLs)==2){
+                        $this->controller->deleteUser($URLs[1]);
+                    }
                 }
             default:
                 // Invalid Request Method
