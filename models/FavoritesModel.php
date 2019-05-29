@@ -56,4 +56,34 @@ class FavoritesModel extends Model
 
         return $result;
     }
+
+    public function insertFavorites($user_id, $poem_id) {
+        $SQL = 'INSERT INTO favorites (ID_USER, ID_POEM) ' .
+            'VALUES ('. $user_id .', '. $poem_id .')';
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+    }
+
+    public function loadFavorites($user_id) {
+        $SQL = 'SELECT ID_POEM FROM favorites WHERE ID_USER = ' . $user_id;
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        $array = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result = [];
+        $i = 0;
+
+        foreach ($array as $row) {
+            $result[$i++] = $row['ID_POEM'];
+        }
+
+        return $result;
+    }
+
+    public function deleteFavorites($user_id, $poem_id) {
+        $SQL = 'DELETE FROM favorites WHERE ID_USER = '. $user_id .' AND ID_POEM = '. $poem_id;
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+    }
 }
