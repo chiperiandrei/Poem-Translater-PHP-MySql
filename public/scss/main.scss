@@ -23,7 +23,6 @@ main {
             .search, .filter, .sort {
                 height: 60px;
                 border: 0;
-                // background-color: rgba(0, 0, 0, 0.1);
                 font-family: 'Roboto', sans-serif;
                 font-weight: 300;
                 font-size: 1.3em;
@@ -46,17 +45,17 @@ main {
                     width: 100%;
                 }
 
-                #search-result {
+                select {
                     display: block;
                     position: absolute;
                     width: 100%;
                     height: 0;
                     min-height: 0;
                     background-color: #FFFFFF;
-                    z-index: 3;
                     top: 100%;
                     border: 1px solid #cdcdcd;
                     transition: all 300ms ease-in-out;
+                    z-index: 2;
                 }
 
                 button {
@@ -68,19 +67,6 @@ main {
                     .fas {
                         font-size: 1.4em;
                     }
-                }
-            }
-
-            .filter {
-                flex: 1;
-                padding: 0 15px;
-                border-left: 1px solid #cdcdcd;
-                border-right: 1px solid #cdcdcd;
-                cursor: pointer;
-
-                select {
-                    min-width: 0;
-                    width: 100%;
                 }
             }
 

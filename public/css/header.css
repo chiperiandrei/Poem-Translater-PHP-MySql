@@ -105,6 +105,7 @@ header .container .navigation #navigation-user #user-menu {
   transition: max-height 0.7s linear, opacity 0.2s ease-in-out;
   border: 1px solid #BDBDBD;
   border-top: 0;
+  z-index: 5;
 }
 header .container .navigation #navigation-user #user-menu.hidden {
   max-height: 0;

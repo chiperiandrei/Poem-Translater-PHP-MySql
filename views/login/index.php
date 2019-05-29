@@ -71,10 +71,6 @@
                     </div>
                     <div>
                         <span id="forgot-password-on">Forgot password?</span>
-                        <div>
-                            <input type="checkbox" id="remember" name="remember">
-                            <label for="remember">Remember me</label>
-                        </div>
                         <button type="submit" id="login">Login</button>
                     </div>
                     <?php if (Session::exists('error-login')) : ?>
