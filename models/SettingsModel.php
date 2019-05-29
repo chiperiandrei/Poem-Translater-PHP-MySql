@@ -79,8 +79,9 @@ class SettingsModel extends Model
         $this->new_username = ($new_username != null) ? $new_username : $currentInfo['USERNAME'];
 
         $SQL = 'UPDATE users SET USERNAME="' . $this->new_username . '" WHERE username="' . $current_user . '"';
-        Session::set('username', $this->new_username);
-
+        rename('storage/users/'.$currentInfo['USERNAME'],'storage/users/'.$new_username);
+        Session::set('username',$this->new_username);
+        Session::set('user_link', '/user/' . $this->new_username);
         $stmt = $this->db->prepare($SQL);
         $stmt->execute();
     }
