@@ -255,7 +255,7 @@ main .comments section .add-comment > .submit {
   text-align: right;
   padding-top: 4px;
 }
-main .comments section .add-comment > .submit > input {
+main .comments section .add-comment > .submit > button {
   cursor: pointer;
   width: 80px;
   height: 40px;
@@ -268,7 +268,7 @@ main .comments section .add-comment > .submit > input {
   border: 1px solid #E0E0E0;
   transition: border-color 300ms ease-in-out;
 }
-main .comments section .add-comment > .submit > input:hover {
+main .comments section .add-comment > .submit > button:hover {
   border-color: #212121;
 }
 main .menu-languages {
