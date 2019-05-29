@@ -26,6 +26,8 @@ class IndexController extends Controller
             $this->model->loadAuthors()
         );
 
+        $this->view->sort = 'asc';
+
         if (Session::exists('user_id')) {
             $avatar_path = $this->getAvatarPath();
             $avatar_type = pathinfo($avatar_path, PATHINFO_EXTENSION);
@@ -248,5 +250,19 @@ class IndexController extends Controller
         header('Content-Type: application/json');
 
         echo $result;
+    }
+
+    public function sort() {
+        if (isset($_REQUEST['sort'])) {
+            usort($this->view->poems, function($a, $b) {
+                return strcmp($a['title'], $b['title']);
+            });
+            $this->view->sort = 'desc';
+
+            if ($_REQUEST['sort'] == 'desc') {
+                $this->view->poems = array_reverse($this->view->poems);
+                $this->view->sort = 'asc';
+            }
+        }
     }
 }

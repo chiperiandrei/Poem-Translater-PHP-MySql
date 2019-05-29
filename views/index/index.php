@@ -23,15 +23,9 @@ if (Session::exists('user_id')) {
                 </select>
                 <button type="submit"><i class="fas fa-search"></i></button>
             </div>
-            <select class="filter">
-                <option disabled selected hidden>Filter your poems</option>
-                <option value="filter-popular-poems">Popular poems</option>
-                <option value="filter-popular-authors">Popular authors</option>
-                <option value="filter-popular-language">Popular language</option>
-                <option value="filter-newest-poem">The newest poems</option>
-                <option value="filter-oldest-poem">The oldest poems</option>
-            </select>
-            <button class="sort"><i class="fas fa-sort-alpha-down"></i></button>
+            <form action="/" method="GET">
+                <button type="submit" class="sort" name="sort" id="sort" value="<?php echo $this->sort; ?>"></button>
+            </form>
         </section>
         <?php if (Session::exists('admin')) : ?>
         <section class="main-admin">

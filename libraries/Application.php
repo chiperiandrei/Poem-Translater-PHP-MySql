@@ -43,6 +43,8 @@ class Application
                     if ($count == 2) {
                         $this->useIndexController($URLs);
                         break;
+                    } else if ($count == 1) {
+                        $this->controller->sort();
                     }
                     break;
 
