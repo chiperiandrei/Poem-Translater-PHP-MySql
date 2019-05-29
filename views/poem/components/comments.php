@@ -1,5 +1,5 @@
 <div class="comments">
-    <section>
+    <section id="comment-area">
         <?php if ($this->poem_comments) : ?>
             <?php foreach ($this->poem_comments as $comment) : ?>
                 <div class="comment">
@@ -31,36 +31,63 @@
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <div class="no-comment">
+            <div id="no-comment-area" class="no-comment">
                 There is no comment yet.
             </div>
         <?php endif; ?>
     </section>
     <section>
         <?php if (Session::exists('user_id')) : ?>
-            <form action="<?php echo $this->poem_header['link']; ?>/add-comment" method="post">
-                <div class="add-comment">
-                    <div class="avatar">
-                        <img src="<?php Session::print('avatar'); ?>" alt="<?php Session::print('complete_name'); ?>">
-                    </div>
-                    <div class="name">
-                        <a href="<?php Session::print('user_link'); ?>">
-                            <?php Session::print('complete_name'); ?>
-                        </a>
-                    </div>
-                    <div class="username">
-                        <a href="<?php Session::print('user_link'); ?>">
-                            (<?php Session::print('username'); ?>)
-                        </a>
-                    </div>
-                    <div class="input">
-                        <textarea name="add-comment" id="add-comment"></textarea>
-                    </div>
-                    <div class="submit">
-                        <input type="submit" value="Add">
-                    </div>
+            <div class="add-comment">
+                <div class="avatar" id="js-avatar">
+                    <img src="<?php Session::print('avatar'); ?>" alt="<?php Session::print('complete_name'); ?>">
                 </div>
-            </form>
+                <div class="name" id="js-name">
+                    <a href="<?php Session::print('user_link'); ?>">
+                        <?php Session::print('complete_name'); ?>
+                    </a>
+                </div>
+                <div class="username" id="js-username">
+                    <a href="<?php Session::print('user_link'); ?>">
+                        (<?php Session::print('username'); ?>)
+                    </a>
+                </div>
+                <div class="input">
+                    <textarea name="add-comment" id="add-comment"></textarea>
+                </div>
+                <div class="submit">
+                    <button onclick="addComment()">Add</button>
+                </div>
+            </div>
         <?php endif; ?>
     </section>
 </div>
+
+<?php
+/*
+<?php if (Session::exists('user_id')) : ?>
+    <form action="<?php echo $this->poem_header['link']; ?>/add-comment" method="post">
+        <div class="add-comment">
+            <div class="avatar">
+                <img src="<?php Session::print('avatar'); ?>" alt="<?php Session::print('complete_name'); ?>">
+            </div>
+            <div class="name">
+                <a href="<?php Session::print('user_link'); ?>">
+                    <?php Session::print('complete_name'); ?>
+                </a>
+            </div>
+            <div class="username">
+                <a href="<?php Session::print('user_link'); ?>">
+                    (<?php Session::print('username'); ?>)
+                </a>
+            </div>
+            <div class="input">
+                <textarea name="add-comment" id="add-comment"></textarea>
+            </div>
+            <div class="submit">
+                <input type="submit" value="Add">
+            </div>
+        </div>
+    </form>
+<?php endif; ?>
+  */
