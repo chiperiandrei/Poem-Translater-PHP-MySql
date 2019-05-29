@@ -178,4 +178,39 @@ class IndexModel extends Model
         $statement = $this->db->prepare($SQL);
         $statement->execute();
     }
+
+    public function search($keyword) {
+        $SQL = 'SELECT TITLE, LANGUAGE FROM poems WHERE TITLE LIKE "%' . $keyword . '%" LIMIT 5';
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        $results = [];
+
+        $titles = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $i = 0;
+        foreach ($titles as $title) {
+            $results[$i]['type'] = 'Poem';
+            $results[$i]['content'] = $title['TITLE'];
+            $results[$i]['link'] = 'poem/' . strtolower($title['LANGUAGE']) . '/' . str_replace(' ', '+', $title['TITLE']);
+            $i++;
+        }
+
+        $SQL = 'SELECT NAME, BIRTH_DATE, DEATH_DATE FROM authors WHERE NAME LIKE "%' . $keyword . '%" LIMIT 5';
+
+        $statement = $this->db->prepare($SQL);
+        $statement->execute();
+
+        $authors = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($authors as $author) {
+            $results[$i]['type'] = 'Author';
+            $results[$i]['content'] = $author['NAME'] .' ('. $author['BIRTH_DATE']  .' - '. $author['DEATH_DATE']  .')';
+            $results[$i]['link'] = 'author/' . str_replace(' ', '+', $author['NAME']);
+            $i++;
+        }
+
+        return $results;
+    }
 }

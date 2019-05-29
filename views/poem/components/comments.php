@@ -62,32 +62,3 @@
         <?php endif; ?>
     </section>
 </div>
-
-<?php
-/*
-<?php if (Session::exists('user_id')) : ?>
-    <form action="<?php echo $this->poem_header['link']; ?>/add-comment" method="post">
-        <div class="add-comment">
-            <div class="avatar">
-                <img src="<?php Session::print('avatar'); ?>" alt="<?php Session::print('complete_name'); ?>">
-            </div>
-            <div class="name">
-                <a href="<?php Session::print('user_link'); ?>">
-                    <?php Session::print('complete_name'); ?>
-                </a>
-            </div>
-            <div class="username">
-                <a href="<?php Session::print('user_link'); ?>">
-                    (<?php Session::print('username'); ?>)
-                </a>
-            </div>
-            <div class="input">
-                <textarea name="add-comment" id="add-comment"></textarea>
-            </div>
-            <div class="submit">
-                <input type="submit" value="Add">
-            </div>
-        </div>
-    </form>
-<?php endif; ?>
-  */

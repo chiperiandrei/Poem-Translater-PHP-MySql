@@ -17,7 +17,10 @@ if (Session::exists('user_id')) {
     <div class="container">
         <section class="main-search">
             <div class="search">
-                <input type="text" placeholder="Search in the wonderful world of poems and authors...">
+                <input type="text" name="keyword" onkeyup="searchResult(this.value)"
+                       placeholder="Search in the wonderful world of poems and authors...">
+                <select name="search-result" id="search-result" multiple></select>
+                </select>
                 <button type="submit"><i class="fas fa-search"></i></button>
             </div>
             <select class="filter">

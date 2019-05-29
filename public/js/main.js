@@ -206,3 +206,89 @@ setFavorites = (element, poemId, action) => {
     XMLHttp.send(params);
 };
 
+searchResult = (keyword) => {
+    const URL = '/index/search?keyword=' + keyword;
+
+    console.log(keyword)
+
+    let select = document.getElementById('search-result');
+
+    if (keyword && keyword !== '') {
+        let XMLHttp;
+
+        if (window.XMLHttpRequest) {
+            XMLHttp = new XMLHttpRequest();
+        } else {
+            XMLHttp = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+
+        XMLHttp.responseType = 'json';
+        XMLHttp.open('GET', URL,true);
+
+        let poem = false;
+        let poemsGroup;
+        let author = false;
+        let authorsGroup;
+
+        XMLHttp.onload = () => {
+            const result = XMLHttp.response;
+            select.setAttribute('size', result.length);
+
+            select.innerHTML = '';
+            select.style.height = '0px';
+            select.style.padding = '0px';
+
+            for (let i = 0; i < result.length; i++) {
+                if (result[i].type === "Poem") {
+                    if (poem === false) {
+                        poemsGroup = document.createElement('optgroup');
+                        poemsGroup.setAttribute('label', 'Poems');
+                        poem = true;
+                    }
+                    let poemOption = document.createElement('option');
+                    poemOption.setAttribute('value', result[i].link);
+                    poemsGroup.setAttribute('ondblclick', 'goTo("' + result[i].link + '")');
+                    poemOption.innerText = result[i].content;
+
+                    poemsGroup.appendChild(poemOption);
+                } else if (result[i].type === 'Author') {
+                    if (author === false) {
+                        authorsGroup = document.createElement('optgroup');
+                        authorsGroup.setAttribute('label', 'Authors');
+                        author = true;
+                    }
+                    let authorOption = document.createElement('option');
+                    authorOption.setAttribute('value', result[i].link);
+                    authorOption.innerText = result[i].content;
+                    authorOption.setAttribute('ondblclick', 'goTo("' + result[i].link + '")');
+
+                    authorsGroup.appendChild(authorOption);
+                }
+            }
+
+            let size = parseInt(select.getAttribute('size'));
+            if (poemsGroup) {
+                select.appendChild(poemsGroup);
+                size++;
+            }
+            if (authorsGroup) {
+                select.appendChild(authorsGroup);
+                size++;
+            }
+            select.setAttribute('size', size.toString());
+            select.style.height = 'auto';
+            select.style.padding = '10px';
+        };
+
+        XMLHttp.send();
+    } else {
+        select.setAttribute('size', '0');
+        select.innerHTML = '';
+        select.style.height = '0px';
+        select.style.padding = '0px';
+    }
+};
+
+goTo = (href) => {
+    window.location.href = window.location.href + href;
+};

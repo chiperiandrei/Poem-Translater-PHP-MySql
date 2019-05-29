@@ -239,4 +239,14 @@ class IndexController extends Controller
 
         $this->model->deleteFavorites($user_id, $poem_id);
     }
+
+    public function search() {
+        $search_keyword = $_REQUEST['keyword'];
+        $search_preg = preg_replace('#[^0-9A-Za-z ]#', '', $search_keyword);
+
+        $result = json_encode($this->model->search($search_preg));
+        header('Content-Type: application/json');
+
+        echo $result;
+    }
 }

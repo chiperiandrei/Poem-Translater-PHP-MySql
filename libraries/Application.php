@@ -115,7 +115,10 @@ class Application
     }
 
     private function useIndexController($URLs) {
-        if ($URLs[1] == 'add-poem') {
+        if ($URLs[1] == 'search') {
+            $this->controller->search();
+            exit();
+        } else if ($URLs[1] == 'add-poem') {
             $this->controller->addPoem();
             header('Location: /');
         } else if ($URLs[1] == 'delete-poem') {
