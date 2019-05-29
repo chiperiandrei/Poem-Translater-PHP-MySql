@@ -292,3 +292,17 @@ searchResult = (keyword) => {
 goTo = (href) => {
     window.location.href = window.location.href + href;
 };
+
+toggleSort = () => {
+    let sortTrigger = document.getElementById('sort');
+    if (sortTrigger.value === 'asc') {
+        sortTrigger.innerHTML = '<i class="fas fa-sort-alpha-down"></i>';
+    } else if (sortTrigger.value === 'desc') {
+        sortTrigger.innerHTML = '<i class="fas fa-sort-alpha-up"></i>';
+    }
+};
+
+window.onload = () => {
+    toggleSort();
+};
+
