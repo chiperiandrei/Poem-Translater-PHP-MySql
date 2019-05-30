@@ -4,6 +4,7 @@ require_once("libraries/Database.php");
 require_once("Controllers/GetController.php");
 require_once("Controllers/PostController.php");
 require_once("Controllers/DeleteController.php");
+require_once("Controllers/PutController.php");
 
 class Api
 {
@@ -51,27 +52,41 @@ class Api
             case 'POST':
                 $this->controller = new PostController();
                 $data = json_decode(file_get_contents('php://input'), true);
-                if ($URLs[0]=='poems'){
+                if ($URLs[0] == 'poems') {
                     $this->controller->addPoem($data);
                 }
-                if ($URLs[0]=='authors'){
+                if ($URLs[0] == 'authors') {
                     $this->controller->addAuthor($data);
                 }
             case 'DELETE':
                 $this->controller = new DeleteController();
-                if ($URLs[0]=='poems'){
-                    if (count($URLs)==2){
+                if ($URLs[0] == 'poems') {
+                    if (count($URLs) == 2) {
                         $this->controller->deletePoem($URLs[1]);
                     }
                 }
-                if ($URLs[0]=='authors'){
-                    if (count($URLs)==2){
+                if ($URLs[0] == 'authors') {
+                    if (count($URLs) == 2) {
                         $this->controller->deleteAuthor($URLs[1]);
                     }
                 }
-                if ($URLs[0]=='users'){
-                    if (count($URLs)==2){
+                if ($URLs[0] == 'users') {
+                    if (count($URLs) == 2) {
                         $this->controller->deleteUser($URLs[1]);
+                    }
+                }
+            case 'PUT':
+                $this->controller = new PutController();
+                $data = json_decode(file_get_contents('php://input'), true);
+                if (count($URLs) == 2) {
+                    if ($URLs[0] == 'authors') {
+                        $this->controller->updateAuthor($data,$URLs[1]);
+                    }
+                    if ($URLs[0] == 'poems') {
+                        $this->controller->updatePoem($data,$URLs[1]);
+                    }
+                    if ($URLs[0] == 'users') {
+                        $this->controller->updateUser($data,$URLs[1]);
                     }
                 }
             default:
