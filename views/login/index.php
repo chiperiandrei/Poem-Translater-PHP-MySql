@@ -118,7 +118,7 @@
                     <?php if (Session::exists('cui')) : ?>
                     <div>
                         <span id="login-ok">
-                            We sent you an e-mail.<?php Session::print('cui'); ?>
+                            We sent an email at <?php Session::print('cui'); ?>
                         </span>
                     </div>
                     <?php endif; ?>

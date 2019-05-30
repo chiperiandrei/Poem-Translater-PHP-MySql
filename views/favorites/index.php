@@ -7,21 +7,6 @@
 
 <main>
     <div class="container">
-        <section class="main-search">
-            <div class="search">
-                <input type="text" placeholder="Search in the wonderful world of poems and authors...">
-                <button type="submit"><i class="fas fa-search"></i></button>
-            </div>
-            <select class="filter">
-                <option disabled selected hidden>Filter your poems</option>
-                <option value="filter-popular-poems">Popular poems</option>
-                <option value="filter-popular-authors">Popular authors</option>
-                <option value="filter-popular-language">Popular language</option>
-                <option value="filter-newest-poem">The newest poems</option>
-                <option value="filter-oldest-poem">The oldest poems</option>
-            </select>
-            <button class="sort"><i class="fas fa-sort-alpha-down"></i></button>
-        </section>
         <section class="main-poems">
             <section>
                 <?php for($i = 0; $i < $this->count; $i += 2) : ?>

@@ -44,7 +44,8 @@ hideAddTranslation = () => {
 addComment = () => {
     let XMLHttp;
     const URL = window.location.href + '/add-comment';
-    const textareaValue = document.getElementById('add-comment').value;
+    let textareaValue = document.getElementById('add-comment').value;
+    textareaValue.value = '';
     const params = 'add-comment=' + textareaValue;
 
     if (window.XMLHttpRequest) {

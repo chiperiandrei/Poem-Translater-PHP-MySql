@@ -78,11 +78,16 @@ class LoginModel extends Model
                 mkdir('storage/users/' . $_POST['username'], 0777, true);
             }
             $pentru = $_POST["email"];
-            $subject = 'PoTr ADMIN PANEL';
-            $mesaj = "Hello ".$_POST["first-name"]." ".$_POST["last-name"]."! You're just joined us. Your password is  " . $_POST["password"] . " .\n Tip! You're nickname is ".$_POST["username"]." Have fun!";
-            $header = 'From: PoTr TEAM' . "\r\n" .
-                'No replay: potrTEAM@poem-translator.tw' . "\r\n" .
-                'X-Mailer: PHP/';
+            $subject = 'PoTr [registration]';
+            $mesaj = "Hello Dear translator ". $_POST["first-name"] ." ". $_POST["last-name"] ."!".
+                     "\r\n\r\nThank you for joining us.".
+                     "\r\n\r\nYour login details are listed below:".
+                     "\r\nYour password is ". $_POST["password"] .
+                     "\r\nYour username is ". $_POST["username"] .
+                     "\r\n\r\nHave a good day!";
+            $header = 'From: PoTr System' . "\r\n" .
+                      'No replay: potrTEAM@poem-translator.tw' . "\r\n" .
+                      'X-Mailer: PHP/';
 
             mail($pentru, $subject, $mesaj, $header);
         }
@@ -111,14 +116,16 @@ class LoginModel extends Model
         if ($count == 1)
             $ok = true;
         else {
-            Session::set('eroareEmail', 'Emailul este gresit, frt!');
+            Session::set('eroareEmail', 'Your email is wrong!');
         }
         $pentru = $email;
-        $subject = 'PoTr ADMIN PANEL';
-        $mesaj = "Hello ! You're new password is " . $pass . " . Make sure that you change it as soon as posible.";
-        $header = 'From: PoTr TEAM' . "\r\n" .
-            'No replay: potrTEAM@poem-translator.tw' . "\r\n" .
-            'X-Mailer: PHP/';
+        $subject = 'PoTr [recover password]';
+        $mesaj = "Your new password is: \"". $pass ."\"\r\n".
+                 "\r\n*Please, change your password as soon as possible.".
+                 "\r\n\r\nHave a good day!";
+        $header = 'From: PoTr System' . "\r\n" .
+                  'No replay: potrTEAM@poem-translator.tw' . "\r\n" .
+                  'X-Mailer: PHP/';
 
         mail($pentru, $subject, $mesaj, $header);
         Session::set('cui', $pentru);
