@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang = "ro-RO">
+    <head>
+        <meta charset = "utf-8">
+		<title> Documentatie REST API Poem Translator</title>
+	</head>
+	<body>
+		<article>
+			<header>
+				<h1 style = "font-size:250% !important;">
+					Documentatie REST API Poem Translator
+				</h1>
+							<section typeof="sa:AuthorsList">
+			  <h2>În dezvoltarea proiectului au participat : </h2>
+			  <ul>
+			    <li typeof="sa:ContributorRole" property="schema:author">
+			    	<a href="https://github.com/chiperiandrei">
+			      <span typeof="schema:Person" style="color: red;"
+			            resource="https://github.com/chiperiandrei">
+			        <meta property="schema:givenName" content="Andrei">
+			        <meta property="schema:additionalName" content="M.">
+			        <meta property="schema:familyName" content="Chiperi">
+			        <span property="schema:name">Chiperi M. Andrei</span>
+			      </span>
+			  </a>
+			      <ul>
+			        <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+			          <a href="mailto:andrei.chiperi98@gmail.com"
+			             property="schema:email">andrei.chiperi98@gmail.com</a>
+			        </li>
+			      </ul>
+			    </li>
+
+			    <li typeof="sa:ContributorRole" property="schema:author">
+			    	<a href="https://github.com/denyky">
+			      <span typeof="schema:Person" style="color: red;"
+			            resource="https://github.com/denyky">
+			        <meta property="schema:givenName" content="Deny-Constantin">
+			        <meta property="schema:additionalName" content="">
+			        <meta property="schema:familyName" content="Pătrașcu">
+			        <span property="schema:name">Pătrașcu Deny-Constantin</span>
+			      </span>
+			  </a>
+			      <ul>
+			        <li property="schema:roleContactPoint" typeof="schema:ContactPoint">
+			          <a href="mailto:denypatranscu@gmail.com"
+			             property="schema:email">denypatranscu@gmail.com</a>
+			        </li>
+			      </ul>
+			    </li>
+			  </ul>
+			</section>
+			</header>
+			<section>
+				<h2> 1. Cum utilizam API-ul?</h2>
+				<p> &emsp; &emsp; REST API-ul disponibil are dezvoltate urmatoarele ENDPOINT-uri				</p>
+				
+					<li>
+						<b>&emsp; &emsp;&emsp; &emsp;&emsp; &emsp;GET</b> request
+						<ul>/api/users - listeaza toti utilizatorii aplicatiei ( doar datele ce nu pot fi utilizate pentru logare)</ul>
+						<ul>/api/poems - listeaza toate poemele din baza de date a aplicatiei</ul>
+						<ul>/api/authors - listeaza toti autorii din baza de date a aplicatiei</ul>
+					</li>
+					<li>
+						<b>&emsp; &emsp;&emsp; &emsp;&emsp; &emsp;POST</b> request
+						<ul>/api/poems - insereaza poeme in cadrul aplicatiei prin intermediul JSON-ului dat ca body. <br><b>Exemplu de JSON&emsp;&emsp;</b><code>[
+    {
+        "TITLE": "Example of title",
+        "AUTHOR_ID": "1",
+        "LANGUAGE": "RO",
+        "STAFF_ID": "1"
+    }
+]</code></ul>
+							<ul>/api/authors - insereaza autori in cadrul aplicatiei prin intermediul JSON-ului dat ca body. <br><b>Exemplu de JSON&emsp;&emsp;</b><code>[
+    {
+        "NAME": "Name of the author",
+        "BIRTH_DATE": "1234",
+        "DEATH_DATE": "4321"
+    }
+]</code></ul>
+					</li>
+					<li>
+						<b>&emsp; &emsp;&emsp; &emsp;&emsp; &emsp;PUT</b> request
+						<ul>/api/users/{id} - actualizeaza nume si prenumele unui utilizator prin inntermediul id-ului dat ca parametru si al JSON-ului dat ca body <br><b>Exemplu de JSON&emsp;&emsp;</b><code>[
+    {
+        "FIRST_NAME": "Nume1",
+        "LAST_NAME": "Nume2"
+    }
+]</code><br><b>Pot lipsi campuri, dar nu pot fi mai multe decat cele doua mentionate. ( FIRST_NAME, LAST_NAME)</b></ul>
+						<ul>/api/poems/{id} - actualizeaza datele unui poem prin inntermediul id-ului dat ca parametru si al JSON-ului dat ca body <br><b>Exemplu de JSON&emsp;&emsp;</b><code>[
+    {
+        "TITLE": "Liceu",
+        "LANGUAGE": "RO",
+        "ID_AUTHOR": "1",
+        "ID_STAFF": "2"
+    }
+]</code><br><b>Pot lipsi campuri, dar nu pot fi mai multe decat cele doua mentionate. ( TITLE, LANGUAGE,ID_AUTHOR,ID_STAFF)</b></ul>
+						<ul>/api/authors/{id} - actualizeaza informatiile despre un autor prin inntermediul id-ului dat ca parametru si al JSON-ului dat ca body <br><b>Exemplu de JSON&emsp;&emsp;</b><code>[
+    {
+        "NAME": "Vasile Alessaacsandri",
+        "BIRTH_DATE": "1821",
+        "DEATH_DATE": "1890"
+    }
+]</code><br><b>Pot lipsi campuri, dar nu pot fi mai multe decat cele doua mentionate. ( NAME, BIRTH_DATE,DEATH_DATE)</b></ul>
+					</li>
+					<li>
+						<b>&emsp; &emsp;&emsp; &emsp;&emsp; &emsp;DELETE</b> request
+						<ul>/api/users/{id} - sterge utilizatorul dat prin parametrul {id}</ul>
+						<ul>/api/poems/{id} - sterge poemul dat prin parametrul {id}</ul>
+						<ul>/api/authors/{id} - sterge autorul dat prin parametrul {id}</ul>
+					</li>
+            </section>	
+			
+			
+		</article>
+	</body>
