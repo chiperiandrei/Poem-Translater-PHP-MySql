@@ -16,6 +16,11 @@ class GetController
         header('Content-Type: application/json');
         echo json_encode($response);
     }
+    public function verifyToken($token){
+        if($this->model->verificaToken($token))
+            return true;
+        else return false;
+    }
 
     public function getUserInfo($id)
     {

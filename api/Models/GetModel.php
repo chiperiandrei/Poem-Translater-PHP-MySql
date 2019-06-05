@@ -54,4 +54,15 @@ class GetModel
         $result = $OUTPUT->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function verificaToken($token)
+    {
+        $sQuery = "SELECT * from api_tokens where api_key='$token'";
+        $OUTPUT = $this->db->prepare($sQuery);
+        $OUTPUT->execute();
+        $row = $OUTPUT->fetch();
+        if ($row) return true;
+        else return false;
+
+    }
 }

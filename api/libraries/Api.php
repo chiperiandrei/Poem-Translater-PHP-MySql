@@ -20,35 +20,47 @@ class Api
         $request_method = $_SERVER["REQUEST_METHOD"];
         switch ($request_method) {
             case 'GET':
+
                 $this->controller = new GetController();
-                if ($URLs[0] == 'users') {
-                    if (count($URLs) == 1) {
-                        $this->controller->getAllUsers();
-                        break;
-                    } else if (count($URLs) == 2) {
-                        $this->controller->getUserInfo($URLs[1]);
-                        break;
+                $headers = apache_request_headers();
+                if ($this->controller->verifyToken($headers['authkey'])) {
+                    if ($URLs[0] == 'users') {
+                        if (count($URLs) == 1) {
+                            $this->controller->getAllUsers();
+                            break;
+                        } else if (count($URLs) == 2) {
+                            $this->controller->getUserInfo($URLs[1]);
+                            break;
+                        }
                     }
+
+                    if ($URLs[0] == 'poems') {
+                        if (count($URLs) == 1) {
+                            $this->controller->getPoems();
+                            break;
+                        } else if (count($URLs) == 2) {
+                            $this->controller->getPoemsById($URLs[1]);
+                            break;
+                        }
+                    }
+                    if ($URLs[0] == 'authors') {
+                        if (count($URLs) == 1) {
+                            $this->controller->getAuthors();
+                            break;
+                        } else if (count($URLs) == 2) {
+                            $this->controller->getAuthorsById($URLs[1]);
+                            break;
+                        }
+                    }
+                }
+                else{
+                    header("HTTP/1.0 405 YOU HAVE NO POWER HERE");
+                    $array['eroare'] = "YOU HAVE NO POWER HERE BOSSSSSSSSSSSSSS";
+                    header('Content-Type: application/json');
+                    echo json_encode($array);
+                    break;
                 }
 
-                if ($URLs[0] == 'poems') {
-                    if (count($URLs) == 1) {
-                        $this->controller->getPoems();
-                        break;
-                    } else if (count($URLs) == 2) {
-                        $this->controller->getPoemsById($URLs[1]);
-                        break;
-                    }
-                }
-                if ($URLs[0] == 'authors') {
-                    if (count($URLs) == 1) {
-                        $this->controller->getAuthors();
-                        break;
-                    } else if (count($URLs) == 2) {
-                        $this->controller->getAuthorsById($URLs[1]);
-                        break;
-                    }
-                }
             case 'POST':
                 $this->controller = new PostController();
                 $data = json_decode(file_get_contents('php://input'), true);
